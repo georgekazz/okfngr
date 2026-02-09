@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('css/post.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <!-- Header -->

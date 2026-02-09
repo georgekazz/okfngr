@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
