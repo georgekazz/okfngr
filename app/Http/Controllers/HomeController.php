@@ -29,6 +29,11 @@ class HomeController extends Controller
 
     public function whoWeAre($locale)
     {
-        return view('who-we-are');
+        return view('vision-and-values');
+    }
+
+    public function ourImpact($locale)
+    {
+        return view('our-impact');
     }
 }

@@ -15,16 +15,17 @@
     <!-- Header -->
     <header>
         <div class="header-container">
-            <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="logo">
+            <a href="./el" class="logo">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="Open Knowledge Greece" class="logo-img">
             </a>
             <button class="mobile-menu-toggle">☰</button>
             <nav>
                 <div class="nav-item has-dropdown">
-                    <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#about" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
                         <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
-                        <a href="{{ route('who-we-are', ['locale' => app()->getLocale()]) }}" class="dropdown-item active">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
@@ -32,6 +33,7 @@
                     <div class="dropdown-menu">
                         <a href="#team" class="dropdown-item">{{ __('home.nav.team') }}</a>
                         <a href="#partners" class="dropdown-item">{{ __('home.nav.partners') }}</a>
+                        <a href="#history" class="dropdown-item">{{ __('home.nav.history') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
@@ -39,6 +41,7 @@
                     <div class="dropdown-menu">
                         <a href="#projects" class="dropdown-item">{{ __('home.nav.projects') }}</a>
                         <a href="#research" class="dropdown-item">{{ __('home.nav.research') }}</a>
+                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.advocacy') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
@@ -46,17 +49,19 @@
                     <div class="dropdown-menu">
                         <a href="#datasets" class="dropdown-item">{{ __('home.nav.datasets') }}</a>
                         <a href="#tools" class="dropdown-item">{{ __('home.nav.tools') }}</a>
+                        <a href="#resources" class="dropdown-item">{{ __('home.nav.resources') }}</a>
                     </div>
                 </div>
             </nav>
             <div class="nav-actions">
-                <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="blog-btn">{{ __('home.nav.blog') }}</a>
+                <a href="./el/blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
                 <div class="lang-switcher">
-                    <a href="{{ route('who-we-are', ['locale' => 'en']) }}" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                    <a href="./en" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
                         EN
                     </a>
-                    <a href="{{ route('who-we-are', ['locale' => 'el']) }}" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
+
+                    <a href="./el" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
                         <img src="{{ asset('img/gr-flag.png') }}" alt="Ελληνικά" class="flag-icon">
                         EL
                     </a>

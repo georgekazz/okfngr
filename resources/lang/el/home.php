@@ -4,13 +4,14 @@ return [
     // Navigation
     'nav' => [
         'about' => 'Σχετικά',
-        'who_we_are' => 'Ποιοι Είμαστε',
+        'who_we_are' => 'Το όραμα και οι αξίες μας',
         'what_we_do' => 'Τι Κάνουμε',
         'open_data' => 'Ανοικτά Δεδομένα',
         'blog' => 'Blog',
 
         'our_mission' => 'Η Αποστολή μας',
         'our_vision' => 'Το Όραμά μας',
+        'our_impact' => 'Η Επίδρασή μας',
         'our_team' => 'Η Ομάδα μας',
         'team' => 'Ομάδα',
         'partners' => 'Συνεργάτες',

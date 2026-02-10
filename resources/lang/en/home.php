@@ -4,7 +4,7 @@ return [
     // Navigation
     'nav' => [
         'about' => 'About',
-        'who_we_are' => 'Who We Are',
+        'who_we_are' => 'Our vision and values',
         'what_we_do' => 'What We Do',
         'open_data' => 'Open Data',
         'blog' => 'Blog',
@@ -13,6 +13,7 @@ return [
         'our_vision' => 'Our Vision',
         'our_team' => 'Our Team',
         'team' => 'Team',
+        'our_impact' => 'Our Impact',
         'partners' => 'Partners',
         'history' => 'History',
         'projects' => 'Projects',
