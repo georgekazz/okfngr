@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WriterController;
+use App\Http\Controllers\AdminController;
+
 
 Route::get('/', function () {
     return redirect('/el');
@@ -35,11 +37,37 @@ Route::group([
     // Writer protected routes - USE ID
     Route::middleware('auth')->prefix('writer')->name('writer.')->group(function () {
         Route::get('/dashboard', [WriterController::class, 'dashboard'])->name('dashboard');
-         Route::get('/posts', [WriterController::class, 'index'])->name('posts.index');
+        Route::get('/posts', [WriterController::class, 'index'])->name('posts.index');
         Route::get('/posts/create', [WriterController::class, 'create'])->name('posts.create');
         Route::post('/posts', [WriterController::class, 'store'])->name('posts.store');
         Route::get('/posts/{post:id}/edit', [WriterController::class, 'edit'])->name('posts.edit');
         Route::put('/posts/{post:id}', [WriterController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post:id}', [WriterController::class, 'destroy'])->name('posts.destroy');
+    });
+
+    // Admin routes
+    Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+        // Users
+        Route::get('/users', [AdminController::class, 'users'])->name('users');
+        Route::get('/users/create', [AdminController::class, 'createUser'])->name('users.create');
+        Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+        Route::get('/users/{user:id}/edit', [AdminController::class, 'editUser'])->name('users.edit');
+        Route::put('/users/{user:id}', [AdminController::class, 'updateUser'])->name('users.update');
+        Route::get('/users/{user:id}/reset-password', [AdminController::class, 'resetPassword'])->name('users.reset-password');
+        Route::put('/users/{user:id}/password', [AdminController::class, 'updatePassword'])->name('users.update-password');
+        Route::delete('/users/{user:id}', [AdminController::class, 'destroyUser'])->name('users.destroy');
+
+        // Posts
+        Route::get('/posts', [AdminController::class, 'posts'])->name('posts');
+        Route::get('/posts/{post:id}/edit', [AdminController::class, 'editPost'])->name('posts.edit');
+        Route::delete('/posts/{post:id}', [AdminController::class, 'destroyPost'])->name('posts.destroy');
+
+        // Comments
+        Route::get('/comments', [AdminController::class, 'comments'])->name('comments');
+        Route::put('/comments/{comment:id}/approve', [AdminController::class, 'approveComment'])->name('comments.approve');
+        Route::put('/comments/{comment:id}/reject', [AdminController::class, 'rejectComment'])->name('comments.reject');
+        Route::delete('/comments/{comment:id}', [AdminController::class, 'destroyComment'])->name('comments.destroy');
     });
 });

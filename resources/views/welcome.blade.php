@@ -131,6 +131,13 @@
             <div class="posts-grid">
                 @forelse($recentPosts as $post)
                 <div class="post-card">
+                    @if($post->featured_image)
+                    <div class="post-card-image">
+                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">
+                            <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}">
+                        </a>
+                    </div>
+                    @endif
                     <div class="post-card-content">
                         <div class="post-date">{{ $post->published_at->format('d F Y') }}</div>
                         <h3><a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">{{ $post->title }}</a></h3>
@@ -148,7 +155,7 @@
             </div>
         </div>
     </section>
-    
+
     <footer>
         <div class="footer-container">
             <div class="footer-logos">

@@ -36,14 +36,22 @@ class WriterController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
 
-            if (Auth::user()->role !== 'writer' && Auth::user()->role !== 'admin') {
+            $user = Auth::user();
+
+            // Check if user has access (writer or admin)
+            if (!in_array($user->role, ['writer', 'admin'])) {
                 Auth::logout();
                 return back()->withErrors([
                     'email' => 'Δεν έχετε δικαίωμα πρόσβασης.',
                 ]);
             }
 
-            return redirect('/el/writer/dashboard');
+            // Redirect based on role
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard', ['locale' => app()->getLocale()]);
+            }
+
+            return redirect()->route('writer.dashboard', ['locale' => app()->getLocale()]);
         }
 
         return back()->withErrors([
