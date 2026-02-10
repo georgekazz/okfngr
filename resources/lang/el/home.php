@@ -8,6 +8,19 @@ return [
         'what_we_do' => 'Τι Κάνουμε',
         'open_data' => 'Ανοικτά Δεδομένα',
         'blog' => 'Blog',
+
+        'our_mission' => 'Η Αποστολή μας',
+        'our_vision' => 'Το Όραμά μας',
+        'our_team' => 'Η Ομάδα μας',
+        'team' => 'Ομάδα',
+        'partners' => 'Συνεργάτες',
+        'history' => 'Ιστορία',
+        'projects' => 'Έργα',
+        'research' => 'Έρευνα',
+        'advocacy' => 'Υπεράσπιση',
+        'datasets' => 'Σύνολα Δεδομένων',
+        'tools' => 'Εργαλεία',
+        'resources' => 'Πόροι',
     ],
 
     // Hero Section

@@ -20,17 +20,37 @@
             </a>
             <button class="mobile-menu-toggle">☰</button>
             <nav>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#about" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
+                        <a href="#vision" class="dropdown-item">{{ __('home.nav.our_vision') }}</a>
+                        <a href="#team" class="dropdown-item">{{ __('home.nav.our_team') }}</a>
+                    </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#team" class="nav-link">{{ __('home.nav.who_we_are') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#team" class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="#partners" class="dropdown-item">{{ __('home.nav.partners') }}</a>
+                        <a href="#history" class="dropdown-item">{{ __('home.nav.history') }}</a>
+                    </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#work" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#projects" class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="#research" class="dropdown-item">{{ __('home.nav.research') }}</a>
+                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.advocacy') }}</a>
+                    </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#data" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#datasets" class="dropdown-item">{{ __('home.nav.datasets') }}</a>
+                        <a href="#tools" class="dropdown-item">{{ __('home.nav.tools') }}</a>
+                        <a href="#resources" class="dropdown-item">{{ __('home.nav.resources') }}</a>
+                    </div>
                 </div>
             </nav>
             <div class="nav-actions">
@@ -225,6 +245,39 @@
                 if (data.success) window.location.reload();
             }).catch(error => console.error('Error switching language:', error));
         }
+
+         document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+            });
+        }
+
+        // Mobile dropdown toggle
+        const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.nav-item.has-dropdown').forEach(otherItem => {
+                        if (otherItem !== parent) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    parent.classList.toggle('active');
+                }
+            });
+        });
+    });
     </script>
 </body>
 

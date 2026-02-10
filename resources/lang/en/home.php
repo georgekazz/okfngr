@@ -8,6 +8,19 @@ return [
         'what_we_do' => 'What We Do',
         'open_data' => 'Open Data',
         'blog' => 'Blog',
+
+        'our_mission' => 'Our Mission',
+        'our_vision' => 'Our Vision',
+        'our_team' => 'Our Team',
+        'team' => 'Team',
+        'partners' => 'Partners',
+        'history' => 'History',
+        'projects' => 'Projects',
+        'research' => 'Research',
+        'advocacy' => 'Advocacy',
+        'datasets' => 'Datasets',
+        'tools' => 'Tools',
+        'resources' => 'Resources',
     ],
 
     // Hero Section

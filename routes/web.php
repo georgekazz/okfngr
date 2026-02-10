@@ -22,6 +22,7 @@ Route::group([
     'middleware' => \App\Http\Middleware\SetLocale::class
 ], function () {
 
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
     // Public pages - USE SLUG
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
