@@ -23,6 +23,7 @@ Route::group([
 ], function () {
 
     Route::get('/about', [HomeController::class, 'about'])->name('about');
+    Route::get('/who-we-are', [HomeController::class, 'whoWeAre'])->name('who-we-are');
     // Public pages - USE SLUG
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/blog', [PostController::class, 'index'])->name('posts.index');

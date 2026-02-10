@@ -26,4 +26,9 @@ class HomeController extends Controller
     {
         return view('about');
     }
+
+    public function whoWeAre($locale)
+    {
+        return view('who-we-are');
+    }
 }
