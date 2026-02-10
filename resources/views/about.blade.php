@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -92,7 +94,7 @@
                 <img src="{{ asset('img/icons/knowledge.svg') }}" alt="Knowledge" class="section-icon">
                 <h2>{{ __('about.mission.title') }}</h2>
             </div>
-            
+
             <div class="mission-intro">
                 <p class="intro-text">{{ __('about.mission.intro') }}</p>
             </div>
@@ -169,48 +171,78 @@
                         <p>{{ __('about.mission.value4_text') }}</p>
                     </div>
                 </div>
+
+                <!-- Value 4 -->
+                <div class="timeline-item" data-color="#a110ce">
+                    <div class="timeline-marker">
+                        <div class="marker-icon">
+                            <img src="{{ asset('img/icons/case-study.svg') }}" alt="Collaboration">
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>{{ __('about.mission.value5_title') }}</h3>
+                        <p>{{ __('about.mission.value5_text') }}</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- What We Do Section -->
+    <!-- Mission Statement Section -->
     <section class="what-we-do">
         <div class="content-container">
             <div class="section-header">
                 <h2>{{ __('about.what_we_do.title') }}</h2>
+                <p class="mission-intro">{{ __('about.what_we_do.intro') }}</p>
             </div>
-            
-            <div class="work-grid">
-                <div class="work-card" data-color="#00D1FF">
-                    <div class="work-icon">
-                        <img src="{{ asset('img/icons/data.svg') }}" alt="Open Data">
+
+            <div class="work-list">
+                <div class="work-card-horizontal" data-color="#00D1FF">
+                    <div class="work-icon-horizontal">
+                        <img src="{{ asset('img/icons/connect-community.svg') }}" alt="Open Societies">
                     </div>
-                    <h3>{{ __('about.what_we_do.area1_title') }}</h3>
-                    <p>{{ __('about.what_we_do.area1_text') }}</p>
+                    <div class="work-content-horizontal">
+                        <h3>{{ __('about.what_we_do.area1_title') }}</h3>
+                        <p>{{ __('about.what_we_do.area1_text') }}</p>
+                    </div>
                 </div>
 
-                <div class="work-card" data-color="#ADFFED">
-                    <div class="work-icon">
-                        <img src="{{ asset('img/icons/training.svg') }}" alt="Education">
+                <div class="work-card-horizontal" data-color="#ADFFED">
+                    <div class="work-icon-horizontal">
+                        <img src="{{ asset('img/icons/knowledge.svg') }}" alt="Knowledge">
                     </div>
-                    <h3>{{ __('about.what_we_do.area2_title') }}</h3>
-                    <p>{{ __('about.what_we_do.area2_text') }}</p>
+                    <div class="work-content-horizontal">
+                        <h3>{{ __('about.what_we_do.area2_title') }}</h3>
+                        <p>{{ __('about.what_we_do.area2_text') }}</p>
+                    </div>
                 </div>
 
-                <div class="work-card" data-color="#E4FF36">
-                    <div class="work-icon">
-                        <img src="{{ asset('img/icons/reproducible-research.svg') }}" alt="Research">
+                <div class="work-card-horizontal" data-color="#E4FF36">
+                    <div class="work-icon-horizontal">
+                        <img src="{{ asset('img/icons/data.svg') }}" alt="Data">
                     </div>
-                    <h3>{{ __('about.what_we_do.area3_title') }}</h3>
-                    <p>{{ __('about.what_we_do.area3_text') }}</p>
+                    <div class="work-content-horizontal">
+                        <h3>{{ __('about.what_we_do.area3_title') }}</h3>
+                        <p>{{ __('about.what_we_do.area3_text') }}</p>
+                    </div>
                 </div>
 
-                <div class="work-card" data-color="#E077FF">
-                    <div class="work-icon">
-                        <img src="{{ asset('img/icons/support.svg') }}" alt="Community">
+                <div class="work-card-horizontal" data-color="#E077FF">
+                    <div class="work-icon-horizontal">
+                        <img src="{{ asset('img/icons/impact.svg') }}" alt="Information">
                     </div>
-                    <h3>{{ __('about.what_we_do.area4_title') }}</h3>
-                    <p>{{ __('about.what_we_do.area4_text') }}</p>
+                    <div class="work-content-horizontal">
+                        <h3>{{ __('about.what_we_do.area4_title') }}</h3>
+                        <p>{{ __('about.what_we_do.area4_text') }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Approach -->
+            <div class="approach-section">
+                <div class="approach-content">
+                    <p class="approach-text">{{ __('about.what_we_do.approach') }}</p>
                 </div>
             </div>
         </div>
@@ -263,7 +295,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const nav = document.querySelector('nav');
-            
+
             if (mobileMenuToggle) {
                 mobileMenuToggle.addEventListener('click', function() {
                     nav.classList.toggle('active');
@@ -272,19 +304,19 @@
 
             // Mobile dropdown toggle
             const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
-            
+
             navItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         const parent = this.parentElement;
-                        
+
                         document.querySelectorAll('.nav-item.has-dropdown').forEach(otherItem => {
                             if (otherItem !== parent) {
                                 otherItem.classList.remove('active');
                             }
                         });
-                        
+
                         parent.classList.toggle('active');
                     }
                 });
@@ -292,4 +324,5 @@
         });
     </script>
 </body>
+
 </html>

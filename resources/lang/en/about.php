@@ -30,18 +30,22 @@ return [
     ],
     
     'what_we_do' => [
-        'title' => 'What We Do',
-        'area1_title' => 'Open Data',
-        'area1_text' => 'We promote the publication and use of open data by public and private entities.',
+        'title' => 'Our Mission',
+        'intro' => 'This is the world we choose. We want open knowledge to become a mainstream force, as natural and important to our daily lives and to organizations as the global interest in the environment is today.',
         
-        'area2_title' => 'Education',
-        'area2_text' => 'We organize educational programs and workshops on open knowledge.',
+        'area1_title' => 'Open Societies',
+        'area1_text' => 'We want to see open societies across the world, where everyone, without exception, has access to key information and the ability to use it to understand and shape their lives better. Organizations and companies with "special" powers will be identified and held accountable. Essential research information that can help us address serious challenges, such as poverty and climate change, will be available to everyone.',
         
-        'area3_title' => 'Research',
-        'area3_text' => 'We conduct research and data analysis on social issues.',
+        'area2_title' => 'Knowledge',
+        'area2_text' => 'Knowledge empowers the many, not the few.',
         
-        'area4_title' => 'Community',
-        'area4_text' => 'We create and support communities around open knowledge.',
+        'area3_title' => 'Data',
+        'area3_text' => 'Data gives us the freedom to make informed choices about how we live, what we buy, and who gets our vote.',
+        
+        'area4_title' => 'Information',
+        'area4_text' => 'Information and knowledge are accessible and visible to everyone.',
+        
+        'approach' => 'To achieve these goals, we must raise the profile of open knowledge and educate about its importance. We must change the mindsets, policies, and business models of large organizations to make opening up information acceptable and desirable. We must strengthen the ability to understand, share, find, and use information worldwide. We must create and support partnerships between governments, businesses, and civil society to use data to check power and address serious issues. We need tools (technical, legal, and educational) to make working with data easier and more effective.',
     ],
     
     'join' => [
