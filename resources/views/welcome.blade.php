@@ -133,9 +133,9 @@
                 <div class="post-card">
                     <div class="post-card-content">
                         <div class="post-date">{{ $post->published_at->format('d F Y') }}</div>
-                        <h3><a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a></h3>
+                        <h3><a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">{{ $post->title }}</a></h3>
                         <p class="post-excerpt">{{ Str::limit($post->excerpt, 100) }}</p>
-                        <a href="{{ route('posts.show', $post->slug) }}" class="read-more">{{ __('home.posts.read_more') }} →</a>
+                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}" class="read-more">{{ __('home.posts.read_more') }} →</a>
                     </div>
                 </div>
                 @empty
@@ -148,7 +148,7 @@
             </div>
         </div>
     </section>
-
+    
     <footer>
         <div class="footer-container">
             <div class="footer-logos">

@@ -108,8 +108,8 @@ class Post extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
-                     ->whereNotNull('published_at')
-                     ->where('published_at', '<=', now());
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 
     /**
@@ -133,16 +133,8 @@ class Post extends Model
      */
     public function isPublished(): bool
     {
-        return $this->status === 'published' 
-            && $this->published_at !== null 
+        return $this->status === 'published'
+            && $this->published_at !== null
             && $this->published_at <= now();
-    }
-
-    /**
-     * Get route key name
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 }

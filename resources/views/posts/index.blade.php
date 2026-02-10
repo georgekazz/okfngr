@@ -67,13 +67,13 @@
             <!-- Categories Filter -->
             <div class="blog-filters">
                 <div class="filter-item">
-                    <a href="{{ route('posts.index') }}" class="filter-link {{ !request('category') ? 'active' : '' }}">
+                    <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="filter-link {{ !request('category') ? 'active' : '' }}">
                         {{ __('blog.all_posts') }}
                     </a>
                 </div>
                 @foreach($categories as $category)
                 <div class="filter-item">
-                    <a href="{{ route('posts.index', ['category' => $category->slug]) }}"
+                    <a href="{{ route('posts.index', ['locale' => app()->getLocale(), 'category' => $category->slug]) }}"
                         class="filter-link {{ request('category') == $category->slug ? 'active' : '' }}">
                         {{ $category->name }}
                     </a>
@@ -87,7 +87,7 @@
                 <article class="article-card">
                     @if($post->featured_image)
                     <div class="article-image">
-                        <a href="{{ route('posts.show', $post->slug) }}">
+                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">
                             <img src="{{ asset('storage/' . $post->featured_image) }}"
                                 alt="{{ $post->title }}">
                         </a>
@@ -118,7 +118,7 @@
                         </div>
 
                         <h2 class="article-title">
-                            <a href="{{ route('posts.show', $post->slug) }}">
+                            <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">
                                 {{ $post->title }}
                             </a>
                         </h2>
@@ -126,7 +126,7 @@
                         <p class="article-excerpt">{{ Str::limit($post->excerpt, 150) }}</p>
 
                         <div class="article-footer">
-                            <a href="{{ route('posts.show', $post->slug) }}" class="read-more-btn">
+                            <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}" class="read-more-btn">
                                 {{ __('blog.read_more') }}
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

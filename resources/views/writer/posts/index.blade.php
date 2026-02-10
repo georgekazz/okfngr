@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Πίνακας Ελέγχου - OKFN Greece</title>
+    <title>Τα Άρθρα μου - OKFN Greece</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
@@ -17,7 +17,7 @@
         <div class="header-container">
             <div class="header-left">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="OKFN Greece" class="dashboard-logo">
-                <h1>Πίνακας Ελέγχου</h1>
+                <h1>Τα Άρθρα μου</h1>
             </div>
             <div class="header-right">
                 <span class="user-name">{{ Auth::user()->name }}</span>
@@ -33,14 +33,14 @@
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
-                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link active">
+                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M2.5 7.5L10 2.5L17.5 7.5V16.25C17.5 16.5815 17.3683 16.8995 17.1339 17.1339C16.8995 17.3683 16.5815 17.5 16.25 17.5H3.75C3.41848 17.5 3.10054 17.3683 2.86612 17.1339C2.6317 16.8995 2.5 16.5815 2.5 16.25V7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M7.5 17.5V10H12.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     Πίνακας Ελέγχου
                 </a>
-                <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M14.1667 2.5H5.83333C4.91667 2.5 4.16667 3.25 4.16667 4.16667V15.8333C4.16667 16.75 4.91667 17.5 5.83333 17.5H14.1667C15.0833 17.5 15.8333 16.75 15.8333 15.8333V4.16667C15.8333 3.25 15.0833 2.5 14.1667 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M7.5 7.5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -68,52 +68,16 @@
 
         <!-- Main Content -->
         <main class="dashboard-main">
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon published">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-value">{{ $publishedCount }}</div>
-                        <div class="stat-label">Δημοσιευμένα</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon draft">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-value">{{ $draftCount }}</div>
-                        <div class="stat-label">Πρόχειρα</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon total">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 20H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M16.5 3.49998C16.8978 3.10216 17.4374 2.87866 18 2.87866C18.2786 2.87866 18.5544 2.93353 18.8118 3.04014C19.0692 3.14674 19.303 3.303 19.5 3.49998C19.697 3.69697 19.8532 3.93082 19.9598 4.18819C20.0665 4.44556 20.1213 4.72141 20.1213 4.99998C20.1213 5.27856 20.0665 5.55441 19.9598 5.81178C19.8532 6.06915 19.697 6.303 19.5 6.49998L7 19L3 20L4 16L16.5 3.49998Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-value">{{ $totalPosts }}</div>
-                        <div class="stat-label">Σύνολο Άρθρων</div>
-                    </div>
-                </div>
+            @if(session('success'))
+            <div class="alert alert-success" style="background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                {{ session('success') }}
             </div>
+            @endif
 
-            <!-- Recent Posts -->
+            <!-- Posts Section -->
             <div class="posts-section">
                 <div class="section-header">
-                    <h2>Πρόσφατα Άρθρα</h2>
+                    <h2>Όλα τα Άρθρα</h2>
                     <a href="{{ url('/el/writer/posts/create') }}" class="btn-primary">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -129,6 +93,7 @@
                         <thead>
                             <tr>
                                 <th>Τίτλος</th>
+                                <th>Κατηγορίες</th>
                                 <th>Κατάσταση</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προβολές</th>
@@ -140,11 +105,21 @@
                             <tr>
                                 <td>
                                     <div class="post-title-cell">
-                                        <strong>{{ $post->title }}</strong>
-                                        @if($post->categories->count() > 0)
-                                        <span class="post-category">{{ $post->categories->first()->name }}</span>
-                                        @endif
+                                        <strong>{{ Str::limit($post->title, 60) }}</strong>
+                                        <small style="color: #6c757d; display: block; margin-top: 4px;">{{ $post->slug }}</small>
                                     </div>
+                                </td>
+                                <td>
+                                    @if($post->categories->count() > 0)
+                                        @foreach($post->categories->take(2) as $category)
+                                            <span class="post-category">{{ $category->name }}</span>
+                                        @endforeach
+                                        @if($post->categories->count() > 2)
+                                            <span class="post-category">+{{ $post->categories->count() - 2 }}</span>
+                                        @endif
+                                    @else
+                                        <span style="color: #999;">-</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <span class="status-badge status-{{ $post->status }}">
@@ -152,7 +127,7 @@
                                     </span>
                                 </td>
                                 <td>{{ $post->created_at->format('d/m/Y') }}</td>
-                                <td>{{ $post->views }}</td>
+                                <td>{{ number_format($post->views_count) }}</td>
                                 <td>
                                     <div class="action-buttons">
                                         <a href="{{ route('writer.posts.edit', ['locale' => app()->getLocale(), 'post' => $post->id]) }}" class="btn-icon" title="Επεξεργασία">
@@ -169,7 +144,7 @@
                                             </svg>
                                         </a>
                                         @endif
-                                        <form action="{{ url('/el/writer/posts/' . $post->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το άρθρο;')">
+                                        <form action="{{ route('writer.posts.destroy', ['locale' => app()->getLocale(), 'post' => $post->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το άρθρο;')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn-icon btn-delete" title="Διαγραφή">

@@ -162,7 +162,7 @@ class WriterController extends Controller
     }
 
 
-    public function edit(Post $post)
+    public function edit($locale, Post $post)  // Added $locale as first parameter
     {
         if ($post->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
             abort(403);
@@ -174,8 +174,7 @@ class WriterController extends Controller
         return view('writer.posts.editor', compact('post', 'categories', 'tags'));
     }
 
-
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $locale, Post $post)
     {
         if ($post->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
             abort(403);
@@ -237,7 +236,7 @@ class WriterController extends Controller
             ->with('success', 'Το άρθρο ενημερώθηκε επιτυχώς!');
     }
 
-    public function destroy(Post $post)
+    public function destroy($locale, Post $post)  // Added $locale parameter
     {
         if ($post->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
             abort(403);
@@ -249,7 +248,7 @@ class WriterController extends Controller
 
         $post->delete();
 
-        return redirect(url('/el/writer/dashboard'))
+        return redirect("/$locale/writer/dashboard")
             ->with('success', 'Το άρθρο διαγράφηκε επιτυχώς!');
     }
 }

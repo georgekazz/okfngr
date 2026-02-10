@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,11 +14,12 @@
     <link rel="stylesheet" href="{{ asset('css/post.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
+
 <body>
     <!-- Header -->
     <header>
         <div class="header-container">
-            <a href="{{ route('home') }}" class="logo">
+            <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="logo">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="Open Knowledge Greece" class="logo-img">
             </a>
             <button class="mobile-menu-toggle">☰</button>
@@ -36,7 +38,7 @@
                 </div>
             </nav>
             <div class="nav-actions">
-                <a href="{{ route('posts.index') }}" class="blog-btn">{{ __('home.nav.blog') }}</a>
+                <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="blog-btn">{{ __('home.nav.blog') }}</a>
                 <div class="lang-switcher">
                     <a href="#" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}" onclick="switchLanguage('en'); return false;">🇬🇧 EN</a>
                     <a href="#" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}" onclick="switchLanguage('el'); return false;">🇬🇷 EL</a>
@@ -48,12 +50,12 @@
     <!-- Post Content -->
     <article class="post-article">
         <div class="post-container">
-            
+
             <!-- Back Button -->
             <div class="post-back">
-                <a href="{{ route('posts.index') }}" class="back-link">
+                <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="back-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     {{ __('post.back_to_blog') }}
                 </a>
@@ -76,24 +78,24 @@
                 <div class="post-meta">
                     <div class="post-meta-item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M15.8333 3.33334H4.16667C3.24619 3.33334 2.5 4.07954 2.5 5.00001V16.6667C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6667V5.00001C17.5 4.07954 16.7538 3.33334 15.8333 3.33334Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M13.3333 1.66666V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M6.66666 1.66666V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2.5 8.33334H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.8333 3.33334H4.16667C3.24619 3.33334 2.5 4.07954 2.5 5.00001V16.6667C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6667V5.00001C17.5 4.07954 16.7538 3.33334 15.8333 3.33334Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.3333 1.66666V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.66666 1.66666V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2.5 8.33334H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <span>{{ $post->published_at->locale(app()->getLocale())->translatedFormat('d F Y') }}</span>
                     </div>
                     <div class="post-meta-item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M16.6667 17.5V15.8333C16.6667 14.9493 16.3155 14.1014 15.6904 13.4763C15.0652 12.8512 14.2174 12.5 13.3333 12.5H6.66667C5.78261 12.5 4.93476 12.8512 4.30964 13.4763C3.68452 14.1014 3.33333 14.9493 3.33333 15.8333V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10 9.16667C11.8409 9.16667 13.3333 7.67428 13.3333 5.83333C13.3333 3.99238 11.8409 2.5 10 2.5C8.15905 2.5 6.66667 3.99238 6.66667 5.83333C6.66667 7.67428 8.15905 9.16667 10 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16.6667 17.5V15.8333C16.6667 14.9493 16.3155 14.1014 15.6904 13.4763C15.0652 12.8512 14.2174 12.5 13.3333 12.5H6.66667C5.78261 12.5 4.93476 12.8512 4.30964 13.4763C3.68452 14.1014 3.33333 14.9493 3.33333 15.8333V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 9.16667C11.8409 9.16667 13.3333 7.67428 13.3333 5.83333C13.3333 3.99238 11.8409 2.5 10 2.5C8.15905 2.5 6.66667 3.99238 6.66667 5.83333C6.66667 7.67428 8.15905 9.16667 10 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <span>{{ $post->user->name }}</span>
                     </div>
                     <div class="post-meta-item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M10 18.3333C14.6024 18.3333 18.3333 14.6024 18.3333 10C18.3333 5.39763 14.6024 1.66667 10 1.66667C5.39763 1.66667 1.66667 5.39763 1.66667 10C1.66667 14.6024 5.39763 18.3333 10 18.3333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10 5V10L13.3333 11.6667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 18.3333C14.6024 18.3333 18.3333 14.6024 18.3333 10C18.3333 5.39763 14.6024 1.66667 10 1.66667C5.39763 1.66667 1.66667 5.39763 1.66667 10C1.66667 14.6024 5.39763 18.3333 10 18.3333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 5V10L13.3333 11.6667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <span>{{ $post->views }} {{ __('post.views') }}</span>
                     </div>
@@ -103,9 +105,9 @@
             <!-- Featured Image -->
             @if($post->featured_image)
             <div class="post-featured-image">
-                <img src="{{ asset('storage/' . $post->featured_image) }}" 
-                     alt="{{ $post->title }}"
-                     onerror="this.style.display='none'">
+                <img src="{{ asset('storage/' . $post->featured_image) }}"
+                    alt="{{ $post->title }}"
+                    onerror="this.style.display='none'">
             </div>
             @endif
 
@@ -118,8 +120,8 @@
             @if($post->tags->count() > 0)
             <div class="post-tags">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M17.5 10.4167L10.4167 17.5L2.5 9.58333V2.5H9.58333L17.5 10.4167Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.25 6.25H6.25833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.5 10.4167L10.4167 17.5L2.5 9.58333V2.5H9.58333L17.5 10.4167Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6.25 6.25H6.25833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 <div class="tags-list">
                     @foreach($post->tags as $tag)
@@ -133,27 +135,29 @@
             <div class="post-share">
                 <h3>{{ __('post.share_article') }}</h3>
                 <div class="share-buttons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', $post->slug)) }}" 
-                       target="_blank" 
-                       class="share-btn facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug])) }}"
+                        target="_blank"
+                        class="share-btn facebook">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                         </svg>
                         Facebook
                     </a>
-                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('posts.show', $post->slug)) }}&text={{ urlencode($post->title) }}" 
-                       target="_blank" 
-                       class="share-btn twitter">
+                    <!-- Twitter -->
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug])) }}&text={{ urlencode($post->title) }}"
+                        target="_blank"
+                        class="share-btn twitter">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                         </svg>
                         Twitter
                     </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('posts.show', $post->slug)) }}&title={{ urlencode($post->title) }}" 
-                       target="_blank" 
-                       class="share-btn linkedin">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug])) }}&title={{ urlencode($post->title) }}"
+                        target="_blank"
+                        class="share-btn linkedin">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                         </svg>
                         LinkedIn
                     </a>
@@ -172,9 +176,9 @@
                         @if($relatedPost->featured_image)
                         <div class="related-image">
                             <a href="{{ route('posts.show', $relatedPost->slug) }}">
-                                <img src="{{ asset('storage/' . $relatedPost->featured_image) }}" 
-                                     alt="{{ $relatedPost->title }}"
-                                     onerror="this.parentElement.parentElement.style.display='none'">
+                                <img src="{{ asset('storage/' . $relatedPost->featured_image) }}"
+                                    alt="{{ $relatedPost->title }}"
+                                    onerror="this.parentElement.parentElement.style.display='none'">
                             </a>
                         </div>
                         @endif
@@ -201,50 +205,50 @@
                 <!-- Comment Form -->
                 <div class="comment-form-wrapper">
                     <h3>{{ __('post.leave_comment') }}</h3>
-                    
+
                     @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                     @endif
 
-                    <form action="{{ route('posts.comments.store', $post) }}" method="POST" class="comment-form">
+                    <form action="{{ route('posts.comments.store', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}" method="POST" class="comment-form">
                         @csrf
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="author_name">{{ __('post.your_name') }} <span class="required">*</span></label>
-                                <input type="text" 
-                                       id="author_name" 
-                                       name="author_name" 
-                                       value="{{ old('author_name') }}" 
-                                       required
-                                       class="@error('author_name') error @enderror">
+                                <input type="text"
+                                    id="author_name"
+                                    name="author_name"
+                                    value="{{ old('author_name') }}"
+                                    required
+                                    class="@error('author_name') error @enderror">
                                 @error('author_name')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="author_email">{{ __('post.your_email') }} <span class="required">*</span></label>
-                                <input type="email" 
-                                       id="author_email" 
-                                       name="author_email" 
-                                       value="{{ old('author_email') }}" 
-                                       required
-                                       class="@error('author_email') error @enderror">
+                                <input type="email"
+                                    id="author_email"
+                                    name="author_email"
+                                    value="{{ old('author_email') }}"
+                                    required
+                                    class="@error('author_email') error @enderror">
                                 @error('author_email')
-                                    <span class="error-message">{{ $message }}</span>
+                                <span class="error-message">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="content">{{ __('post.your_comment') }} <span class="required">*</span></label>
-                            <textarea id="content" 
-                                      name="content" 
-                                      rows="5" 
-                                      required
-                                      class="@error('content') error @enderror">{{ old('content') }}</textarea>
+                            <textarea id="content"
+                                name="content"
+                                rows="5"
+                                required
+                                class="@error('content') error @enderror">{{ old('content') }}</textarea>
                             @error('content')
-                                <span class="error-message">{{ $message }}</span>
+                            <span class="error-message">{{ $message }}</span>
                             @enderror
                         </div>
                         <button type="submit" class="submit-btn">
@@ -257,7 +261,7 @@
                 @if($post->approvedComments->count() > 0)
                 <div class="comments-list">
                     @foreach($post->parentComments as $comment)
-                        @include('partials.comment', ['comment' => $comment])
+                    @include('partials.comment', ['comment' => $comment])
                     @endforeach
                 </div>
                 @else
@@ -275,16 +279,24 @@
             </div>
             <div class="footer-social">
                 <a href="https://facebook.com/okfngreece" class="social-link" aria-label="Facebook">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
                 </a>
                 <a href="https://twitter.com/okfngr" class="social-link" aria-label="Twitter">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    </svg>
                 </a>
                 <a href="https://github.com/okgreece" class="social-link" aria-label="GitHub">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
                 </a>
                 <a href="mailto:info@okfn.gr" class="social-link" aria-label="Email">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
                 </a>
             </div>
             <div class="footer-text">
@@ -298,9 +310,15 @@
         function switchLanguage(locale) {
             fetch(`/language/${locale}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
-            }).then(response => response.json()).then(data => { if (data.success) window.location.reload(); }).catch(error => console.error('Error:', error));
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }).then(response => response.json()).then(data => {
+                if (data.success) window.location.reload();
+            }).catch(error => console.error('Error:', error));
         }
     </script>
 </body>
+
 </html>
