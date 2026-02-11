@@ -21,7 +21,7 @@
             <button class="mobile-menu-toggle">☰</button>
             <nav>
                 <div class="nav-item has-dropdown">
-                    <a href="#about" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
                         <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
                         <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
@@ -29,27 +29,30 @@
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#team" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
                         <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
                         <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
-                        <a href="#history" class="dropdown-item">{{ __('home.nav.history') }}</a>
+                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.governance') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#work" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
                         <a href="#projects" class="dropdown-item">{{ __('home.nav.projects') }}</a>
-                        <a href="#research" class="dropdown-item">{{ __('home.nav.research') }}</a>
-                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.advocacy') }}</a>
+                        <a href="#research" class="dropdown-item">{{ __('home.nav.apps') }}</a>
+                        <a href="#research" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
+                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
+                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.media') }}</a>
+                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#data" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="#datasets" class="dropdown-item">{{ __('home.nav.datasets') }}</a>
-                        <a href="#tools" class="dropdown-item">{{ __('home.nav.tools') }}</a>
-                        <a href="#resources" class="dropdown-item">{{ __('home.nav.resources') }}</a>
+                        <a href="#datasets" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
+                        <a href="#tools" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
+                        <a href="#resources" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
                     </div>
                 </div>
             </nav>

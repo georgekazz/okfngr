@@ -51,4 +51,9 @@ class HomeController extends Controller
     {
         return view('board-of-directors');
     }
+
+    public function governance($locale)
+    {
+        return view('governance');
+    }
 }

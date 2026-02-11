@@ -28,6 +28,7 @@ Route::group([
     Route::get('/our-team', [HomeController::class, 'ourTeam'])->name('our-team');
     Route::get('/in-memory', [HomeController::class, 'inMemory'])->name('in-memory');
     Route::get('/board-of-directors', [HomeController::class, 'boardOfDirectors'])->name('board-of-directors');
+    Route::get('/governance', [HomeController::class, 'governance'])->name('governance');
 
 
     // Public pages - USE SLUG
