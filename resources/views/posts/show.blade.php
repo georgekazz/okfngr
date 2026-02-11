@@ -19,29 +19,56 @@
     <!-- Header -->
     <header>
         <div class="header-container">
-            <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="logo">
+            <a href="./el" class="logo">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="Open Knowledge Greece" class="logo-img">
             </a>
             <button class="mobile-menu-toggle">☰</button>
             <nav>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#about" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
+                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
+                    </div>
                 </div>
-                <div class="nav-item">
-                    <a href="#team" class="nav-link">{{ __('home.nav.who_we_are') }} <span class="dropdown-arrow">▼</span></a>
+                <div class="nav-item has-dropdown">
+                    <a href="#team" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
+                        <a href="#history" class="dropdown-item">{{ __('home.nav.history') }}</a>
+                    </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#work" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#projects" class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="#research" class="dropdown-item">{{ __('home.nav.research') }}</a>
+                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.advocacy') }}</a>
+                    </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item has-dropdown">
                     <a href="#data" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#datasets" class="dropdown-item">{{ __('home.nav.datasets') }}</a>
+                        <a href="#tools" class="dropdown-item">{{ __('home.nav.tools') }}</a>
+                        <a href="#resources" class="dropdown-item">{{ __('home.nav.resources') }}</a>
+                    </div>
                 </div>
             </nav>
             <div class="nav-actions">
-                <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="blog-btn">{{ __('home.nav.blog') }}</a>
+                <a href="./el/blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
                 <div class="lang-switcher">
-                    <a href="#" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}" onclick="switchLanguage('en'); return false;">🇬🇧 EN</a>
-                    <a href="#" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}" onclick="switchLanguage('el'); return false;">🇬🇷 EL</a>
+                    <a href="./en" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                        <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
+                        EN
+                    </a>
+
+                    <a href="./el" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
+                        <img src="{{ asset('img/gr-flag.png') }}" alt="Ελληνικά" class="flag-icon">
+                        EL
+                    </a>
                 </div>
             </div>
         </div>
@@ -272,33 +299,33 @@
     </article>
 
     <!-- Footer -->
-    <footer>
+   <footer>
         <div class="footer-container">
             <div class="footer-logos">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="OKFN Greece" class="footer-logo">
             </div>
             <div class="footer-social">
-                <a href="https://facebook.com/okfngreece" class="social-link" aria-label="Facebook">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg>
+                <!-- Facebook -->
+                <a href="https://facebook.com/okfngreece" class="social-link" target="_blank" rel="noopener">
+                    <img src="{{ asset('img/social/facebook.png') }}" alt="Facebook" class="social-icon">
                 </a>
-                <a href="https://twitter.com/okfngr" class="social-link" aria-label="Twitter">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                    </svg>
+
+                <!-- Twitter -->
+                <a href="https://twitter.com/okfngr" class="social-link" target="_blank" rel="noopener">
+                    <img src="{{ asset('img/social/twitter.png') }}" alt="Twitter" class="social-icon">
                 </a>
-                <a href="https://github.com/okgreece" class="social-link" aria-label="GitHub">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                    </svg>
+
+                <!-- GitHub -->
+                <a href="https://github.com/okgreece" class="social-link" target="_blank" rel="noopener">
+                    <img src="{{ asset('img/social/github.png') }}" alt="GitHub" class="social-icon">
                 </a>
-                <a href="mailto:info@okfn.gr" class="social-link" aria-label="Email">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/okgreece" class="social-link" target="_blank" rel="noopener">
+                    <img src="{{ asset('img/social/instagram.png') }}" alt="Instagram" class="social-icon">
                 </a>
             </div>
+
             <div class="footer-text">
                 <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}</p>
                 <p style="margin-top: 1rem;">{{ __('home.footer.copyright', ['year' => date('Y')]) }}</p>
