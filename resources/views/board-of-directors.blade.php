@@ -56,12 +56,11 @@
             <div class="nav-actions">
                 <a href="./blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
                 <div class="lang-switcher">
-                    <a href="./en" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                    <a href="{{ route('board-of-directors', ['locale' => 'en']) }}" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
                         EN
                     </a>
-
-                    <a href="./el" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
+                    <a href="{{ route('board-of-directors', ['locale' => 'el']) }}" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
                         <img src="{{ asset('img/gr-flag.png') }}" alt="Ελληνικά" class="flag-icon">
                         EL
                     </a>
