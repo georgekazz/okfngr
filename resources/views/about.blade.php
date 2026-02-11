@@ -271,19 +271,27 @@
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="OKFN Greece" class="footer-logo">
             </div>
             <div class="footer-social">
+                <!-- Facebook -->
                 <a href="https://facebook.com/okfngreece" class="social-link" target="_blank" rel="noopener">
                     <img src="{{ asset('img/social/facebook.png') }}" alt="Facebook" class="social-icon">
                 </a>
+
+                <!-- Twitter -->
                 <a href="https://twitter.com/okfngr" class="social-link" target="_blank" rel="noopener">
                     <img src="{{ asset('img/social/twitter.png') }}" alt="Twitter" class="social-icon">
                 </a>
+
+                <!-- GitHub -->
                 <a href="https://github.com/okgreece" class="social-link" target="_blank" rel="noopener">
                     <img src="{{ asset('img/social/github.png') }}" alt="GitHub" class="social-icon">
                 </a>
+
+                <!-- Instagram -->
                 <a href="https://instagram.com/okgreece" class="social-link" target="_blank" rel="noopener">
                     <img src="{{ asset('img/social/instagram.png') }}" alt="Instagram" class="social-icon">
                 </a>
             </div>
+
             <div class="footer-text">
                 <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}</p>
                 <p style="margin-top: 1rem;">{{ __('home.footer.copyright', ['year' => date('Y')]) }}</p>
