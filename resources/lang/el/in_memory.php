@@ -34,27 +34,27 @@ return [
         'images' => [
             [
                 'path' => 'people/memory/groupphotopassas1.png',
-                'caption' => 'Σε εκδήλωση για τα Ανοικτά Δεδομένα, 2018',
+                'caption' => 'Σε εκδήλωση',
             ],
             [
                 'path' => 'people/memory/groupphotopassas2.png',
-                'caption' => 'Με την ομάδα σε ερευνητικό συνέδριο, 2019',
+                'caption' => 'Με την ομάδα',
             ],
             [
                 'path' => 'people/memory/groupphotopassas3.png',
-                'caption' => 'Κατά τη διάρκεια εργαστηρίου, 2020',
+                'caption' => 'Κατά τη διάρκεια εργαστηρίου',
             ],
             [
                 'path' => 'people/memory/groupphotopassas4.png',
-                'caption' => 'Στιγμές συνεργασίας και δημιουργίας, 2021',
+                'caption' => 'Στιγμές συνεργασίας και δημιουργίας',
             ],
             [
                 'path' => 'people/memory/groupphotopassas5.png',
-                'caption' => 'Στιγμές συνεργασίας και δημιουργίας, 2021',
+                'caption' => 'Στιγμές συνεργασίας και δημιουργίας',
             ],
             [
                 'path' => 'people/memory/groupphotopassas6.png',
-                'caption' => 'Στιγμές συνεργασίας και δημιουργίας, 2021',
+                'caption' => 'Στιγμές συνεργασίας και δημιουργίας',
             ],
         ],
     ],
