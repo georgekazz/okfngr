@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('who_we_are.title') }} - Open Knowledge Greece</title>
+    <title>{{ __('board.title') }} - Open Knowledge Greece</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/who-we-are.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/board-of-directors.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
-
 <body>
     <!-- Header -->
     <header>
@@ -73,124 +71,95 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="page-hero">
+    <section class="board-hero">
+        <div class="hero-background">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+            <div class="hero-shape shape-3"></div>
+        </div>
+        
         <div class="hero-content">
-            <div class="hero-icon">
-                <img src="{{ asset('img/icons/knowledge.svg') }}" alt="Knowledge">
+            <div class="hero-badge">
+                <img src="{{ asset('img/icons/board.svg') }}" alt="Board">
+                <span>{{ __('board.hero.badge') }}</span>
             </div>
-            <h1>{{ __('who_we_are.hero.title') }}</h1>
-            <p class="hero-lead">{{ __('who_we_are.hero.subtitle') }}</p>
+            
+            <h1>{{ __('board.hero.title') }}</h1>
+            <p class="hero-lead">{{ __('board.hero.subtitle') }}</p>
         </div>
     </section>
 
-    <!-- Vision Section -->
-    <section class="vision-section">
+    <!-- Board Grid Section -->
+    <section class="board-section">
         <div class="content-container">
-            <div class="section-header-large">
-                <img src="{{ asset('img/icons/impact.svg') }}" alt="Vision" class="section-icon-large">
-                <h2>{{ __('who_we_are.vision.title') }}</h2>
+            <div class="board-intro">
+                <h2>{{ __('board.intro.title') }}</h2>
+                <p>{{ __('board.intro.text') }}</p>
             </div>
 
-            <div class="vision-content">
-                <div class="vision-intro">
-                    <p class="lead-text">{{ __('who_we_are.vision.intro') }}</p>
-                </div>
-
-                <div class="vision-paragraphs">
-                    <p>{{ __('who_we_are.vision.paragraph1') }}</p>
-                    <p>{{ __('who_we_are.vision.paragraph2') }}</p>
-                    <p>{{ __('who_we_are.vision.paragraph3') }}</p>
-                    <p>{{ __('who_we_are.vision.paragraph4') }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Open Term Section -->
-    <section class="open-term-section">
-        <div class="content-container">
-            <div class="section-header-large">
-                <h2>{{ __('who_we_are.open_term.title') }}</h2>
-            </div>
-
-            <div class="term-content">
-                <p class="lead-text">{{ __('who_we_are.open_term.intro') }}</p>
-
-                <div class="definition-box">
-                    <h3>{{ __('who_we_are.open_term.definition_title') }}</h3>
-                    <p>{{ __('who_we_are.open_term.definition_text') }}</p>
-                </div>
-
-                <div class="principles-grid">
-                    <div class="principle-card" data-color="#00D1FF">
-                        <div class="principle-icon">
-                            <img src="{{ asset('img/icons/governance.svg') }}" alt="Access">
+            <div class="board-grid">
+                @foreach(__('board.members') as $member)
+                <div class="board-member">
+                    <div class="member-image-wrapper">
+                        <div class="member-image">
+                            <img src="{{ asset('img/' . $member['image']) }}" alt="{{ $member['name'] }}" onerror="this.src='{{ asset('img/people/placeholder.png') }}'">
                         </div>
-                        <p>{{ __('who_we_are.open_term.principle1') }}</p>
-                    </div>
+                        <div class="member-overlay">
+                            <div class="social-links">
+                                @if(isset($member['social']['twitter']) && $member['social']['twitter'])
+                                <a href="{{ $member['social']['twitter'] }}" target="_blank" rel="noopener" class="social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                                    </svg>
+                                </a>
+                                @endif
+                                
+                                @if(isset($member['social']['linkedin']) && $member['social']['linkedin'])
+                                <a href="{{ $member['social']['linkedin'] }}" target="_blank" rel="noopener" class="social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                        <circle cx="4" cy="4" r="2"/>
+                                    </svg>
+                                </a>
+                                @endif
+                                
+                                @if(isset($member['social']['github']) && $member['social']['github'])
+                                <a href="{{ $member['social']['github'] }}" target="_blank" rel="noopener" class="social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+                                    </svg>
+                                </a>
+                                @endif
+                                
+                                @if(isset($member['social']['email']) && $member['social']['email'])
+                                <a href="mailto:{{ $member['social']['email'] }}" class="social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                </a>
+                                @endif
 
-                    <div class="principle-card" data-color="#ADFFED">
-                        <div class="principle-icon">
-                            <img src="{{ asset('img/icons/reproducible-research.svg') }}" alt="Redistribute">
+                                @if(isset($member['social']['website']) && $member['social']['website'])
+                                <a href="{{ $member['social']['website'] }}" target="_blank" rel="noopener" class="social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="2" y1="12" x2="22" y2="12"/>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                    </svg>
+                                </a>
+                                @endif
+                            </div>
                         </div>
-                        <p>{{ __('who_we_are.open_term.principle2') }}</p>
                     </div>
-
-                    <div class="principle-card" data-color="#E4FF36">
-                        <div class="principle-icon">
-                            <img src="{{ asset('img/icons/create-open-data.svg') }}" alt="Reuse">
-                        </div>
-                        <p>{{ __('who_we_are.open_term.principle3') }}</p>
+                    
+                    <div class="member-info">
+                        <h3 class="member-name">{{ $member['name'] }}</h3>
+                        <p class="member-role">{{ $member['role'] }}</p>
+                        <p class="member-bio">{{ $member['bio'] }}</p>
                     </div>
-
-                    <div class="principle-card" data-color="#E077FF">
-                        <div class="principle-icon">
-                            <img src="{{ asset('img/icons/collaboration.svg') }}" alt="No restrictions">
-                        </div>
-                        <p>{{ __('who_we_are.open_term.principle4') }}</p>
-                    </div>
-                </div>
-
-                <p class="term-conclusion">{{ __('who_we_are.open_term.conclusion') }}</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Values Section -->
-    <section class="values-detailed-section">
-        <div class="content-container">
-            <div class="section-header-large">
-                <img src="{{ asset('img/icons/mission.svg') }}" alt="Values" class="section-icon-large">
-                <h2>{{ __('who_we_are.values.title') }}</h2>
-            </div>
-
-            <div class="values-intro">
-                <p class="lead-text">{{ __('who_we_are.values.intro') }}</p>
-            </div>
-
-            <!-- Value Items -->
-            <div class="value-items">
-                @foreach(['open_knowledge', 'respect', 'collaboration', 'realistic', 'doing', 'achieving_change'] as $valueKey)
-                <div class="value-item">
-                    <h3>{{ __("who_we_are.values.{$valueKey}_title") }}</h3>
-                    <p>{{ __("who_we_are.values.{$valueKey}_text") }}</p>
                 </div>
                 @endforeach
-            </div>
-        </div>
-    </section>
-
-    <!-- About Organization Section -->
-    <section class="organization-section">
-        <div class="content-container">
-            <div class="org-box">
-                <div class="org-icon">
-                    <img src="{{ asset('img/icons/board.svg') }}" alt="Organization">
-                </div>
-                <div class="org-content">
-                    <h2>{{ __('who_we_are.organization.title') }}</h2>
-                    <p>{{ __('who_we_are.organization.text') }}</p>
-                </div>
             </div>
         </div>
     </section>
@@ -226,7 +195,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const nav = document.querySelector('nav');
-
+            
             if (mobileMenuToggle) {
                 mobileMenuToggle.addEventListener('click', function() {
                     nav.classList.toggle('active');
@@ -234,19 +203,19 @@
             }
 
             const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
-
+            
             navItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         const parent = this.parentElement;
-
+                        
                         document.querySelectorAll('.nav-item.has-dropdown').forEach(otherItem => {
                             if (otherItem !== parent) {
                                 otherItem.classList.remove('active');
                             }
                         });
-
+                        
                         parent.classList.toggle('active');
                     }
                 });
@@ -254,5 +223,4 @@
         });
     </script>
 </body>
-
 </html>

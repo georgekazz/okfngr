@@ -7,8 +7,9 @@ return [
         'who_we_are' => 'Our vision and values',
         'what_we_do' => 'What We Do',
         'open_data' => 'Open Data',
+        'who_we_are2' => 'Who we are',
         'blog' => 'Blog',
-
+        'board' => 'Board of Directors',
         'our_mission' => 'Our Mission',
         'our_vision' => 'Our Vision',
         'our_team' => 'Our Team',

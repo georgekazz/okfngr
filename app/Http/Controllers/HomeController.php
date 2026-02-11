@@ -41,8 +41,14 @@ class HomeController extends Controller
     {
         return view('our-team');
     }
+    
     public function inMemory($locale)
     {
         return view('in-memory');
+    }
+
+    public function boardOfDirectors($locale)
+    {
+        return view('board-of-directors');
     }
 }

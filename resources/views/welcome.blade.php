@@ -29,10 +29,10 @@
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#team" class="nav-link">{{ __('home.nav.who_we_are') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#team" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
                         <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
-                        <a href="#partners" class="dropdown-item">{{ __('home.nav.partners') }}</a>
+                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
                         <a href="#history" class="dropdown-item">{{ __('home.nav.history') }}</a>
                     </div>
                 </div>
