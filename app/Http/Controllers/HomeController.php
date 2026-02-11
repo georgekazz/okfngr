@@ -36,4 +36,9 @@ class HomeController extends Controller
     {
         return view('our-impact');
     }
+
+    public function ourTeam($locale)
+    {
+        return view('our-team');
+    }
 }

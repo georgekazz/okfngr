@@ -31,7 +31,7 @@
                 <div class="nav-item has-dropdown">
                     <a href="#team" class="nav-link">{{ __('home.nav.who_we_are') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="#team" class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
                         <a href="#partners" class="dropdown-item">{{ __('home.nav.partners') }}</a>
                         <a href="#history" class="dropdown-item">{{ __('home.nav.history') }}</a>
                     </div>

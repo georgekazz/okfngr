@@ -25,6 +25,7 @@ Route::group([
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/vision-and-values', [HomeController::class, 'whoWeAre'])->name('vision-and-values');
     Route::get('/our-impact', [HomeController::class, 'ourImpact'])->name('our-impact');
+    Route::get('/our-team', [HomeController::class, 'ourTeam'])->name('our-team');
 
     // Public pages - USE SLUG
     Route::get('/', [HomeController::class, 'index'])->name('home');
