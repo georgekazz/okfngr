@@ -54,7 +54,7 @@
                 </div>
             </nav>
             <div class="nav-actions">
-                <a href="./el/blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
+                <a href="./blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
                 <div class="lang-switcher">
                     <a href="./en" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
