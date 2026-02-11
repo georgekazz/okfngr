@@ -658,7 +658,11 @@
 .volunteer-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent, rgba(0, 209, 255, 0.95));
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 209, 255, 0.95)
+    );
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -856,33 +860,95 @@
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 20px;
     }
-    
+
     .volunteers-intro h2 {
         font-size: 2rem;
     }
-    
+
     .modal-content {
         flex-direction: column;
     }
-    
+
     .modal-image {
         flex: none;
         aspect-ratio: 1 / 1;
     }
-    
+
     .modal-info {
         padding: 30px 25px;
     }
-    
+
     .modal-info h2 {
         font-size: 2rem;
     }
-    
+
     .modal-role {
         font-size: 1rem;
     }
-    
+
     .modal-bio {
         font-size: 1rem;
     }
+}
+/* In Memory Teaser */
+.in-memory-teaser {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.memory-teaser-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid var(--color-mint);
+}
+
+.memory-teaser-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 30px;
+    opacity: 0.6;
+}
+
+.memory-teaser-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--color-dark);
+}
+
+.memory-teaser-content h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+}
+
+.memory-teaser-content p {
+    font-size: 1.2rem;
+    color: var(--color-gray);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.btn-memory {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--color-dark);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-memory:hover {
+    background: var(--color-mint);
+    color: var(--color-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(173, 255, 237, 0.3);
 }

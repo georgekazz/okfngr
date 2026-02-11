@@ -122,7 +122,7 @@ return [
         'text' => 'Our volunteers are key to our success.',
         'view_bio' => 'View Bio',
     ],
-    
+
     'volunteer_members' => [
         [
             'name' => 'Christina Karypidou',
@@ -158,18 +158,14 @@ return [
             'role' => 'Volunteer',
             'bio' => 'Dr Evdokimos Konstantinidis is the head of the Assistive Technologies and Silver Science research team of the Medical Physics Laboratory, Aristotle University of Thessaloniki. He received his diploma in electronic engineering from the Technological Educational Institute of Thessaloniki in 2004, his Master\'s degree in Medical Informatics in 2008 from Aristotle University of Thessaloniki, Greece and his doctorate at the Medical Physics laboratory, School of Health Sciences, Aristotle University of Thessaloniki, Greece. His current research interests focus mainly on the field of Medical Informatics and particularly regarding assistive technologies for people with special needs and the elderly (silverscience, silvergaming, mobile health). His recent research interests focus on intervention for the elderly in the field of physical exercise games and on Internet of Things technologies as well as artificial intelligence in serious purpose games. In addition, his research interests turn to elderly interventions through physical exercise games, living laboratories and big data sharing technologies. He supported the creation of the Thessaloniki Active and Healthy Ageing Living Lab (Thess-AHALL) which became a member of the European Network of Living Labs (ENoLL) in 2016. In this context, he is studying the creation and implementation of a serious purpose games platform that promotes cross-national collaboration in design with and for the elderly (http://www.fitforall.gr/dev/), which won the 3rd best co-creation project award of the European Network of Living Labs 2016. He has authored over 50 publications in various international scientific journals and conferences and was a keynote speaker at the IEEE CBMS 2017 conference. He is currently deputy technical director of the European H2020 SmokeFreeBrain project and works on the UNCAP program funded by H2020.',
             'image' => 'people/volunteers/evdokimos.png',
-            'social' => [
-                
-            ]
+            'social' => []
         ],
         [
             'name' => 'Anastasia Papadopoulou',
             'role' => 'Volunteer',
             'bio' => 'Anastasia Papadopoulou is a graduate of the Department of Mathematics at Aristotle University of Thessaloniki. In the same department she completed her postgraduate studies in Internet Science, with a thesis regarding the study and analysis of data and indicators in semantic budget data of Local Government Organizations at OpenBudgets.eu. She was a scientific collaborator in the research program "Innovative Open Data Education and Training based on PBL and Learning Analytics" of SEPVE. At Open Knowledge Foundation Greece she is active as Community Assistant. Her research interests include the analysis of open linked data, data journalism, as well as the analysis of biological networks.',
             'image' => 'people/volunteers/papadopoulou.jpg',
-            'social' => [
-               
-            ]
+            'social' => []
         ],
         [
             'name' => 'Anthi Baliou',
@@ -180,6 +176,12 @@ return [
                 'linkedin' => 'https://www.linkedin.com/in/anthi-baliou',
             ]
         ],
+    ],
+
+    'in_memory_teaser' => [
+        'title' => 'In Memory',
+        'text' => 'Honoring the memory of those who left us but whose work continues to inspire',
+        'button' => 'View Tribute',
     ],
 
     'join' => [

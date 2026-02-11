@@ -227,6 +227,25 @@
         </div>
     </div>
 
+    <!-- In Memory Section -->
+    <section class="in-memory-teaser">
+        <div class="content-container">
+            <div class="memory-teaser-content">
+                <div class="memory-teaser-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h3>{{ __('our_team.in_memory_teaser.title') }}</h3>
+                <p>{{ __('our_team.in_memory_teaser.text') }}</p>
+                <a href="{{ route('in-memory', ['locale' => app()->getLocale()]) }}" class="btn-memory">
+                    {{ __('our_team.in_memory_teaser.button') }}
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Join Team CTA -->
     <section class="join-team-section">
         <div class="content-container">
