@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Writer\MediaEventController;
+
 
 
 Route::get('/', function () {
@@ -63,6 +65,14 @@ Route::group([
         Route::get('/posts/{post:id}/edit', [WriterController::class, 'edit'])->name('posts.edit');
         Route::put('/posts/{post:id}', [WriterController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post:id}', [WriterController::class, 'destroy'])->name('posts.destroy');
+
+        //MEdia
+        Route::get('/media-events', [MediaEventController::class, 'index'])->name('media-events.index');
+        Route::get('/media-events/create', [MediaEventController::class, 'create'])->name('media-events.create');
+        Route::post('/media-events', [MediaEventController::class, 'store'])->name('media-events.store');
+        Route::get('/media-events/{mediaEvent}/edit', [MediaEventController::class, 'edit'])->name('media-events.edit');
+        Route::put('/media-events/{mediaEvent}', [MediaEventController::class, 'update'])->name('media-events.update');
+        Route::delete('/media-events/{mediaEvent}', [MediaEventController::class, 'destroy'])->name('media-events.destroy');
     });
 
     // Admin routes
@@ -91,3 +101,5 @@ Route::group([
         Route::delete('/comments/{comment:id}', [AdminController::class, 'destroyComment'])->name('comments.destroy');
     });
 });
+
+//php artisan storage:link
