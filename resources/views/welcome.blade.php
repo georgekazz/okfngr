@@ -39,20 +39,20 @@
                 <div class="nav-item has-dropdown">
                     <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="#projects" class="dropdown-item">{{ __('home.nav.projects') }}</a>
-                        <a href="#research" class="dropdown-item">{{ __('home.nav.apps') }}</a>
-                        <a href="#research" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
-                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
-                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.media') }}</a>
-                        <a href="#advocacy" class="dropdown-item">{{ __('home.nav.editions') }}</a>
+                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.apps') }}</a>
+                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
+                        <a href="{{ route('ourActions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
+                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.media') }}</a>
+                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
                     <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="#datasets" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
-                        <a href="#tools" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
-                        <a href="#resources" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
+                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
+                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
+                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
                     </div>
                 </div>
             </nav>

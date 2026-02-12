@@ -41,7 +41,7 @@ class HomeController extends Controller
     {
         return view('our-team');
     }
-    
+
     public function inMemory($locale)
     {
         return view('in-memory');
@@ -55,5 +55,50 @@ class HomeController extends Controller
     public function governance($locale)
     {
         return view('governance');
+    }
+
+    public function researchProjects($locale)
+    {
+        return view('research-projects');
+    }
+
+    public function applications($locale)
+    {
+        return view('applications');
+    }
+
+    public function oldProjects($locale)
+    {
+        return view('old-projects');
+    }
+
+    public function ourActions($locale)
+    {
+        return view('our-actions');
+    }
+
+    public function media($locale)
+    {
+        return view('media');
+    }
+
+    public function editions($locale)
+    {
+        return view('editions');
+    }
+
+    public function openData($locale)
+    {
+        return view('open-data');
+    }
+
+    public function howTo($locale)
+    {
+        return view('how-to');
+    }
+
+    public function whyOpen($locale)
+    {
+        return view('why-open');
     }
 }

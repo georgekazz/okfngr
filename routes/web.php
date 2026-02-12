@@ -29,6 +29,17 @@ Route::group([
     Route::get('/in-memory', [HomeController::class, 'inMemory'])->name('in-memory');
     Route::get('/board-of-directors', [HomeController::class, 'boardOfDirectors'])->name('board-of-directors');
     Route::get('/governance', [HomeController::class, 'governance'])->name('governance');
+    Route::get('/research-projects', [HomeController::class, 'researchProjects'])->name('researchProjects');
+    Route::get('/applications', [HomeController::class, 'applications'])->name('applications');
+    Route::get('/old-projects', [HomeController::class, 'oldProjects'])->name('oldProjects');
+    Route::get('/our-actions', [HomeController::class, 'ourActions'])->name('ourActions');
+    Route::get('/media', [HomeController::class, 'media'])->name('media');
+    Route::get('/editions', [HomeController::class, 'editions'])->name('editions');
+    Route::get('/open-data', [HomeController::class, 'openData'])->name('openData');
+
+    Route::get('/how-to', [HomeController::class, 'howTo'])->name('howTo');
+    Route::get('/why-open', [HomeController::class, 'whyOpen'])->name('whyOpen');
+
 
 
     // Public pages - USE SLUG
