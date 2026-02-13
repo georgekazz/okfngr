@@ -79,7 +79,11 @@ class HomeController extends Controller
 
     public function media($locale)
     {
-        return view('media');
+        $events = \App\Models\MediaEvent::published()
+            ->orderByEventDate('desc')
+            ->get();
+
+        return view('media', compact('events'));
     }
 
     public function editions($locale)

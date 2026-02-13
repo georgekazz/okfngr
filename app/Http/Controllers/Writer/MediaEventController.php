@@ -69,7 +69,7 @@ class MediaEventController extends Controller
         return view('writer.media-events.edit', compact('mediaEvent'));
     }
 
-    public function update(Request $request, MediaEvent $mediaEvent)
+    public function update($locale, Request $request, MediaEvent $mediaEvent)
     {
         // Check if user owns this event
         if ($mediaEvent->user_id !== Auth::id()) {
@@ -113,7 +113,7 @@ class MediaEventController extends Controller
             ->with('success', 'Η εκδήλωση ενημερώθηκε επιτυχώς!');
     }
 
-    public function destroy(MediaEvent $mediaEvent)
+    public function destroy($locale, MediaEvent $mediaEvent)
     {
         // Check if user owns this event
         if ($mediaEvent->user_id !== Auth::id()) {
