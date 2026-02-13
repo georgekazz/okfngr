@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/media-event.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -121,92 +122,92 @@
                 <div class="events-grid">
                     @foreach($events as $event)
                         <div class="event-card {{ $event->status }}">
-                            <div class="event-header">
-                                <div style="flex: 1;">
-                                    <h2 class="event-title">{{ $event->title }}</h2>
-                                </div>
-                                <span class="event-status {{ $event->status }}">
-                                    {{ $event->status === 'published' ? 'Δημοσιευμένο' : 'Πρόχειρο' }}
-                                </span>
-                            </div>
-
                             @if($event->image)
                                 <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" class="event-image">
                             @endif
 
-                            <div class="event-meta">
-                                <div class="event-meta-item">
-                                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path
-                                            d="M17.5 5.83333H2.5V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V5.83333Z"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    {{ $event->event_date->format('d/m/Y') }}
+                            <div class="event-content">
+                                <div class="event-header">
+                                    <h2 class="event-title">{{ $event->title }}</h2>
+                                    <span class="event-status {{ $event->status }}">
+                                        {{ $event->status === 'published' ? 'Δημοσιευμένο' : 'Πρόχειρο' }}
+                                    </span>
                                 </div>
-                                @if($event->location)
+
+                                <div class="event-meta">
                                     <div class="event-meta-item">
                                         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
                                             <path
-                                                d="M10 10.8333C11.3807 10.8333 12.5 9.71404 12.5 8.33333C12.5 6.95262 11.3807 5.83333 10 5.83333C8.61929 5.83333 7.5 6.95262 7.5 8.33333C7.5 9.71404 8.61929 10.8333 10 10.8333Z"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path
-                                                d="M10 17.5C13.3333 14.1667 16.6667 11.1548 16.6667 8.33333C16.6667 4.65143 13.6819 1.66667 10 1.66667C6.3181 1.66667 3.33333 4.65143 3.33333 8.33333C3.33333 11.1548 6.66667 14.1667 10 17.5Z"
+                                                d="M17.5 5.83333H2.5V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V5.83333Z"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        {{ $event->location }}
+                                        {{ $event->event_date->format('d/m/Y') }}
                                     </div>
-                                @endif
-                            </div>
-
-                            <p class="event-description">{{ $event->description }}</p>
-
-                            @if($event->links && count($event->links) > 0)
-                                <div class="event-links">
-                                    @foreach($event->links as $link)
-                                        <a href="{{ $link }}" target="_blank" class="event-link">
-                                            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor"
-                                                stroke-width="2">
+                                    @if($event->location)
+                                        <div class="event-meta-item">
+                                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
                                                 <path
-                                                    d="M10.8333 9.16667C10.3092 9.82926 9.56613 10.2845 8.73346 10.4588C7.90078 10.6331 7.03286 10.5159 6.28101 10.1271C5.52917 9.73829 4.94274 9.10306 4.62688 8.33438C4.31102 7.5657 4.28544 6.71437 4.55474 5.92894C4.82404 5.14351 5.37186 4.47529 6.09836 4.04265C6.82486 3.61001 7.68364 3.44149 8.52519 3.56482C9.36674 3.68815 10.1388 4.09574 10.7025 4.71667"
+                                                    d="M10 10.8333C11.3807 10.8333 12.5 9.71404 12.5 8.33333C12.5 6.95262 11.3807 5.83333 10 5.83333C8.61929 5.83333 7.5 6.95262 7.5 8.33333C7.5 9.71404 8.61929 10.8333 10 10.8333Z"
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                                 <path
-                                                    d="M9.16667 10.8333C9.69084 10.1707 10.4339 9.71554 11.2666 9.54121C12.0992 9.36688 12.9672 9.48414 13.719 9.87292C14.4709 10.2617 15.0573 10.8969 15.3732 11.6656C15.689 12.4343 15.7146 13.2856 15.4453 14.071C15.176 14.8565 14.6282 15.5247 13.9017 15.9573C13.1752 16.39 12.3164 16.5585 11.4749 16.4352C10.6333 16.3118 9.86125 15.9042 9.29752 15.2833"
+                                                    d="M10 17.5C13.3333 14.1667 16.6667 11.1548 16.6667 8.33333C16.6667 4.65143 13.6819 1.66667 10 1.66667C6.3181 1.66667 3.33333 4.65143 3.33333 8.33333C3.33333 11.1548 6.66667 14.1667 10 17.5Z"
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                            Σύνδεσμος
-                                        </a>
-                                    @endforeach
+                                            {{ $event->location }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
 
-                            <div class="event-actions">
-                                <a href="{{ route('writer.media-events.edit', ['locale' => app()->getLocale(), 'mediaEvent' => $event->id]) }}"
-                                    class="btn-edit">
-                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path
-                                            d="M14.1667 2.5C14.3856 2.28113 14.6454 2.10752 14.9314 1.98906C15.2173 1.87061 15.5238 1.80969 15.8333 1.80969C16.1429 1.80969 16.4493 1.87061 16.7353 1.98906C17.0213 2.10752 17.281 2.28113 17.5 2.5C17.7189 2.71887 17.8925 2.97863 18.0109 3.26461C18.1294 3.55059 18.1903 3.85706 18.1903 4.16667C18.1903 4.47627 18.1294 4.78274 18.0109 5.06872C17.8925 5.3547 17.7189 5.61446 17.5 5.83333L6.25 17.0833L1.66667 18.3333L2.91667 13.75L14.1667 2.5Z"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    Επεξεργασία
-                                </a>
-                                <form
-                                    action="{{ route('writer.media-events.destroy', ['locale' => app()->getLocale(), 'mediaEvent' => $event->id]) }}"
-                                    method="POST" style="display: inline;"
-                                    onsubmit="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την εκδήλωση;');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-delete">
+                                <p class="event-description">{{ $event->description }}</p>
+
+                                @if($event->links && count($event->links) > 0)
+                                    <div class="event-links">
+                                        @foreach($event->links as $link)
+                                            <a href="{{ $link }}" target="_blank" class="event-link">
+                                                <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path
+                                                        d="M10.8333 9.16667C10.3092 9.82926 9.56613 10.2845 8.73346 10.4588C7.90078 10.6331 7.03286 10.5159 6.28101 10.1271C5.52917 9.73829 4.94274 9.10306 4.62688 8.33438C4.31102 7.5657 4.28544 6.71437 4.55474 5.92894C4.82404 5.14351 5.37186 4.47529 6.09836 4.04265C6.82486 3.61001 7.68364 3.44149 8.52519 3.56482C9.36674 3.68815 10.1388 4.09574 10.7025 4.71667"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path
+                                                        d="M9.16667 10.8333C9.69084 10.1707 10.4339 9.71554 11.2666 9.54121C12.0992 9.36688 12.9672 9.48414 13.719 9.87292C14.4709 10.2617 15.0573 10.8969 15.3732 11.6656C15.689 12.4343 15.7146 13.2856 15.4453 14.071C15.176 14.8565 14.6282 15.5247 13.9017 15.9573C13.1752 16.39 12.3164 16.5585 11.4749 16.4352C10.6333 16.3118 9.86125 15.9042 9.29752 15.2833"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                                Σύνδεσμος
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                                <div class="event-actions">
+                                    <a href="{{ route('writer.media-events.edit', ['locale' => app()->getLocale(), 'mediaEvent' => $event->id]) }}"
+                                        class="btn-edit">
                                         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor"
                                             stroke-width="2">
-                                            <path d="M2.5 5H4.16667H17.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path
-                                                d="M6.66667 5V3.33333C6.66667 2.89131 6.84226 2.46738 7.15482 2.15482C7.46738 1.84226 7.89131 1.66667 8.33333 1.66667H11.6667C12.1087 1.66667 12.5326 1.84226 12.8452 2.15482C13.1577 2.46738 13.3333 2.89131 13.3333 3.33333V5M15.8333 5V16.6667C15.8333 17.1087 15.6577 17.5326 15.3452 17.8452C15.0326 18.1577 14.6087 18.3333 14.1667 18.3333H5.83333C5.39131 18.3333 4.96738 18.1577 4.65482 17.8452C4.34226 17.5326 4.16667 17.1087 4.16667 16.6667V5H15.8333Z"
+                                                d="M14.1667 2.5C14.3856 2.28113 14.6454 2.10752 14.9314 1.98906C15.2173 1.87061 15.5238 1.80969 15.8333 1.80969C16.1429 1.80969 16.4493 1.87061 16.7353 1.98906C17.0213 2.10752 17.281 2.28113 17.5 2.5C17.7189 2.71887 17.8925 2.97863 18.0109 3.26461C18.1294 3.55059 18.1903 3.85706 18.1903 4.16667C18.1903 4.47627 18.1294 4.78274 18.0109 5.06872C17.8925 5.3547 17.7189 5.61446 17.5 5.83333L6.25 17.0833L1.66667 18.3333L2.91667 13.75L14.1667 2.5Z"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        Διαγραφή
-                                    </button>
-                                </form>
+                                        Επεξεργασία
+                                    </a>
+                                    <form
+                                        action="{{ route('writer.media-events.destroy', ['locale' => app()->getLocale(), 'mediaEvent' => $event->id]) }}"
+                                        method="POST" style="flex: 1; display: inline;"
+                                        onsubmit="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την εκδήλωση;');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                                stroke-width="2">
+                                                <path d="M2.5 5H4.16667H17.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M6.66667 5V3.33333C6.66667 2.89131 6.84226 2.46738 7.15482 2.15482C7.46738 1.84226 7.89131 1.66667 8.33333 1.66667H11.6667C12.1087 1.66667 12.5326 1.84226 12.8452 2.15482C13.1577 2.46738 13.3333 2.89131 13.3333 3.33333V5M15.8333 5V16.6667C15.8333 17.1087 15.6577 17.5326 15.3452 17.8452C15.0326 18.1577 14.6087 18.3333 14.1667 18.3333H5.83333C5.39131 18.3333 4.96738 18.1577 4.65482 17.8452C4.34226 17.5326 4.16667 17.1087 4.16667 16.6667V5H15.8333Z"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            Διαγραφή
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     @endforeach

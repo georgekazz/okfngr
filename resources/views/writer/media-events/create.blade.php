@@ -6,6 +6,8 @@
     <title>Νέα Εκδήλωση - Writer Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/media-event.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <style>
         .form-container {
             background: white;

@@ -59,7 +59,7 @@ class MediaEventController extends Controller
             ->with('success', 'Η εκδήλωση δημιουργήθηκε επιτυχώς!');
     }
 
-    public function edit(MediaEvent $mediaEvent)
+    public function edit($locale, MediaEvent $mediaEvent)
     {
         // Check if user owns this event
         if ($mediaEvent->user_id !== Auth::id()) {
