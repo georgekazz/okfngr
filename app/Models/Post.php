@@ -61,6 +61,13 @@ class Post extends Model
             }
         });
     }
+    public function parentComments()
+    {
+        return $this->hasMany(Comment::class)
+            ->whereNull('parent_id')
+            ->where('status', 'approved')
+            ->orderBy('created_at', 'desc');
+    }
 
     /**
      * Get the user that owns the post.
