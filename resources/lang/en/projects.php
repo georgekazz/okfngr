@@ -2,14 +2,50 @@
 
 return [
     'title' => 'Research Projects',
-    
+
     'hero' => [
         'badge' => 'Research & Innovation',
         'title' => 'Research Projects',
         'subtitle' => 'Discover our research projects and initiatives to promote open data',
     ],
-    
+
     'list' => [
+        [
+            'title' => 'Arxive',
+            'description' => '',
+            'image' => 'arxive.png',
+            'badge' => 'EU Project',
+            'social' => [
+                'website' => '',
+            ]
+        ],
+        [
+            'title' => 'Cyberguard',
+            'description' => 'CYBERGUARD is a three-year European project (Grant Agreement No. 101190251) that develops advanced, deployable tools to help Security Operations Centres (SOCs) detect, prevent, and respond to sophisticated cyber threats across critical sectors such as energy, transport, maritime, government, finance, and health. The project integrates state-of-the-art capabilities in malware analysis, penetration testing, CTI (cyber threat intelligence), and mitigation of attacks targeting AI systems—especially large language models—while ensuring seamless interoperability with existing SOC infrastructures and third-party tools. Its goal is to empower SOC analysts with practical technologies and shared knowledge that measurably improve operational resilience.',
+            'image' => 'cyberguard.png',
+            'badge' => 'EU Project',
+            'social' => [
+                'website' => 'https://cyberguard-eu.eu/',
+            ]
+        ],
+        [
+            'title' => 'INTERSOC',
+            'description' => 'Cybersecurity is a critical issue across the EU, with many Member States ranking low on the Global Cybersecurity Index. Threats in cyberspace are global and can impact multiple sectors, sometimes causing damage far beyond their intended targets. As digital systems grow more complex, total prevention of attacks is impossible, but strong, coordinated defences can reduce risks to business continuity. Current security efforts in the EU are often siloed, even as attackers become more coordinated and sophisticated. This requires a new approach to protect critical infrastructure. By monitoring threat actors tactics, techniques, and procedures, along with their motivations and targets, we can improve threat detection and response. INTERSOC (INTERconnected Security Operation Centres) is designed to enhance cybersecurity across the EU. It aims to improve national and EU-level preparedness, enable advanced threat forecasting, strengthen cyber-incident detection and response, and provide training in digital infrastructure security, while upholding privacy and fundamental rights.',
+            'image' => 'intersoc.svg',
+            'badge' => 'EU Project',
+            'social' => [
+                'website' => 'https://inter-soc.eu/',
+            ]
+        ],
+        [
+            'title' => 'SECUR-EU',
+            'description' => 'SECUR-EU Project recognizes the paramount importance and challenges that cybersecurity plays when dealing with vital sectors and infrastructures of EU economy, particularly critical infrastructures (CIs) and Small and Medium Enterprises (SMEs). We aim to foster a common culture of cybersecurity awareness, enhance open-source security solutions, and make them available to the SME market through innovative approaches including the HackOlympics initiative.',
+            'image' => 'logo-secureu.svg',
+            'badge' => 'EU Project',
+            'social' => [
+                'website' => 'https://www.secur-eu.eu/',
+            ]
+        ],
         [
             'title' => 'UPCAST Project EU',
             'description' => 'The UPCAST project provides a set of universal, reliable, transparent and user-friendly data market plugins for automating data sharing and processing agreements between businesses, public administrations and citizens. The project plugins will enable stakeholders in the common European data space to design and develop data exchange and transaction guarantees.',
