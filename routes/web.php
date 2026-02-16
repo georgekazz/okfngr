@@ -7,6 +7,8 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Writer\MediaEventController;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/', function () {
     return redirect('/el');
@@ -99,5 +101,23 @@ Route::group([
 
         // Logout
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    });
+
+    // User routes
+    Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+        // Day Offs
+        Route::get('/day-offs', [UserController::class, 'dayOffs'])->name('day-offs.index');
+        Route::get('/day-offs/create', [UserController::class, 'createDayOff'])->name('day-offs.create');
+        Route::post('/day-offs', [UserController::class, 'storeDayOff'])->name('day-offs.store');
+        Route::get('/day-offs/{dayOff}/edit', [UserController::class, 'editDayOff'])->name('day-offs.edit');
+        Route::put('/day-offs/{dayOff}', [UserController::class, 'updateDayOff'])->name('day-offs.update');
+        Route::delete('/day-offs/{dayOff}', [UserController::class, 'destroyDayOff'])->name('day-offs.destroy');
+
+        // Calendar & Links
+        Route::get('/calendar', [UserController::class, 'calendar'])->name('calendar');
+        Route::get('/team-links', [UserController::class, 'teamLinks'])->name('team-links');
+        Route::get('/statistics', [UserController::class, 'statistics'])->name('statistics');
     });
 });

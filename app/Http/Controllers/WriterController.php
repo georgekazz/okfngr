@@ -38,20 +38,20 @@ class WriterController extends Controller
 
             $user = Auth::user();
 
-            // Check if user has access (writer or admin)
-            if (!in_array($user->role, ['writer', 'admin'])) {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => 'Δεν έχετε δικαίωμα πρόσβασης.',
-                ]);
-            }
-
             // Redirect based on role
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard', ['locale' => app()->getLocale()]);
+            } elseif ($user->role === 'writer') {
+                return redirect()->route('writer.dashboard', ['locale' => app()->getLocale()]);
+            } elseif ($user->role === 'user') {
+                return redirect()->route('user.dashboard', ['locale' => app()->getLocale()]);
             }
 
-            return redirect()->route('writer.dashboard', ['locale' => app()->getLocale()]);
+            // If no valid role, logout
+            Auth::logout();
+            return back()->withErrors([
+                'email' => 'Δεν έχετε δικαίωμα πρόσβασης.',
+            ]);
         }
 
         return back()->withErrors([

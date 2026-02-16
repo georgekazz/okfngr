@@ -81,4 +81,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class)->where('status', 'published');
     }
+
+    public function dayOffs()
+    {
+        return $this->hasMany(DayOff::class);
+    }
+
+    public function approvedDayOffs()
+    {
+        return $this->hasMany(DayOff::class, 'approved_by');
+    }
+
+    public function teamLinks()
+    {
+        return $this->hasMany(TeamLink::class, 'created_by');
+    }
 }
