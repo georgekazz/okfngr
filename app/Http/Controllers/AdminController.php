@@ -147,9 +147,17 @@ class AdminController extends Controller
     }
 
     // Comments Management
-    public function comments($locale)
+    public function comments(Request $request, $locale)
     {
-        $comments = Comment::with(['post', 'post.user'])->latest()->paginate(20);
+        $query = Comment::with(['post'])->latest();
+
+        // Filter by status
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $comments = $query->paginate(20);
+
         return view('admin.comments.index', compact('comments'));
     }
 
