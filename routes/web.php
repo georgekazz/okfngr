@@ -8,8 +8,6 @@ use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Writer\MediaEventController;
 
-
-
 Route::get('/', function () {
     return redirect('/el');
 });
@@ -24,6 +22,7 @@ Route::group([
     'middleware' => \App\Http\Middleware\SetLocale::class
 ], function () {
 
+    // Static pages
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/vision-and-values', [HomeController::class, 'whoWeAre'])->name('vision-and-values');
     Route::get('/our-impact', [HomeController::class, 'ourImpact'])->name('our-impact');
@@ -38,28 +37,23 @@ Route::group([
     Route::get('/media', [HomeController::class, 'media'])->name('media');
     Route::get('/editions', [HomeController::class, 'editions'])->name('editions');
     Route::get('/open-data', [HomeController::class, 'openData'])->name('openData');
-
     Route::get('/how-to', [HomeController::class, 'howTo'])->name('howTo');
     Route::get('/why-open', [HomeController::class, 'whyOpen'])->name('whyOpen');
 
-
-
-    // Public pages - USE SLUG
+    // Public pages - Blog
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
-    Route::post('/posts/{post:slug}/comments', [PostController::class, 'storeComment'])
+    Route::post('/posts/{post:id}/comments', [PostController::class, 'storeComment'])
         ->name('posts.comments.store');
+
 
     // Writer login/logout
     Route::get('/writer/login', [WriterController::class, 'showLogin'])->name('writer.login');
     Route::post('/writer/login', [WriterController::class, 'login'])->name('writer.login.submit');
     Route::post('/writer/logout', [WriterController::class, 'logout'])->name('writer.logout');
 
-    // Admin logout route
-    Route::post('/{locale}/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-
-    // Writer protected routes - USE ID
+    // Writer protected routes
     Route::middleware('auth')->prefix('writer')->name('writer.')->group(function () {
         Route::get('/dashboard', [WriterController::class, 'dashboard'])->name('dashboard');
         Route::get('/posts', [WriterController::class, 'index'])->name('posts.index');
@@ -69,7 +63,7 @@ Route::group([
         Route::put('/posts/{post:id}', [WriterController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post:id}', [WriterController::class, 'destroy'])->name('posts.destroy');
 
-        //MEdia
+        // Media Events
         Route::get('/media-events', [MediaEventController::class, 'index'])->name('media-events.index');
         Route::get('/media-events/create', [MediaEventController::class, 'create'])->name('media-events.create');
         Route::post('/media-events', [MediaEventController::class, 'store'])->name('media-events.store');
@@ -105,8 +99,5 @@ Route::group([
 
         // Logout
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
-
     });
 });
-
-//php artisan storage:link

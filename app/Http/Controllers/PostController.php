@@ -64,8 +64,13 @@ class PostController extends Controller
         return view('posts.show', compact('post', 'relatedPosts'));
     }
 
-    public function storeComment(Request $request, Post $post)
+    public function storeComment($locale, Request $request, Post $post)
     {
+
+        // Check if post is published
+        if (!$post->isPublished()) {
+            abort(404);
+        }
 
         $validator = Validator::make($request->all(), [
             'author_name' => 'required|string|max:255',
@@ -99,6 +104,7 @@ class PostController extends Controller
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
         ]);
+
 
         return redirect()
             ->back()

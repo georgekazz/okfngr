@@ -584,7 +584,7 @@
                                         <div class="comment-content">{{ $comment->content }}</div>
                                     </td>
                                     <td>
-                                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'slug' => $comment->post->slug]) }}"
+                                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $comment->post->slug]) }}"
                                             target="_blank" class="post-link">
                                             {{ $comment->post->title }}
                                         </a>

@@ -239,7 +239,7 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('posts.comments.store', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}" method="POST" class="comment-form">
+                    <form action="{{ route('posts.comments.store', ['locale' => app()->getLocale(), 'post' => $post->id]) }}" method="POST" class="comment-form">
                         @csrf
                         <div class="form-row">
                             <div class="form-group">
