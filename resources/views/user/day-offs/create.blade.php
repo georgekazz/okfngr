@@ -461,12 +461,8 @@
             </div>
 
             <div class="form-container">
-                <form action="{{ route('user.day-offs.store', [
-                        'locale' => app()->getLocale()
-                    ]) }}" method="POST">
-
+                <form action="{{ route('user.day-offs.store', ['locale' => app()->getLocale()]) }}" method="POST" id="dayOffForm">
                     @csrf
-                    @method('PUT')
 
                     <!-- Calculated Days Display -->
                     <div class="days-display" id="daysDisplay">
