@@ -280,7 +280,37 @@
     margin-bottom: 20px;
     font-size: 1rem;
     flex: 1;
+    /* Taller scroll area */
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 8px;
 }
+
+/* Custom scrollbar styling */
+.app-description::-webkit-scrollbar {
+    width: 6px;
+}
+
+.app-description::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.app-description::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--color-cyan, #00D1FF), #00b8e6);
+    border-radius: 3px;
+}
+
+.app-description::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00b8e6, #009fcc);
+}
+
+/* Firefox */
+.app-description {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-cyan, #00D1FF) #f1f1f1;
+}
+
 /* App Links - Multiple URLs */
 .app-links {
     display: flex;
