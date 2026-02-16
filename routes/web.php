@@ -56,6 +56,9 @@ Route::group([
     Route::post('/writer/login', [WriterController::class, 'login'])->name('writer.login.submit');
     Route::post('/writer/logout', [WriterController::class, 'logout'])->name('writer.logout');
 
+    // Admin logout route
+    Route::post('/{locale}/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
     // Writer protected routes - USE ID
     Route::middleware('auth')->prefix('writer')->name('writer.')->group(function () {
         Route::get('/dashboard', [WriterController::class, 'dashboard'])->name('dashboard');
@@ -80,7 +83,7 @@ Route::group([
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
         // Users
-        Route::get('/users', [AdminController::class, 'users'])->name('users');
+        Route::get('/users', [AdminController::class, 'users'])->name('users.index');
         Route::get('/users/create', [AdminController::class, 'createUser'])->name('users.create');
         Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
         Route::get('/users/{user:id}/edit', [AdminController::class, 'editUser'])->name('users.edit');
@@ -90,15 +93,19 @@ Route::group([
         Route::delete('/users/{user:id}', [AdminController::class, 'destroyUser'])->name('users.destroy');
 
         // Posts
-        Route::get('/posts', [AdminController::class, 'posts'])->name('posts');
+        Route::get('/posts', [AdminController::class, 'posts'])->name('posts.index');
         Route::get('/posts/{post:id}/edit', [AdminController::class, 'editPost'])->name('posts.edit');
         Route::delete('/posts/{post:id}', [AdminController::class, 'destroyPost'])->name('posts.destroy');
 
         // Comments
-        Route::get('/comments', [AdminController::class, 'comments'])->name('comments');
-        Route::put('/comments/{comment:id}/approve', [AdminController::class, 'approveComment'])->name('comments.approve');
-        Route::put('/comments/{comment:id}/reject', [AdminController::class, 'rejectComment'])->name('comments.reject');
+        Route::get('/comments', [AdminController::class, 'comments'])->name('comments.index');
+        Route::patch('/comments/{comment:id}/approve', [AdminController::class, 'approveComment'])->name('comments.approve');
+        Route::patch('/comments/{comment:id}/reject', [AdminController::class, 'rejectComment'])->name('comments.reject');
         Route::delete('/comments/{comment:id}', [AdminController::class, 'destroyComment'])->name('comments.destroy');
+
+        // Logout
+        Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
     });
 });
 
