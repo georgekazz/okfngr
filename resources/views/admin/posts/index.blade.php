@@ -119,7 +119,7 @@
                                     @if($post->featured_image)
                                     <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}" class="post-thumbnail" onerror="this.style.display='none'">
                                     @else
-                                    <img src="{{ asset('img/placeholder.jpg') }}" alt="No image" class="post-thumbnail" onerror="this.style.display='none'">
+                                    <img src="{{ asset('img/placeholder.png') }}" alt="No image" class="post-thumbnail" onerror="this.style.display='none'">
                                     @endif
                                     
                                     <div class="post-details">
@@ -165,7 +165,7 @@
                                             <path d="M10 18.3333C14.6024 18.3333 18.3333 14.6024 18.3333 10C18.3333 5.39763 14.6024 1.66667 10 1.66667C5.39763 1.66667 1.66667 5.39763 1.66667 10C1.66667 14.6024 5.39763 18.3333 10 18.3333Z"/>
                                             <path d="M1.66667 10C1.66667 10 4.16667 5 10 5C15.8333 5 18.3333 10 18.3333 10C18.3333 10 15.8333 15 10 15C4.16667 15 1.66667 10 1.66667 10Z"/>
                                         </svg>
-                                        {{ $post->views }} προβολές
+                                        {{ $post->views_count }} προβολές
                                     </span>
                                     <span class="stat-item">
                                         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">

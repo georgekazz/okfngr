@@ -64,7 +64,7 @@ class AdminController extends Controller
             'is_active' => true,
         ]);
 
-        return redirect()->route('admin.users', ['locale' => $locale])
+        return redirect()->route('admin.users.index', ['locale' => $locale])
             ->with('success', 'Ο χρήστης δημιουργήθηκε επιτυχώς!');
     }
 
@@ -85,7 +85,7 @@ class AdminController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('admin.users', ['locale' => $locale])
+        return redirect()->route('admin.users.index', ['locale' => $locale])
             ->with('success', 'Ο χρήστης ενημερώθηκε επιτυχώς!');
     }
 
@@ -104,7 +104,7 @@ class AdminController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('admin.users', ['locale' => $locale])
+        return redirect()->route('admin.users.index', ['locale' => $locale])
             ->with('success', 'Ο κωδικός ενημερώθηκε επιτυχώς!');
     }
 
@@ -115,9 +115,10 @@ class AdminController extends Controller
             return back()->with('error', 'Δεν μπορείτε να διαγράψετε τον εαυτό σας!');
         }
 
-        $user->delete();
+        // Force delete (permanent removal from database)
+        $user->forceDelete();
 
-        return redirect()->route('admin.users', ['locale' => $locale])
+        return redirect()->route('admin.users.index', ['locale' => $locale])
             ->with('success', 'Ο χρήστης διαγράφηκε επιτυχώς!');
     }
 
