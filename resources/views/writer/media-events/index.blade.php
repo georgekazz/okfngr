@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Εκδηλώσεις Μέσων - Writer Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/media-event.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
@@ -24,7 +24,7 @@
                         <path d="M7.5 17.5V10H12.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    Πίνακας Ελέγχου
+                    <span>Πίνακας Ελέγχου</span>
                 </a>
 
                 <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
@@ -39,7 +39,7 @@
                         <path d="M7.5 14.1667H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    Τα Άρθρα μου
+                    <span>Τα Άρθρα μου</span>
                 </a>
 
                 <a href="{{ url('/el/writer/posts/create') }}" class="nav-link create-new">
@@ -49,11 +49,10 @@
                         <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    Νέο Άρθρο
+                    <span>Νέο Άρθρο</span>
                 </a>
 
-                <a href="{{ route('writer.media-events.index', ['locale' => app()->getLocale()]) }}"
-                    class="nav-link active">
+                <a href="{{ route('writer.media-events.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                             d="M17.5 5.83333H2.5V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V5.83333Z"
@@ -65,18 +64,18 @@
                         <path d="M2.5 9.16667H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    Εκδηλώσεις Μέσων
+                    <span>Εκδηλώσεις Μέσων</span>
                 </a>
 
                 <a href="{{ route('writer.media-events.create', ['locale' => app()->getLocale()]) }}"
-                    class="nav-link create-new">
+                    class="nav-link create-new active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                         <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    Νέα Εκδήλωση
+                    <span>Νέα Εκδήλωση</span>
                 </a>
 
                 <a href="{{ url('/el') }}" class="nav-link">
@@ -88,7 +87,7 @@
                             d="M13.3333 10C13.3333 11.8409 11.8409 13.3333 10 13.3333C8.15905 13.3333 6.66667 11.8409 6.66667 10C6.66667 8.15905 8.15905 6.66667 10 6.66667"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
-                    Προβολή Ιστοτόπου
+                    <span>Προβολή Ιστοτόπου</span>
                 </a>
             </nav>
         </aside>
