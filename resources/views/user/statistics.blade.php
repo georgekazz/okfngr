@@ -604,8 +604,8 @@
         // Map database data to months array
         const monthlyValues = months.map((_, index) => {
             const monthNumber = index + 1;
-            const monthData = monthlyData.find(m => m.month == monthNumber);
-            return monthData ? parseInt(monthData.total) : 0;
+            // monthlyData is an object keyed by month number
+            return monthlyData[monthNumber] ? parseInt(monthlyData[monthNumber].total) : 0;
         });
 
         // Monthly Chart
