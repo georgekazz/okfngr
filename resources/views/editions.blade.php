@@ -16,7 +16,7 @@
 <body>
     <header>
         <div class="header-container">
-            <a href="./el" class="logo">
+            <a href="./" class="logo">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="Open Knowledge Greece" class="logo-img">
             </a>
             <button class="mobile-menu-toggle">☰</button>
