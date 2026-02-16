@@ -107,13 +107,16 @@ Route::group([
     Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
+        // Salary Calculator
+        Route::get('/salary-calculator', [UserController::class, 'salaryCalculator'])->name('salary-calculator');
+
         // Day Offs
         Route::get('/day-offs', [UserController::class, 'dayOffs'])->name('day-offs.index');
         Route::get('/day-offs/create', [UserController::class, 'createDayOff'])->name('day-offs.create');
         Route::post('/day-offs', [UserController::class, 'storeDayOff'])->name('day-offs.store');
-        Route::get('/day-offs/{dayOff}/edit', [UserController::class, 'editDayOff'])->name('day-offs.edit');
-        Route::put('/day-offs/{dayOff}', [UserController::class, 'updateDayOff'])->name('day-offs.update');
-        Route::delete('/day-offs/{dayOff}', [UserController::class, 'destroyDayOff'])->name('day-offs.destroy');
+        Route::get('/day-offs/{id}/edit', [UserController::class, 'editDayOff'])->name('day-offs.edit');
+        Route::put('/day-offs/{id}', [UserController::class, 'updateDayOff'])->name('day-offs.update');
+        Route::delete('/day-offs/{id}', [UserController::class, 'destroyDayOff'])->name('day-offs.destroy');
 
         // Calendar & Links
         Route::get('/calendar', [UserController::class, 'calendar'])->name('calendar');

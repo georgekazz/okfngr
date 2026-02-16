@@ -403,6 +403,17 @@
                     </svg>
                     Οι Άδειές μου
                 </a>
+                
+                <a href="{{ route('user.salary-calculator', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="5" width="16" height="12" rx="2" />
+                        <path d="M2 10h16" />
+                        <path d="M6 14h.01" />
+                        <path d="M10 14h.01" />
+                        <path d="M14 14h.01" />
+                    </svg>
+                    Υπολογισμός Μισθού
+                </a>
 
                 <a href="{{ route('user.calendar', ['locale' => app()->getLocale()]) }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -510,14 +521,14 @@
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="{{ route('user.day-offs.edit', ['locale' => app()->getLocale(), 'dayOff' => $dayOff->id]) }}" class="btn-icon btn-edit" title="Επεξεργασία">
+                                    <a href="{{ route('user.day-offs.edit', ['locale' => app()->getLocale(), 'id' => $dayOff->id]) }}" class="btn-icon btn-edit" title="Επεξεργασία">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
                                             <path d="M8.25 3H3C2.60218 3 2.22064 3.15804 1.93934 3.43934C1.65804 3.72064 1.5 4.10218 1.5 4.5V15C1.5 15.3978 1.65804 15.7794 1.93934 16.0607C2.22064 16.342 2.60218 16.5 3 16.5H13.5C13.8978 16.5 14.2794 16.342 14.5607 16.0607C14.842 15.7794 15 15.3978 15 15V9.75"/>
                                             <path d="M13.875 1.87498C14.1734 1.57661 14.5778 1.40918 15 1.40918C15.4222 1.40918 15.8266 1.57661 16.125 1.87498C16.4234 2.17336 16.5908 2.57782 16.5908 2.99998C16.5908 3.42215 16.4234 3.82661 16.125 4.12498L9 11.25L6 12L6.75 9L13.875 1.87498Z"/>
                                         </svg>
                                     </a>
 
-                                    <form action="{{ route('user.day-offs.destroy', ['locale' => app()->getLocale(), 'dayOff' => $dayOff->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την άδεια;')">
+                                    <form action="{{ route('user.day-offs.destroy', ['locale' => app()->getLocale(), 'id' => $dayOff->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την άδεια;')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-icon btn-delete" title="Διαγραφή">

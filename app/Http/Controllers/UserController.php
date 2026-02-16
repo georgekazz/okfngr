@@ -13,18 +13,18 @@ class UserController extends Controller
     public function dashboard($locale)
     {
         $user = auth()->user();
-        
+
         // Get user's day offs
         $myDayOffs = DayOff::where('user_id', $user->id)
             ->latest()
             ->take(5)
             ->get();
-        
+
         // Get all day offs for calendar
         $allDayOffs = DayOff::with('user')
             ->whereYear('start_date', Carbon::now()->year)
             ->get();
-        
+
         // Statistics
         $stats = [
             'my_total_days' => DayOff::where('user_id', $user->id)
@@ -37,7 +37,7 @@ class UserController extends Controller
                 ->sum('total_days'),
             'team_members' => User::where('role', 'user')->count(),
         ];
-        
+
         return view('user.dashboard', compact('myDayOffs', 'allDayOffs', 'stats'));
     }
 
@@ -46,13 +46,14 @@ class UserController extends Controller
         $dayOffs = DayOff::where('user_id', auth()->id())
             ->latest()
             ->paginate(15);
-        
+
         return view('user.day-offs.index', compact('dayOffs'));
     }
 
     public function createDayOff($locale)
     {
-        return view('user.day-offs.create');
+        $dayOff = new DayOff(); // or your model name
+        return view('user.day-offs.create', compact('dayOff'));
     }
 
     public function storeDayOff(Request $request, $locale)
@@ -83,8 +84,10 @@ class UserController extends Controller
             ->with('success', 'Η άδεια καταχωρήθηκε επιτυχώς!');
     }
 
-    public function editDayOff($locale, DayOff $dayOff)
+    public function editDayOff($locale, $id)
     {
+        $dayOff = DayOff::findOrFail($id);
+
         // Only allow editing own day offs
         if ($dayOff->user_id !== auth()->id()) {
             return back()->with('error', 'Δεν μπορείτε να επεξεργαστείτε αυτή την άδεια.');
@@ -93,8 +96,10 @@ class UserController extends Controller
         return view('user.day-offs.edit', compact('dayOff'));
     }
 
-    public function updateDayOff(Request $request, $locale, DayOff $dayOff)
+    public function updateDayOff(Request $request, $locale, $id)
     {
+        $dayOff = DayOff::findOrFail($id);
+
         // Only allow editing own day offs
         if ($dayOff->user_id !== auth()->id()) {
             return back()->with('error', 'Δεν μπορείτε να επεξεργαστείτε αυτή την άδεια.');
@@ -125,8 +130,10 @@ class UserController extends Controller
             ->with('success', 'Η άδεια ενημερώθηκε επιτυχώς!');
     }
 
-    public function destroyDayOff($locale, DayOff $dayOff)
+    public function destroyDayOff($locale, $id)
     {
+        $dayOff = DayOff::findOrFail($id);
+
         // Only allow deleting own day offs
         if ($dayOff->user_id !== auth()->id()) {
             return back()->with('error', 'Δεν μπορείτε να διαγράψετε αυτή την άδεια.');
@@ -137,12 +144,17 @@ class UserController extends Controller
         return back()->with('success', 'Η άδεια διαγράφηκε επιτυχώς!');
     }
 
+    public function salaryCalculator($locale)
+    {
+        return view('user.salary-calculator');
+    }
+
     public function calendar($locale)
     {
         $dayOffs = DayOff::with('user')
             ->whereYear('start_date', Carbon::now()->year)
             ->get();
-        
+
         return view('user.calendar', compact('dayOffs'));
     }
 
@@ -153,23 +165,45 @@ class UserController extends Controller
             ->orderBy('category')
             ->get()
             ->groupBy('category');
-        
+
         return view('user.team-links', compact('links'));
     }
 
     public function statistics($locale)
     {
+        // Get all users with their total days for current year
         $users = User::where('role', 'user')
             ->withSum(['dayOffs as total_days' => function ($query) {
                 $query->whereYear('start_date', Carbon::now()->year);
             }], 'total_days')
-            ->get();
+            ->get()
+            ->map(function ($user) {
+                $user->total_days = $user->total_days ?? 0;
+                return $user;
+            });
 
+        // Monthly statistics
         $monthlyStats = DayOff::whereYear('start_date', Carbon::now()->year)
-            ->selectRaw('MONTH(start_date) as month, sum(total_days) as total')
+            ->selectRaw('MONTH(start_date) as month, SUM(total_days) as total')
             ->groupBy('month')
-            ->get();
+            ->get()
+            ->keyBy('month');
 
-        return view('user.statistics', compact('users', 'monthlyStats'));
+        // Type statistics
+        $typeStats = DayOff::whereYear('start_date', Carbon::now()->year)
+            ->selectRaw('type, SUM(total_days) as total')
+            ->groupBy('type')
+            ->get()
+            ->keyBy('type');
+
+        // Prepare type data for chart
+        $typeData = [
+            'vacation' => $typeStats->get('vacation')->total ?? 0,
+            'sick' => $typeStats->get('sick')->total ?? 0,
+            'personal' => $typeStats->get('personal')->total ?? 0,
+            'other' => $typeStats->get('other')->total ?? 0,
+        ];
+
+        return view('user.statistics', compact('users', 'monthlyStats', 'typeData'));
     }
 }

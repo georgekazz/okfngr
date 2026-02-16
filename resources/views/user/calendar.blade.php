@@ -527,6 +527,17 @@
                     Οι Άδειές μου
                 </a>
 
+                <a href="{{ route('user.salary-calculator', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="5" width="16" height="12" rx="2" />
+                        <path d="M2 10h16" />
+                        <path d="M6 14h.01" />
+                        <path d="M10 14h.01" />
+                        <path d="M14 14h.01" />
+                    </svg>
+                    Υπολογισμός Μισθού
+                </a>
+
                 <a href="{{ route('user.calendar', ['locale' => app()->getLocale()]) }}" class="nav-link active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="3" y="4" width="14" height="14" rx="2" ry="2"/>
