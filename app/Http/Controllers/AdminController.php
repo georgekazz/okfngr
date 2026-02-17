@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Models\TeamLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -181,5 +182,91 @@ class AdminController extends Controller
         $comment->delete();
 
         return back()->with('success', 'Το σχόλιο διαγράφηκε!');
+    }
+
+    // Team Links Management
+    public function teamLinks($locale)
+    {
+        $links = TeamLink::with('creator')
+            ->orderBy('order')
+            ->orderBy('category')
+            ->paginate(20);
+
+        return view('admin.team-links.index', compact('links'));
+    }
+
+    public function createTeamLink($locale)
+    {
+        return view('admin.team-links.create');
+    }
+
+    public function storeTeamLink(Request $request, $locale)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'url' => 'required|url',
+            'icon' => 'nullable|string|max:255',
+            'category' => 'required|in:tools,documentation,communication,resources,other',
+            'order' => 'nullable|integer|min:0',
+            // is_active removed from validation
+        ]);
+
+        TeamLink::create([
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null,
+            'url' => $validated['url'],
+            'icon' => $validated['icon'] ?? '🔗',
+            'category' => $validated['category'],
+            'order' => $validated['order'] ?? 0,
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            'created_by' => auth()->id(),
+        ]);
+
+        return redirect()->route('admin.team-links.index', ['locale' => $locale])
+            ->with('success', 'Ο σύνδεσμος δημιουργήθηκε επιτυχώς!');
+    }
+
+    public function editTeamLink($locale, $id)
+    {
+        $link = TeamLink::findOrFail($id);
+        return view('admin.team-links.edit', compact('link'));
+    }
+
+    public function updateTeamLink(Request $request, $locale, $id)
+    {
+        $link = TeamLink::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'url' => 'required|url',
+            'icon' => 'nullable|string|max:255',
+            'category' => 'required|in:tools,documentation,communication,resources,other',
+            'order' => 'nullable|integer|min:0',
+            // is_active removed from validation
+        ]);
+
+        $link->update([
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null,
+            'url' => $validated['url'],
+            'icon' => $validated['icon'] ?? '🔗',
+            'category' => $validated['category'],
+            'order' => $validated['order'] ?? 0,
+            'is_active' => $request->has('is_active') ? 1 : 0,
+        ]);
+
+        return redirect()->route('admin.team-links.index', ['locale' => $locale])
+            ->with('success', 'Ο σύνδεσμος ενημερώθηκε επιτυχώς!');
+    }
+
+    public function destroyTeamLink($locale, $id)
+    {
+        $link = TeamLink::findOrFail($id);
+        $link->delete();
+
+        return redirect()->route('admin.team-links.index', ['locale' => $locale])
+            ->with('success', 'Ο σύνδεσμος διαγράφηκε επιτυχώς!');
     }
 }

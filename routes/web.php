@@ -99,6 +99,14 @@ Route::group([
         Route::patch('/comments/{comment:id}/reject', [AdminController::class, 'rejectComment'])->name('comments.reject');
         Route::delete('/comments/{comment:id}', [AdminController::class, 'destroyComment'])->name('comments.destroy');
 
+        // Team Links
+        Route::get('/team-links', [AdminController::class, 'teamLinks'])->name('team-links.index');
+        Route::get('/team-links/create', [AdminController::class, 'createTeamLink'])->name('team-links.create');
+        Route::post('/team-links', [AdminController::class, 'storeTeamLink'])->name('team-links.store');
+        Route::get('/team-links/{id}/edit', [AdminController::class, 'editTeamLink'])->name('team-links.edit');
+        Route::put('/team-links/{id}', [AdminController::class, 'updateTeamLink'])->name('team-links.update');
+        Route::delete('/team-links/{id}', [AdminController::class, 'destroyTeamLink'])->name('team-links.destroy');
+
         // Logout
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     });
