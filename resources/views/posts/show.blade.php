@@ -79,14 +79,24 @@
                 </div>
             </nav>
             <div class="nav-actions">
-                <a href="../blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
+                <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="blog-btn">
+                    {{ __('home.nav.blog') }}
+                </a>
                 <div class="lang-switcher">
-                    <a href="./en" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                    @php
+                        $currentRoute = Route::currentRouteName();
+                        $params = Route::current()->parameters();
+                        unset($params['locale']);
+                    @endphp
+
+                    <a href="{{ route($currentRoute, array_merge(['locale' => 'en'], $params)) }}"
+                        class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
                         EN
                     </a>
 
-                    <a href="./el" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
+                    <a href="{{ route($currentRoute, array_merge(['locale' => 'el'], $params)) }}"
+                        class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
                         <img src="{{ asset('img/gr-flag.png') }}" alt="Ελληνικά" class="flag-icon">
                         EL
                     </a>

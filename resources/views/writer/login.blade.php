@@ -76,7 +76,7 @@
             </form>
 
             <div class="login-footer">
-                <a href="/el" class="back-link">
+                <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="back-link">
                     ← Επιστροφή στην Αρχική
                 </a>
             </div>
