@@ -146,7 +146,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="uni_contract">Ποσό Σύμβασης (μηνιαίο)</label>
+                        <label for="uni_contract">Ποσό Σύμβασης (3μηνο)</label>
                         <div class="currency-input">
                             <input type="number" id="uni_contract" class="form-input" placeholder="0.00" step="0.01"
                                 min="0">
@@ -166,17 +166,31 @@
                     </div>
 
                     <div class="total-section">
-                        <div class="total-label">Καθαρό Ποσό (μηνιαίο)</div>
+                        <div class="total-label">Καθαρό Ποσό (3μηνο)</div>
                         <div class="total-amount" id="uni_net">€0.00</div>
                     </div>
 
                     <div class="payment-schedule">
-                        <div class="schedule-title">Πληρωμή</div>
+                        <div class="schedule-title">Πληρωμές</div>
                         <div class="schedule-item">
                             <div class="schedule-icon">1</div>
                             <div class="schedule-details">
-                                <div class="schedule-period">Κάθε Μήνα</div>
-                                <div class="schedule-amount" id="uni_monthly">€0.00</div>
+                                <div class="schedule-period">Μήνας 1</div>
+                                <div class="schedule-amount" id="uni_month1">€0.00</div>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-icon">2</div>
+                            <div class="schedule-details">
+                                <div class="schedule-period">Μήνας 2</div>
+                                <div class="schedule-amount" id="uni_month2">€0.00</div>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-icon">3</div>
+                            <div class="schedule-details">
+                                <div class="schedule-period">Μήνας 3</div>
+                                <div class="schedule-amount" id="uni_month3">€0.00</div>
                             </div>
                         </div>
                     </div>
@@ -212,18 +226,30 @@
                             <span class="breakdown-value" id="okfn_gross">€0.00</span>
                         </div>
                         <div class="breakdown-item">
-                            <span class="breakdown-label">Παρακράτηση 20%</span>
-                            <span class="breakdown-value negative" id="okfn_tax">-€0.00</span>
+                            <span class="breakdown-label">Καθαρό Ποσό (÷1.24)</span>
+                            <span class="breakdown-value" id="okfn_net_base">€0.00</span>
                         </div>
                         <div class="breakdown-item">
                             <span class="breakdown-label">ΦΠΑ 24%</span>
                             <span class="breakdown-value negative" id="okfn_vat">-€0.00</span>
                         </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Παρακράτηση 20%</span>
+                            <span class="breakdown-value negative" id="okfn_tax">-€0.00</span>
+                        </div>
+                        <div class="breakdown-item highlight">
+                            <span class="breakdown-label">Θα λάβετε στην τράπεζα</span>
+                            <span class="breakdown-value" id="okfn_bank_total">€0.00</span>
+                        </div>
+                        <div class="breakdown-item warning">
+                            <span class="breakdown-label">⚠️ ΦΠΑ για πληρωμή</span>
+                            <span class="breakdown-value negative" id="okfn_vat_to_pay">-€0.00</span>
+                        </div>
                     </div>
 
                     <div class="total-section">
-                        <div class="total-label">Καθαρό Ποσό (3μηνο)</div>
-                        <div class="total-amount" id="okfn_net">€0.00</div>
+                        <div class="total-label">Καθαρά Χρήματα (3μηνο)</div>
+                        <div class="total-amount" id="okfn_clean_money">€0.00</div>
                     </div>
 
                     <div class="payment-schedule">
@@ -245,6 +271,40 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Summary Section -->
+            <section class="summary-section">
+                <div class="summary-header">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <line x1="3" y1="9" x2="21" y2="9" />
+                        <line x1="9" y1="21" x2="9" y2="9" />
+                    </svg>
+                    <h2>Συνολική Επισκόπηση</h2>
+                </div>
+
+                <!-- Combined Total -->
+                <div class="summary-card combined-card">
+                    <div class="summary-card-header">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23" />
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                        <h3>Συνολικά (Πανεπιστήμιο + OKFN)</h3>
+                    </div>
+                    <div class="summary-amounts">
+                        <div class="summary-item">
+                            <div class="summary-label">Σύνολο ανά 3μηνο</div>
+                            <div class="summary-value large highlight" id="combined_total_3month">€0.00</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Σύνολο ανά μήνα (μέσος όρος)</div>
+                            <div class="summary-value highlight" id="combined_total_monthly">€0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -254,33 +314,84 @@
             return '€' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         }
 
+        // Update Combined Total Function
+        function updateCombinedTotal() {
+            const uniContract = parseFloat(document.getElementById('uni_contract').value) || 0;
+            const okfnContract = parseFloat(document.getElementById('okfn_contract').value) || 0;
+
+            // University net
+            const uniNet = uniContract - (uniContract * 0.20);
+
+            // OKFN clean money calculation
+            const okfnNetBase = okfnContract / 1.24;
+            const okfnVat = okfnNetBase * 0.24;
+            const okfnTax = okfnNetBase * 0.20;
+            const okfnBankTotal = okfnContract - okfnTax;
+            const okfnCleanMoney = okfnBankTotal - okfnVat;
+
+            // Combined totals
+            const total3Month = uniNet + okfnCleanMoney;
+            const totalMonthly = total3Month / 3;
+
+            document.getElementById('combined_total_3month').textContent = formatCurrency(total3Month);
+            document.getElementById('combined_total_monthly').textContent = formatCurrency(totalMonthly);
+        }
+
         // University Calculator
         document.getElementById('uni_contract').addEventListener('input', function () {
             const contract = parseFloat(this.value) || 0;
             const tax = contract * 0.20;
             const net = contract - tax;
+            const monthlyPayment = net / 3;
 
             document.getElementById('uni_gross').textContent = formatCurrency(contract);
             document.getElementById('uni_tax').textContent = '-' + formatCurrency(tax);
             document.getElementById('uni_net').textContent = formatCurrency(net);
-            document.getElementById('uni_monthly').textContent = formatCurrency(net);
+            document.getElementById('uni_month1').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('uni_month2').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('uni_month3').textContent = formatCurrency(monthlyPayment);
+
+            updateCombinedTotal();
         });
 
         // OKFN Calculator
         document.getElementById('okfn_contract').addEventListener('input', function () {
             const contract = parseFloat(this.value) || 0;
-            const tax = contract * 0.20;
-            const vat = contract * 0.24;
-            const net = contract - tax - vat;
-            const firstPayment = net / 2;
-            const secondPayment = net / 2;
 
+            // Step 1: Calculate net amount (contract ÷ 1.24)
+            const netBase = contract / 1.24;
+
+            // Step 2: Calculate VAT (net * 0.24)
+            const vat = netBase * 0.24;
+
+            // Step 3: Calculate tax withholding (net * 0.20)
+            const tax = netBase * 0.20;
+
+            // Step 4: Calculate what you receive in bank (contract - tax)
+            const bankTotal = contract - tax;
+
+            // Step 5: VAT you need to pay aside
+            const vatToPay = vat;
+
+            // Step 6: Clean money (bank total - VAT to pay)
+            const cleanMoney = bankTotal - vatToPay;
+
+            // Step 7: Payments (50% each)
+            const firstPayment = cleanMoney / 2;
+            const secondPayment = cleanMoney / 2;
+
+            // Update display
             document.getElementById('okfn_gross').textContent = formatCurrency(contract);
-            document.getElementById('okfn_tax').textContent = '-' + formatCurrency(tax);
+            document.getElementById('okfn_net_base').textContent = formatCurrency(netBase);
             document.getElementById('okfn_vat').textContent = '-' + formatCurrency(vat);
-            document.getElementById('okfn_net').textContent = formatCurrency(net);
+            document.getElementById('okfn_tax').textContent = '-' + formatCurrency(tax);
+            document.getElementById('okfn_bank_total').textContent = formatCurrency(bankTotal);
+            document.getElementById('okfn_vat_to_pay').textContent = '-' + formatCurrency(vatToPay);
+            document.getElementById('okfn_clean_money').textContent = formatCurrency(cleanMoney);
             document.getElementById('okfn_first').textContent = formatCurrency(firstPayment);
             document.getElementById('okfn_second').textContent = formatCurrency(secondPayment);
+
+            updateCombinedTotal();
         });
     </script>
 </body>

@@ -12,7 +12,7 @@ return [
     'list' => [
         [
             'title' => 'Arxive',
-            'description' => '',
+            'description' => 'ARXIVE revolutionizes the documentation, analysis, and dissemination of cultural heritage objects by developing cutting-edge tools and methodologies integrated into the European Collaborative Cloud for Cultural Heritage. Addressing fragmented on-site workflows and the challenges of preserving both tangible and intangible cultural assets, ARXIVE introduces a semantic archival system that provides advanced solutions for annotating evolving digital twins. These tools empower cultural heritage professionals to create semantically rich, context-aware documentation while streamlining processes for research, preservation, and dissemination.',
             'image' => 'arxive.png',
             'badge' => 'EU Project',
             'social' => [
