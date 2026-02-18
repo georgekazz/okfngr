@@ -159,20 +159,132 @@
     color: var(--text-secondary);
 }
 
-/* Tags */
-.post-tags {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+/* Tags Section - Improved */
+.post-tags-section {
+    background: linear-gradient(135deg, rgba(0, 209, 255, 0.05), rgba(173, 255, 237, 0.05));
+    border: 2px solid rgba(0, 209, 255, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
     margin-bottom: 3rem;
 }
 
-.post-tags svg {
+.post-tags-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+}
+
+.post-tags-header svg {
     color: var(--cyan);
     flex-shrink: 0;
+}
+
+.tags-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tags-list {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tag-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    background: white;
+    border: 2px solid rgba(0, 209, 255, 0.3);
+    border-radius: 50px;
+    color: var(--cyan);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tag-item:hover {
+    background: var(--cyan);
+    color: white;
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 209, 255, 0.3);
+}
+
+.post-tags-minimal {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+    font-size: 1rem;
+}
+
+.tags-intro {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.tag-minimal {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.tag-minimal::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--cyan);
+    transition: width 0.3s;
+}
+
+.tag-minimal:hover {
+    color: var(--purple);
+}
+
+.tag-minimal:hover::after {
+    width: 100%;
+}
+
+.tag-separator {
+    color: var(--text-secondary);
+}
+
+/* Alternative Style - Pills without borders */
+.tag-item-alt {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 209, 255, 0.1);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.tag-item-alt:hover {
+    background: var(--cyan);
+    color: white;
+    transform: translateX(3px);
 }
 
 .tags-list {

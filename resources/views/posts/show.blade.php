@@ -27,36 +27,54 @@
                 <div class="nav-item has-dropdown">
                     <a href="#" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
-                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
-                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
+                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
-                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
-                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.governance') }}</a>
+                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.board') }}</a>
+                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.governance') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.projects') }}</a>
-                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.apps') }}</a>
-                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
-                        <a href="{{ route('ourActions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
-                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.media') }}</a>
-                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.editions') }}</a>
+                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.apps') }}</a>
+                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
+                        <a href="{{ route('ourActions', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
+                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.media') }}</a>
+                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
-                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
-                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
+                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.open_data') }}</a>
+                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.how_to') }}</a>
+                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.why_open') }}</a>
                     </div>
                 </div>
             </nav>
@@ -94,13 +112,12 @@
 
             <!-- Post Header -->
             <header class="post-header">
-                @if($post->categories->count() > 0)
+                @if($post->category)
                     <div class="post-categories">
-                        @foreach($post->categories as $category)
-                            <a href="{{ route('posts.index', ['category' => $category->slug]) }}" class="post-category-badge">
-                                {{ $category->name }}
-                            </a>
-                        @endforeach
+                        <a href="{{ route('posts.index', ['locale' => app()->getLocale(), 'category' => $post->category->slug]) }}"
+                            class="post-category-badge">
+                            {{ $post->category->name }}
+                        </a>
                     </div>
                 @endif
 
@@ -120,7 +137,7 @@
                             <path d="M2.5 8.33334H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
-                        <span>{{ $post->published_at->locale(app()->getLocale())->translatedFormat('d F Y') }}</span>
+                        <span>{{ $post->created_at->locale(app()->getLocale())->translatedFormat('d F Y') }}</span>
                     </div>
                     <div class="post-meta-item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -150,9 +167,9 @@
             </header>
 
             <!-- Featured Image -->
-            @if($post->featured_image)
+            @if($post->thumbnail)
                 <div class="post-featured-image">
-                    <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
+                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}"
                         onerror="this.style.display='none'">
                 </div>
             @endif
@@ -162,18 +179,24 @@
                 {!! $post->content !!}
             </div>
 
-            <!-- Tags -->
+            <!-- Tags Section - IMPROVED -->
             @if($post->tags->count() > 0)
-                <div class="post-tags">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M17.5 10.4167L10.4167 17.5L2.5 9.58333V2.5H9.58333L17.5 10.4167Z" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.25 6.25H6.25833" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
+                <div class="post-tags-section">
+                    <div class="post-tags-header">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M17.5 10.4167L10.4167 17.5L2.5 9.58333V2.5H9.58333L17.5 10.4167Z" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.25 6.25H6.25833" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="tags-label">{{ __('post.tags') }}</span>
+                    </div>
                     <div class="tags-list">
                         @foreach($post->tags as $tag)
-                            <a href="{{ route('posts.index', ['tag' => $tag->slug]) }}" class="tag">{{ $tag->name }}</a>
+                            <a href="{{ route('posts.index', ['locale' => app()->getLocale(), 'tag' => $tag->slug]) }}"
+                                class="tag-item">
+                                #{{ $tag->name }}
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -183,7 +206,7 @@
             <div class="post-share">
                 <h3>{{ __('post.share_article') }}</h3>
                 <div class="share-buttons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug])) }}"
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
                         target="_blank" class="share-btn facebook">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path
@@ -191,8 +214,7 @@
                         </svg>
                         Facebook
                     </a>
-                    <!-- Twitter -->
-                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug])) }}&text={{ urlencode($post->title) }}"
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($post->title) }}"
                         target="_blank" class="share-btn twitter">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path
@@ -200,8 +222,7 @@
                         </svg>
                         Twitter
                     </a>
-                    <!-- LinkedIn -->
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug])) }}&title={{ urlencode($post->title) }}"
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}&title={{ urlencode($post->title) }}"
                         target="_blank" class="share-btn linkedin">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path
@@ -214,17 +235,18 @@
         </div>
 
         <!-- Related Posts -->
-        @if($relatedPosts->count() > 0)
+        @if(isset($relatedPosts) && $relatedPosts->count() > 0)
             <section class="related-posts">
                 <div class="post-container">
                     <h2>{{ __('post.related_posts') }}</h2>
                     <div class="related-grid">
                         @foreach($relatedPosts as $relatedPost)
                             <article class="related-card">
-                                @if($relatedPost->featured_image)
+                                @if($relatedPost->thumbnail)
                                     <div class="related-image">
-                                        <a href="{{ route('posts.show', $relatedPost->slug) }}">
-                                            <img src="{{ asset('storage/' . $relatedPost->featured_image) }}"
+                                        <a
+                                            href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $relatedPost->slug]) }}">
+                                            <img src="{{ asset('storage/' . $relatedPost->thumbnail) }}"
                                                 alt="{{ $relatedPost->title }}"
                                                 onerror="this.parentElement.parentElement.style.display='none'">
                                         </a>
@@ -232,7 +254,8 @@
                                 @endif
                                 <div class="related-content">
                                     <h3>
-                                        <a href="{{ route('posts.show', $relatedPost->slug) }}">
+                                        <a
+                                            href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $relatedPost->slug]) }}">
                                             {{ $relatedPost->title }}
                                         </a>
                                     </h3>
@@ -248,7 +271,7 @@
         <!-- Comments Section -->
         <section class="comments-section">
             <div class="post-container">
-                <h2>{{ __('post.comments') }} ({{ $post->approvedComments->count() }})</h2>
+                <h2>{{ __('post.comments') }} ({{ $post->comments()->where('status', 'approved')->count() }})</h2>
 
                 <!-- Comment Form -->
                 <div class="comment-form-wrapper">
@@ -300,9 +323,9 @@
                 </div>
 
                 <!-- Comments List -->
-                @if($post->parentComments->count() > 0)
+                @if($post->comments()->where('status', 'approved')->where('parent_id', null)->count() > 0)
                     <div class="comments-list">
-                        @foreach($post->parentComments as $comment)
+                        @foreach($post->comments()->where('status', 'approved')->where('parent_id', null)->get() as $comment)
                             @include('partials.comment', ['comment' => $comment])
                         @endforeach
                     </div>

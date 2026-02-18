@@ -12,4 +12,5 @@ return [
     'your_comment' => 'Your Comment',
     'submit_comment' => 'Submit Comment',
     'no_comments' => 'No comments yet. Be the first to comment!',
+    'tags' => 'Tags',
 ];
