@@ -23,36 +23,54 @@
                 <div class="nav-item has-dropdown">
                     <a href="#" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
-                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
-                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
+                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
-                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
-                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.governance') }}</a>
+                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.board') }}</a>
+                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.governance') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.projects') }}</a>
-                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.apps') }}</a>
-                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
-                        <a href="{{ route('ourActions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
-                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.media') }}</a>
-                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.editions') }}</a>
+                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.apps') }}</a>
+                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
+                        <a href="{{ route('ourActions', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
+                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.media') }}</a>
+                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
-                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
-                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
+                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.open_data') }}</a>
+                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.how_to') }}</a>
+                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.why_open') }}</a>
                     </div>
                 </div>
             </nav>
@@ -86,27 +104,21 @@
         <div class="hero-slider">
             <div class="slider-wrapper">
                 <div class="slide active">
-                    <img src="{{ asset('img/slides/frontpage_img_one.png') }}"
-                        alt="Slide 1"
-                        class="slide-image">
+                    <img src="{{ asset('img/slides/frontpage_img_one.png') }}" alt="Slide 1" class="slide-image">
                     <div class="slide-overlay">
                         <h3>{{ __('home.slider.schools_title') }}</h3>
                         <p>{{ __('home.slider.schools_desc') }}</p>
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="{{ asset('img/slides/frontpage_img_two.png') }}"
-                        alt="Slide 1"
-                        class="slide-image">
+                    <img src="{{ asset('img/slides/frontpage_img_two.png') }}" alt="Slide 1" class="slide-image">
                     <div class="slide-overlay">
                         <h3>{{ __('home.slider.governance_title') }}</h3>
                         <p>{{ __('home.slider.governance_desc') }}</p>
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="{{ asset('img/slides/frontpage_img_three.png') }}"
-                        alt="Slide 1"
-                        class="slide-image">
+                    <img src="{{ asset('img/slides/frontpage_img_three.png') }}" alt="Slide 1" class="slide-image">
                     <div class="slide-overlay">
                         <h3>{{ __('home.slider.dbpedia_title') }}</h3>
                         <p>{{ __('home.slider.dbpedia_desc') }}</p>
@@ -153,27 +165,30 @@
             <h2>{{ __('home.posts.title') }}</h2>
             <div class="posts-grid">
                 @forelse($recentPosts as $post)
-                <div class="post-card">
-                    @if($post->featured_image)
-                    <div class="post-card-image">
-                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">
-                            <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}">
-                        </a>
+                    <div class="post-card">
+                        @if($post->featured_image)
+                            <div class="post-card-image">
+                                <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}">
+                                    <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}">
+                                </a>
+                            </div>
+                        @endif
+                        <div class="post-card-content">
+                            <div class="post-date">{{ $post->published_at->format('d F Y') }}</div>
+                            <h3><a
+                                    href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}">{{ $post->title }}</a>
+                            </h3>
+                            <p class="post-excerpt">{{ Str::limit($post->excerpt, 100) }}</p>
+                            <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}"
+                                class="read-more">{{ __('home.posts.read_more') }} →</a>
+                        </div>
                     </div>
-                    @endif
-                    <div class="post-card-content">
-                        <div class="post-date">{{ $post->published_at->format('d F Y') }}</div>
-                        <h3><a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">{{ $post->title }}</a></h3>
-                        <p class="post-excerpt">{{ Str::limit($post->excerpt, 100) }}</p>
-                        <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}" class="read-more">{{ __('home.posts.read_more') }} →</a>
-                    </div>
-                </div>
                 @empty
-                <div class="post-card">
-                    <div class="post-card-content">
-                        <p class="post-excerpt">{{ __('home.posts.no_posts') }}</p>
+                    <div class="post-card">
+                        <div class="post-card-content">
+                            <p class="post-excerpt">{{ __('home.posts.no_posts') }}</p>
+                        </div>
                     </div>
-                </div>
                 @endforelse
             </div>
         </div>
@@ -207,7 +222,8 @@
             </div>
 
             <div class="footer-text">
-                <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}</p>
+                <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}
+                </p>
                 <p style="margin-top: 1rem;">{{ __('home.footer.copyright', ['year' => date('Y')]) }}</p>
             </div>
         </div>
@@ -249,38 +265,38 @@
             }).catch(error => console.error('Error switching language:', error));
         }
 
-         document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const nav = document.querySelector('nav');
-        
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', function() {
-                nav.classList.toggle('active');
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('nav');
 
-        // Mobile dropdown toggle
-        const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const parent = this.parentElement;
-                    
-                    // Close other dropdowns
-                    document.querySelectorAll('.nav-item.has-dropdown').forEach(otherItem => {
-                        if (otherItem !== parent) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle current dropdown
-                    parent.classList.toggle('active');
-                }
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function () {
+                    nav.classList.toggle('active');
+                });
+            }
+
+            // Mobile dropdown toggle
+            const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const parent = this.parentElement;
+
+                        // Close other dropdowns
+                        document.querySelectorAll('.nav-item.has-dropdown').forEach(otherItem => {
+                            if (otherItem !== parent) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+
+                        // Toggle current dropdown
+                        parent.classList.toggle('active');
+                    }
+                });
             });
         });
-    });
     </script>
 </body>
 

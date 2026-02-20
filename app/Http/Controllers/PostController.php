@@ -35,27 +35,34 @@ class PostController extends Controller
         return view('posts.index', compact('posts', 'categories'));
     }
 
-    public function show($locale, Post $post)
+    public function show($locale, $id)
     {
-        if (!$post->isPublished()) {
-            abort(404);
-        }
+        $post = Post::where('id', $id)
+            ->where('status', 'published')
+            ->with(['user', 'categories', 'tags'])
+            ->firstOrFail();
 
-        $post->incrementViews();
+        $post->increment('views_count');
 
         $post->load([
-            'user',
-            'categories',
-            'tags',
-            'approvedComments' => function ($query) {
-                $query->whereNull('parent_id')->with('approvedReplies');
+            'comments' => function ($query) {
+                $query->where('status', 'approved')
+                    ->whereNull('parent_id')
+                    ->with([
+                        'replies' => function ($q) {
+                            $q->where('status', 'approved');
+                        }
+                    ]);
             }
         ]);
 
-        $relatedPosts = Post::published()
+        // Get related posts based on shared categories
+        $categoryIds = $post->categories->pluck('id');
+
+        $relatedPosts = Post::where('status', 'published')
             ->where('id', '!=', $post->id)
-            ->whereHas('categories', function ($query) use ($post) {
-                $query->whereIn('categories.id', $post->categories->pluck('id'));
+            ->whereHas('categories', function ($query) use ($categoryIds) {
+                $query->whereIn('categories.id', $categoryIds);
             })
             ->latest('published_at')
             ->take(3)

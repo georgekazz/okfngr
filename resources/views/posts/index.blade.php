@@ -139,7 +139,7 @@
                     <article class="article-card">
                         @if($post->featured_image)
                             <div class="article-image">
-                                <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">
+                                <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}">
                                     <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}">
                                 </a>
                                 @if($post->categories->first())
@@ -163,7 +163,7 @@
                                         <path d="M2 6.66667H14" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    {{ $post->published_at->locale(app()->getLocale())->translatedFormat('d F Y') }}
+                                    {{ ($post->published_at ?? $post->created_at)->locale(app()->getLocale())->translatedFormat('d F Y') }}
                                 </span>
                                 <span class="article-author">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -182,7 +182,7 @@
 
                             <h2 class="article-title">
                                 <a
-                                    href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}">
+                                    href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}">
                                     {{ $post->title }}
                                 </a>
                             </h2>
@@ -190,7 +190,7 @@
                             <p class="article-excerpt">{{ Str::limit($post->excerpt, 150) }}</p>
 
                             <div class="article-footer">
-                                <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->slug]) }}"
+                                <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}"
                                     class="read-more-btn">
                                     {{ __('blog.read_more') }}
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

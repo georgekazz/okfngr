@@ -122,12 +122,14 @@
 
             <!-- Post Header -->
             <header class="post-header">
-                @if($post->category)
+                @if($post->categories->count() > 0)
                     <div class="post-categories">
-                        <a href="{{ route('posts.index', ['locale' => app()->getLocale(), 'category' => $post->category->slug]) }}"
-                            class="post-category-badge">
-                            {{ $post->category->name }}
-                        </a>
+                        @foreach($post->categories as $category)
+                            <a href="{{ route('posts.index', ['locale' => app()->getLocale(), 'category' => $category->slug]) }}"
+                                class="post-category-badge">
+                                {{ $category->name }}
+                            </a>
+                        @endforeach
                     </div>
                 @endif
 
@@ -147,7 +149,7 @@
                             <path d="M2.5 8.33334H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
-                        <span>{{ $post->created_at->locale(app()->getLocale())->translatedFormat('d F Y') }}</span>
+                        {{ ($post->published_at ?? $post->created_at)->locale(app()->getLocale())->translatedFormat('d F Y') }}
                     </div>
                     <div class="post-meta-item">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -243,40 +245,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Related Posts -->
-        @if(isset($relatedPosts) && $relatedPosts->count() > 0)
-            <section class="related-posts">
-                <div class="post-container">
-                    <h2>{{ __('post.related_posts') }}</h2>
-                    <div class="related-grid">
-                        @foreach($relatedPosts as $relatedPost)
-                            <article class="related-card">
-                                @if($relatedPost->thumbnail)
-                                    <div class="related-image">
-                                        <a
-                                            href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $relatedPost->slug]) }}">
-                                            <img src="{{ asset('storage/' . $relatedPost->thumbnail) }}"
-                                                alt="{{ $relatedPost->title }}"
-                                                onerror="this.parentElement.parentElement.style.display='none'">
-                                        </a>
-                                    </div>
-                                @endif
-                                <div class="related-content">
-                                    <h3>
-                                        <a
-                                            href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $relatedPost->slug]) }}">
-                                            {{ $relatedPost->title }}
-                                        </a>
-                                    </h3>
-                                    <p>{{ Str::limit($relatedPost->excerpt, 100) }}</p>
-                                </div>
-                            </article>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-        @endif
 
         <!-- Comments Section -->
         <section class="comments-section">

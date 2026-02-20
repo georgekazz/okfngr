@@ -11,11 +11,6 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'user_id',
         'title',
@@ -29,11 +24,6 @@ class Post extends Model
         'meta_tags',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -42,9 +32,6 @@ class Post extends Model
         ];
     }
 
-    /**
-     * Boot the model.
-     */
     protected static function boot()
     {
         parent::boot();
@@ -61,6 +48,7 @@ class Post extends Model
             }
         });
     }
+
     public function parentComments()
     {
         return $this->hasMany(Comment::class)
@@ -69,49 +57,44 @@ class Post extends Model
             ->orderBy('created_at', 'desc');
     }
 
-    /**
-     * Get the user that owns the post.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get the categories for the post.
-     */
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
 
-    /**
-     * Get the tags for the post.
-     */
+    // ✅ ADD THIS HELPER METHOD for single category access
+    public function category()
+    {
+        return $this->categories()->first();
+    }
+
+    // ✅ ADD THIS ATTRIBUTE to easily get category_id
+    public function getCategoryIdAttribute()
+    {
+        $category = $this->categories()->first();
+        return $category ? $category->id : null;
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    /**
-     * Get the comments for the post.
-     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * Get the approved comments for the post.
-     */
     public function approvedComments()
     {
         return $this->hasMany(Comment::class)->where('status', 'approved')->whereNull('parent_id');
     }
 
-    /**
-     * Scope a query to only include published posts.
-     */
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
@@ -119,25 +102,16 @@ class Post extends Model
             ->where('published_at', '<=', now());
     }
 
-    /**
-     * Scope a query to only include draft posts.
-     */
     public function scopeDraft($query)
     {
         return $query->where('status', 'draft');
     }
 
-    /**
-     * Increment views count
-     */
     public function incrementViews()
     {
         $this->increment('views_count');
     }
 
-    /**
-     * Check if post is published
-     */
     public function isPublished(): bool
     {
         return $this->status === 'published'

@@ -45,7 +45,7 @@ Route::group([
     // Public pages - Blog
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::post('/posts/{post:id}/comments', [PostController::class, 'storeComment'])
         ->name('posts.comments.store');
 
