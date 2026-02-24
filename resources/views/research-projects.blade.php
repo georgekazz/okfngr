@@ -42,7 +42,6 @@
                         <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.projects') }}</a>
                         <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.apps') }}</a>
                         <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
-                        <a href="{{ route('ourActions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_actions') }}</a>
                         <a href="{{ route('media', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.media') }}</a>
                         <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>

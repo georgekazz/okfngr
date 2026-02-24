@@ -35,7 +35,7 @@ Route::group([
     Route::get('/research-projects', [HomeController::class, 'researchProjects'])->name('researchProjects');
     Route::get('/applications', [HomeController::class, 'applications'])->name('applications');
     Route::get('/old-projects', [HomeController::class, 'oldProjects'])->name('oldProjects');
-    Route::get('/our-actions', [HomeController::class, 'ourActions'])->name('ourActions');
+    // Route::get('/our-actions', [HomeController::class, 'ourActions'])->name('ourActions');
     Route::get('/media', [HomeController::class, 'media'])->name('media');
     Route::get('/editions', [HomeController::class, 'editions'])->name('editions');
     Route::get('/open-data', [HomeController::class, 'openData'])->name('openData');
