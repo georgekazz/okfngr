@@ -173,7 +173,8 @@ class WriterController extends Controller
     {
         $request->validate(['file' => 'required|image|max:5120']);
         $path = $request->file('file')->store('posts', 'public');
-        return response()->json(['location' => Storage::url($path)]);
+
+        return response()->json(['location' => asset('storage/' . $path)]);
     }
 
     public function edit($locale, Post $post)  // Added $locale as first parameter

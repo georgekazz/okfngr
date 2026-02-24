@@ -195,6 +195,8 @@
         selector: '#content',
         height: 600,
         menubar: true,
+        convert_urls: false,
+        relative_urls: false,
         plugins: [
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',

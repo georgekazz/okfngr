@@ -506,11 +506,19 @@
                 </div>
             </header>
 
-            <!-- Featured Image — AFTER header, BEFORE content -->
-            @if($post->featured_image && !str_contains($post->content, '<img'))
-                <div class="mb-10 rounded-2xl overflow-hidden shadow-xl w-full">
-                    <img src="{{ asset('storage/' . $post->featured_image) }}" ...>
-                </div>
+            <!-- Featured Image -->
+            @if($post->featured_image)
+                @php
+                    $filename = basename($post->featured_image);
+                @endphp
+                @if(!str_contains($post->content, $filename))
+                    <div class="mb-10 rounded-2xl overflow-hidden shadow-xl w-full">
+                        <img src="{{ asset('storage/' . $post->featured_image) }}" 
+                            alt="{{ $post->title }}"
+                            class="w-full h-auto block object-cover max-h-[500px]"
+                            onerror="this.parentElement.style.display='none'">
+                    </div>
+                @endif
             @endif
 
             <!-- Post Content -->
