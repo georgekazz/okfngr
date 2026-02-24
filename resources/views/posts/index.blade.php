@@ -76,7 +76,7 @@
             </nav>
             <div class="nav-actions">
                 <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="blog-btn">
-                    {{ __('home.nav.blog') }}
+                    <span>{{ __('home.nav.blog') }}</span>
                 </a>
                 <div class="lang-switcher">
                     @php

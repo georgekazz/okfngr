@@ -56,7 +56,9 @@
                 </div>
             </nav>
             <div class="nav-actions">
-                <a href="./blog" class="blog-btn">{{ __('home.nav.blog') }}</a>
+                <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="blog-btn">
+                    <span>{{ __('home.nav.blog') }}</span>
+                </a>
                 <div class="lang-switcher">
                     <a href="{{ route('board-of-directors', ['locale' => 'en']) }}" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
