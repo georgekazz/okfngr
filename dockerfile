@@ -1,0 +1,66 @@
+FROM php:8.3-apache
+
+# Εγκατάσταση απαιτούμενων πακέτων
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    zip \
+    unzip \
+    curl \
+    git \
+    nano \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Ενεργοποίηση Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Εγκατάσταση PHP extensions
+RUN docker-php-ext-install pdo_mysql zip mbstring exif bcmath gd
+
+# Εγκατάσταση Node.js και npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Ρύθμιση DocumentRoot του Apache για Laravel
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Ορισμός Working Directory
+WORKDIR /var/www/html
+
+# Copy package files πρώτα (cache optimization)
+COPY package.json package-lock.json* ./
+
+# Install npm dependencies
+RUN npm install
+
+# Μετά copy όλο το project
+COPY . .
+
+# Build Vite assets
+RUN NODE_OPTIONS=--max-old-space-size=2048 npm run build
+
+# Εγκατάσταση Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Ορισμός περιβάλλοντος για τον Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Εγκατάσταση PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Δημιουργία storage logs
+RUN mkdir -p /var/www/html/storage/logs && touch /var/www/html/storage/logs/laravel.log
+
+# Ορισμός σωστών δικαιωμάτων
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Αντιγραφή entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
