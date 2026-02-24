@@ -169,6 +169,12 @@ class WriterController extends Controller
             ->with('success', 'Το άρθρο δημιουργήθηκε επιτυχώς!');
     }
 
+    public function uploadImage(Request $request)
+    {
+        $request->validate(['file' => 'required|image|max:5120']);
+        $path = $request->file('file')->store('posts', 'public');
+        return response()->json(['location' => Storage::url($path)]);
+    }
 
     public function edit($locale, Post $post)  // Added $locale as first parameter
     {

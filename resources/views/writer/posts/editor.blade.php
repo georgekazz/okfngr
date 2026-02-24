@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- TinyMCE Editor -->
 <script src="https://cdn.tiny.cloud/1/5seorlrf0fc75ossjv7xrxelfgubizejfpbn3bhrasuppiwa/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 </head>
@@ -187,29 +188,52 @@
         </form>
     </div>
 
-    <script>
-        // Initialize TinyMCE
-        tinymce.init({
-            selector: '#content',
-            height: 600,
-            menubar: true,
-            plugins: [
-                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                'insertdatetime', 'media', 'table', 'help', 'wordcount'
-            ],
-            toolbar: 'undo redo | formatselect | bold italic backcolor | \
-                     alignleft aligncenter alignright alignjustify | \
-                     bullist numlist outdent indent | removeformat | help',
-            content_style: 'body { font-family: Roboto, Arial, sans-serif; font-size: 16px; }',
-            language: 'el'
-        });
+   <script>
+    const uploadImageUrl = "{{ route('writer.upload-image', ['locale' => app()->getLocale()]) }}";
 
-        // Auto-generate slug from title
-        document.getElementById('title').addEventListener('input', function(e) {
-            const title = e.target.value;
-            // You can add slug preview here if needed
-        });
-    </script>
+    tinymce.init({
+        selector: '#content',
+        height: 600,
+        menubar: true,
+        plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                 alignleft aligncenter alignright alignjustify | \
+                 bullist numlist outdent indent | removeformat | help',
+        content_style: 'body { font-family: Roboto, Arial, sans-serif; font-size: 16px; }',
+        language: 'el',
+        paste_data_images: false,
+        images_file_types: 'jpg,jpeg,png,gif,webp',
+        automatic_uploads: true,
+        images_reuse_filename: false,
+        images_upload_url: uploadImageUrl,
+        images_upload_handler: function (blobInfo, progress) {
+            return new Promise(function (resolve, reject) {
+                let formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                fetch(uploadImageUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.location) {
+                        resolve(data.location);
+                    } else {
+                        reject('Upload failed: ' + JSON.stringify(data));
+                    }
+                })
+                .catch(err => reject('Upload error: ' + err));
+            });
+        }
+    });
+</script>
 </body>
 </html>

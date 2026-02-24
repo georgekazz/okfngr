@@ -29,6 +29,7 @@ class ImportWordPressXML extends Command
     private $userMap = [];
     private $categoryMap = [];
     private $tagMap = [];
+    private $attachmentMap = [];
 
     public function handle()
     {
@@ -60,6 +61,12 @@ class ImportWordPressXML extends Command
         $this->info('XML file loaded successfully');
         $this->info('');
 
+        // Build attachment map FIRST (needed for featured image resolution)
+        $this->info('🖼️  Building attachment map...');
+        $this->attachmentMap = $this->buildAttachmentMap($xml, $namespaces);
+        $this->info('Found ' . count($this->attachmentMap) . ' attachments');
+        $this->info('');
+
         // Import authors
         $this->importAuthors($xml, $namespaces);
         $this->info('');
@@ -79,6 +86,40 @@ class ImportWordPressXML extends Command
         $this->showSummary();
 
         return 0;
+    }
+
+    private function buildAttachmentMap($xml, $namespaces)
+    {
+        $wp = $namespaces['wp'] ?? null;
+        $map = [];
+
+        if (!$wp) {
+            return $map;
+        }
+
+        $items = $xml->xpath('//item');
+        foreach ($items as $item) {
+            $item->registerXPathNamespace('wp', $wp);
+            $postType = (string) $item->children($wp)->post_type;
+
+            if ($postType !== 'attachment') {
+                continue;
+            }
+
+            $postId = (string) $item->children($wp)->post_id;
+            $attachmentUrl = (string) $item->children($wp)->attachment_url;
+
+            // Fallback to guid
+            if (empty($attachmentUrl)) {
+                $attachmentUrl = (string) $item->guid;
+            }
+
+            if ($postId && $attachmentUrl) {
+                $map[$postId] = $attachmentUrl;
+            }
+        }
+
+        return $map;
     }
 
     private function importAuthors($xml, $namespaces)
@@ -112,7 +153,6 @@ class ImportWordPressXML extends Command
                 $name = $login;
             }
 
-            // Check if user exists
             $user = User::where('email', $email)->first();
 
             if (!$user) {
@@ -236,19 +276,15 @@ class ImportWordPressXML extends Command
             $item->registerXPathNamespace('content', $content);
             $item->registerXPathNamespace('excerpt', $excerpt);
 
-            // Get post type
             $postType = (string) $item->children($wp)->post_type;
 
-            // Only import posts (not pages, attachments, etc.)
             if ($postType !== 'post') {
                 $progressBar->advance();
                 continue;
             }
 
-            // Get post status
             $status = (string) $item->children($wp)->status;
 
-            // Only import published posts
             if ($status !== 'publish') {
                 $progressBar->advance();
                 continue;
@@ -269,7 +305,6 @@ class ImportWordPressXML extends Command
             $title = (string) $item->title;
             $slug = (string) $item->children($wp)->post_name;
 
-            // Check if post already exists
             if (Post::where('slug', $slug)->exists()) {
                 $this->stats['skipped']++;
                 return;
@@ -281,21 +316,17 @@ class ImportWordPressXML extends Command
             $pubDate = (string) $item->pubDate;
             $creator = (string) $item->children('http://purl.org/dc/elements/1.1/')->creator;
 
-            // ✅ CLEAN THE HTML CONTENT
             $postContent = $this->cleanHtmlContent($postContent);
 
-
-            // Get author
             $userId = $this->userMap[$creator] ?? $this->userMap['default'] ?? User::where('role', 'admin')->first()->id;
 
-            // ✅ Get categories (multiple for many-to-many)
+            // Categories
             $categoryIds = [];
             $categories = $item->xpath('category[@domain="category"]');
             foreach ($categories as $cat) {
                 $categoryName = (string) $cat;
                 $categorySlug = Str::slug($categoryName);
 
-                // Create category if it doesn't exist
                 if (!isset($this->categoryMap[$categorySlug])) {
                     $category = Category::firstOrCreate(
                         ['slug' => $categorySlug],
@@ -308,14 +339,13 @@ class ImportWordPressXML extends Command
                 $categoryIds[] = $this->categoryMap[$categorySlug];
             }
 
-            // Get tags
+            // Tags
             $tagIds = [];
             $tags = $item->xpath('category[@domain="post_tag"]');
             foreach ($tags as $tag) {
                 $tagName = (string) $tag;
                 $tagSlug = Str::slug($tagName);
 
-                // Create tag if it doesn't exist
                 if (!isset($this->tagMap[$tagSlug])) {
                     $tagModel = Tag::firstOrCreate(
                         ['slug' => $tagSlug],
@@ -328,9 +358,16 @@ class ImportWordPressXML extends Command
                 $tagIds[] = $this->tagMap[$tagSlug];
             }
 
-            // Download featured image if exists
+            // Featured image
             $thumbnailPath = null;
             $attachmentUrl = $this->extractFeaturedImage($item, $wp);
+
+            // Resolve thumbnail_id to actual URL via attachment map
+            if (is_array($attachmentUrl) && isset($attachmentUrl['thumbnail_id'])) {
+                $thumbnailId = $attachmentUrl['thumbnail_id'];
+                $attachmentUrl = $this->attachmentMap[$thumbnailId] ?? null;
+            }
+
             if ($attachmentUrl) {
                 $thumbnailPath = $this->downloadImage($attachmentUrl, $slug);
                 if ($thumbnailPath) {
@@ -338,19 +375,18 @@ class ImportWordPressXML extends Command
                 }
             }
 
-            // Clean excerpt
+            // Excerpt
             $cleanExcerpt = strip_tags($postExcerpt);
             $cleanExcerpt = html_entity_decode($cleanExcerpt);
             $cleanExcerpt = trim($cleanExcerpt);
 
-            // If excerpt is empty, create one from content
             if (empty($cleanExcerpt) && !empty($postContent)) {
                 $cleanExcerpt = strip_tags($postContent);
                 $cleanExcerpt = html_entity_decode($cleanExcerpt);
                 $cleanExcerpt = Str::limit($cleanExcerpt, 200);
             }
 
-            // ✅ Parse the actual post date correctly
+            // Date
             $publishedDate = null;
             if (!empty($postDate) && $postDate !== '0000-00-00 00:00:00') {
                 $publishedDate = Carbon::parse($postDate);
@@ -360,7 +396,6 @@ class ImportWordPressXML extends Command
                 $publishedDate = now();
             }
 
-            // ✅ Create post (removed category_id since it's many-to-many)
             $post = Post::create([
                 'title' => html_entity_decode($title),
                 'slug' => $slug,
@@ -375,12 +410,10 @@ class ImportWordPressXML extends Command
                 'updated_at' => $publishedDate,
             ]);
 
-            // ✅ Attach categories (many-to-many)
             if (!empty($categoryIds)) {
                 $post->categories()->sync($categoryIds);
             }
 
-            // ✅ Attach tags (many-to-many)
             if (!empty($tagIds)) {
                 $post->tags()->sync($tagIds);
             }
@@ -401,21 +434,20 @@ class ImportWordPressXML extends Command
             return '';
         }
 
-        // Load HTML with DOMDocument
         $dom = new \DOMDocument();
         libxml_use_internal_errors(true);
         $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         libxml_clear_errors();
 
-        // Remove style attributes
         $xpath = new \DOMXPath($dom);
+
+        // Remove style attributes
         foreach ($xpath->query('//*[@style]') as $node) {
             $node->removeAttribute('style');
         }
 
-        // Remove class attributes (except for images if needed)
+        // Remove class attributes (keep on img)
         foreach ($xpath->query('//*[@class]') as $node) {
-            // Keep classes for images if they're important
             if ($node->nodeName !== 'img') {
                 $node->removeAttribute('class');
             }
@@ -437,10 +469,7 @@ class ImportWordPressXML extends Command
             $node->removeAttribute('align');
         }
 
-        // Get cleaned HTML
         $cleanedHtml = $dom->saveHTML();
-
-        // Remove XML declaration and wrapper
         $cleanedHtml = preg_replace('/^<!DOCTYPE.+?>/', '', $cleanedHtml);
         $cleanedHtml = str_replace(['<html>', '</html>', '<body>', '</body>'], '', $cleanedHtml);
 
@@ -449,19 +478,27 @@ class ImportWordPressXML extends Command
 
     private function extractFeaturedImage($item, $wp)
     {
-        // Try to get featured image from postmeta
-        $postmeta = $item->xpath('wp:postmeta[wp:meta_key="_wp_attached_file"]');
+        // Method 1: _thumbnail_id → resolve via attachment map
+        $thumbnailMeta = $item->xpath('wp:postmeta[wp:meta_key="_thumbnail_id"]');
+        if (!empty($thumbnailMeta)) {
+            $thumbnailMeta[0]->registerXPathNamespace('wp', $wp);
+            $thumbnailId = (string) $thumbnailMeta[0]->children($wp)->meta_value;
+            if ($thumbnailId) {
+                return ['thumbnail_id' => $thumbnailId];
+            }
+        }
 
+        // Method 2: _wp_attached_file
+        $postmeta = $item->xpath('wp:postmeta[wp:meta_key="_wp_attached_file"]');
         if (!empty($postmeta)) {
             $postmeta[0]->registerXPathNamespace('wp', $wp);
             $attachedFile = (string) $postmeta[0]->children($wp)->meta_value;
-
             if ($attachedFile) {
                 return 'https://okfn.gr/wp-content/uploads/' . $attachedFile;
             }
         }
 
-        // Try to extract from content
+        // Method 3: First image in content
         $content = (string) $item->children('http://purl.org/rss/1.0/modules/content/')->encoded;
         if (preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches)) {
             return $matches[1];

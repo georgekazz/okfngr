@@ -64,6 +64,7 @@ Route::group([
         Route::get('/posts/{post:id}/edit', [WriterController::class, 'edit'])->name('posts.edit');
         Route::put('/posts/{post:id}', [WriterController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post:id}', [WriterController::class, 'destroy'])->name('posts.destroy');
+        Route::post('/upload-image', [WriterController::class, 'uploadImage'])->name('upload-image');
 
         // Media Events
         Route::get('/media-events', [MediaEventController::class, 'index'])->name('media-events.index');
