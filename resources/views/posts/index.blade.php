@@ -116,21 +116,20 @@
         <div class="blog-container">
 
             <!-- Categories Filter -->
-            <div class="blog-filters">
-                <div class="filter-item">
+            <div class="blog-filters" id="blogFilters">
+                <div class="blog-filters-inner">
                     <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}"
-                        class="filter-link {{ !request('category') ? 'active' : '' }}">
+                        class="filter-link {{ !request('category') && !request('tag') ? 'active' : '' }}">
                         {{ __('blog.all_posts') }}
                     </a>
-                </div>
-                @foreach($categories as $category)
-                    <div class="filter-item">
+
+                    @foreach($categories as $category)
                         <a href="{{ route('posts.index', ['locale' => app()->getLocale(), 'category' => $category->slug]) }}"
                             class="filter-link {{ request('category') == $category->slug ? 'active' : '' }}">
                             {{ $category->name }}
                         </a>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
 
             <!-- Articles Grid -->
@@ -181,8 +180,7 @@
                             </div>
 
                             <h2 class="article-title">
-                                <a
-                                    href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}">
+                                <a href="{{ route('posts.show', ['locale' => app()->getLocale(), 'post' => $post->id]) }}">
                                     {{ $post->title }}
                                 </a>
                             </h2>
@@ -329,6 +327,34 @@
                 if (data.success) window.location.reload();
             }).catch(error => console.error('Error:', error));
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filtersContainer = document.getElementById('blogFilters');
+            const filtersInner = filtersContainer.querySelector('.blog-filters-inner');
+
+            function updateScrollIndicators() {
+                const hasScrollLeft = filtersInner.scrollLeft > 10;
+                const hasScrollRight = filtersInner.scrollLeft < (filtersInner.scrollWidth - filtersInner.clientWidth - 10);
+
+                filtersContainer.classList.toggle('has-scroll-left', hasScrollLeft);
+                filtersContainer.classList.toggle('has-scroll-right', hasScrollRight);
+            }
+
+            // Update on scroll
+            filtersInner.addEventListener('scroll', updateScrollIndicators);
+
+            // Update on load and resize
+            updateScrollIndicators();
+            window.addEventListener('resize', updateScrollIndicators);
+
+            // Optional: Scroll active filter into view
+            const activeFilter = filtersInner.querySelector('.filter-link.active');
+            if (activeFilter) {
+                activeFilter.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        });
     </script>
 </body>
 

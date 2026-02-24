@@ -57,17 +57,44 @@
     margin: 0 auto;
 }
 
-/* Filters - Improved Responsive */
 .blog-filters {
-    display: flex;
-    gap: clamp(0.5rem, 2vw, 1rem);
     margin-bottom: clamp(2rem, 4vw, 3rem);
-    flex-wrap: wrap;
-    justify-content: center;
     padding: clamp(1rem, 3vw, 2rem);
     background: var(--light);
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.blog-filters-inner {
+    display: flex;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.5rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cyan) #e0e0e0;
+}
+
+/* Custom Scrollbar for Webkit browsers */
+.blog-filters-inner::-webkit-scrollbar {
+    height: 8px;
+}
+
+.blog-filters-inner::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.blog-filters-inner::-webkit-scrollbar-thumb {
+    background: var(--cyan);
+    border-radius: 10px;
+}
+
+.blog-filters-inner::-webkit-scrollbar-thumb:hover {
+    background: var(--purple);
 }
 
 .filter-link {
@@ -81,6 +108,7 @@
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     transition: all 0.3s;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .filter-link:hover {
@@ -94,6 +122,67 @@
     border-color: transparent;
     color: var(--light);
     box-shadow: 0 4px 15px rgba(0, 209, 255, 0.3);
+}
+
+/* Optional: Scroll indicators */
+.blog-filters::before,
+.blog-filters::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.blog-filters::before {
+    left: 0;
+    background: linear-gradient(to right, var(--light), transparent);
+}
+
+.blog-filters::after {
+    right: 0;
+    background: linear-gradient(to left, var(--light), transparent);
+}
+
+.blog-filters.has-scroll-left::before,
+.blog-filters.has-scroll-right::after {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blog-filters {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .blog-filters-inner {
+        gap: 0.5rem;
+    }
+
+    .filter-link {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-filters {
+        padding: 0.75rem;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: 0;
+    }
+
+    .filter-link {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.875rem;
+    }
 }
 
 /* Articles Grid - Improved Responsive */
