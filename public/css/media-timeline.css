@@ -661,3 +661,480 @@
 .modal-container::-webkit-scrollbar-thumb:hover {
     background: #00b8e6;
 }
+
+
+
+/* ── Ruler Timeline ────────────────────────────────── */
+.ruler-section {
+    padding: 80px 0 120px;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.ruler-section .section-heading {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 20px;
+}
+
+.ruler-section .section-heading h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--dark);
+}
+
+/* Track wrapper — clips overflow */
+.ruler-track-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* The scrollable inner track */
+.ruler-track {
+    display: flex;
+    align-items: flex-end;
+    padding: 0 calc(50vw - 120px);
+    gap: 0;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+}
+
+.ruler-track:active { cursor: grabbing; }
+
+/* The horizontal ruler line */
+.ruler-line {
+    position: absolute;
+    bottom: 52px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--cyan) 10%, var(--purple) 90%, transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Each event card on the ruler */
+.ruler-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 240px;
+    padding: 0 20px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Card above the line */
+.ruler-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 24px;
+    width: 200px;
+    transform-origin: bottom center;
+}
+
+.ruler-event:hover .ruler-card,
+.ruler-event.active .ruler-card {
+    border-color: var(--cyan);
+    box-shadow: 0 12px 40px rgba(0,209,255,0.3);
+    transform: translateY(-8px) scale(1.03);
+}
+
+.ruler-card-img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, #e0f7fa, #f0f9ff);
+}
+
+.ruler-card-img-placeholder {
+    width: 100%;
+    height: 110px;
+    background: linear-gradient(135deg, #e0f7fa, #f0f9ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ruler-card-img-placeholder svg {
+    opacity: 0.3;
+    color: var(--cyan);
+}
+
+.ruler-card-body {
+    padding: 14px 16px;
+}
+
+.ruler-card-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ruler-card-loc {
+    font-size: 0.75rem;
+    color: var(--cyan);
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* The tick + date below the line */
+.ruler-tick-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.ruler-tick {
+    width: 4px;
+    height: 28px;
+    background: var(--cyan);
+    border-radius: 2px;
+    transition: height 0.3s ease, background 0.3s ease;
+}
+
+.ruler-event:hover .ruler-tick,
+.ruler-event.active .ruler-tick {
+    height: 40px;
+    background: var(--purple);
+}
+
+.ruler-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--cyan);
+    box-shadow: 0 0 0 5px rgba(0,209,255,0.15);
+    transition: all 0.3s ease;
+    margin: -1px 0;
+    z-index: 2;
+}
+
+.ruler-event:hover .ruler-dot,
+.ruler-event.active .ruler-dot {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 8px rgba(224,119,255,0.2);
+    transform: scale(1.3);
+}
+
+.ruler-date-badge {
+    margin-top: 12px;
+    background: white;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    padding: 8px 14px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+    min-width: 70px;
+}
+
+.ruler-event:hover .ruler-date-badge,
+.ruler-event.active .ruler-date-badge {
+    border-color: var(--cyan);
+}
+
+.ruler-date-badge .day {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1;
+}
+
+.ruler-date-badge .month {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ruler-date-badge .year {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--gray);
+    margin-top: 2px;
+}
+
+/* ── Nav Arrows ─────────────────────────────────────── */
+.ruler-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 48px;
+    padding: 0 20px;
+}
+
+.ruler-nav-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--cyan);
+    background: white;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0,209,255,0.15);
+}
+
+.ruler-nav-btn:hover {
+    background: var(--cyan);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,209,255,0.35);
+}
+
+.ruler-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Progress dots */
+.ruler-progress {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.ruler-progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ruler-progress-dot.active {
+    background: var(--cyan);
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* ── Popup Modal (originates from card) ─────────────── */
+.event-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.event-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.event-popup {
+    background: white;
+    border-radius: 20px;
+    max-width: 820px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    transform: scale(0.85) translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.event-popup-overlay.active .event-popup {
+    transform: scale(1) translateY(0);
+}
+
+.popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    color: var(--dark);
+}
+
+.popup-close:hover {
+    background: var(--cyan);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.popup-image {
+    width: 100%;
+    height: 340px;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(135deg, #e0f7fa, #f0f9ff);
+}
+
+.popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup-image-placeholder {
+    width: 100%;
+    height: 340px;
+    background: linear-gradient(135deg, #e0f7fa, #f0f9ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px 20px 0 0;
+}
+
+.popup-image-placeholder svg {
+    opacity: 0.2;
+    color: var(--cyan);
+}
+
+.popup-body {
+    padding: 36px 40px 40px;
+}
+
+.popup-date-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,209,255,0.1);
+    border: 1.5px solid rgba(0,209,255,0.3);
+    color: var(--cyan);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.popup-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.popup-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.popup-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--gray);
+    background: #f8f9fa;
+    padding: 8px 14px;
+    border-radius: 10px;
+}
+
+.popup-meta-item svg { color: var(--cyan); flex-shrink: 0; }
+
+.popup-description {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #444;
+    white-space: pre-line;
+    border-top: 2px solid #f0f0f0;
+    padding-top: 24px;
+}
+
+.popup-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.popup-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+    color: var(--cyan);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1.5px solid rgba(0,209,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.popup-link:hover {
+    background: var(--cyan);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,209,255,0.3);
+}
+
+/* Empty state */
+.ruler-empty {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.ruler-empty svg { opacity: 0.25; color: var(--cyan); margin-bottom: 20px; }
+.ruler-empty h3 { font-size: 1.8rem; font-weight: 700; color: var(--dark); }
+.ruler-empty p { color: var(--gray); margin-top: 10px; }
+
+/* Scrollbar */
+.event-popup::-webkit-scrollbar { width: 8px; }
+.event-popup::-webkit-scrollbar-track { background: #f1f1f1; }
+.event-popup::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 4px; }
+
+/* Mobile */
+@media (max-width: 640px) {
+    .ruler-event { min-width: 180px; padding: 0 12px; }
+    .ruler-card { width: 156px; }
+    .popup-body { padding: 24px; }
+    .popup-title { font-size: 1.5rem; }
+    .popup-image, .popup-image-placeholder { height: 220px; }
+}
