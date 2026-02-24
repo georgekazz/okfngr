@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\TeamLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -109,6 +110,13 @@ class AdminController extends Controller
             ->with('success', 'Ο κωδικός ενημερώθηκε επιτυχώς!');
     }
 
+    public function uploadImage(Request $request)
+    {
+        $request->validate(['file' => 'required|image|max:5120']);
+        $path = $request->file('file')->store('posts', 'public');
+        return response()->json(['location' => Storage::url($path)]);
+    }
+
     public function destroyUser($locale, User $user)
     {
         // Prevent self-deletion
@@ -133,7 +141,8 @@ class AdminController extends Controller
     public function editPost($locale, Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     public function destroyPost($locale, Post $post)
@@ -146,6 +155,58 @@ class AdminController extends Controller
 
         return redirect()->route('admin.posts', ['locale' => $locale])
             ->with('success', 'Το άρθρο διαγράφηκε επιτυχώς!');
+    }
+
+    public function updatePost(Request $request, $locale, Post $post)
+    {
+        $validated = $request->validate([
+            'title'          => 'required|string|max:255',
+            'excerpt'        => 'nullable|string|max:500',
+            'content'        => 'required|string',
+            'status'         => 'required|in:draft,published',
+            'featured_image' => 'nullable|image|max:5120',
+            'remove_image'   => 'nullable|boolean',
+            'categories'     => 'nullable|array',
+            'categories.*'   => 'exists:categories,id',
+            'tags'           => 'nullable|array',
+            'tags.*'         => 'exists:tags,id',
+        ]);
+
+        if ($post->title !== $validated['title']) {
+            $slug = Str::slug($validated['title']);
+            $count = 1;
+            $original = $slug;
+            while (Post::where('slug', $slug)->where('id', '!=', $post->id)->exists()) {
+                $slug = $original . '-' . $count++;
+            }
+            $post->slug = $slug;
+        }
+
+        if ($request->filled('remove_image') && $post->featured_image) {
+            Storage::disk('public')->delete($post->featured_image);
+            $post->featured_image = null;
+        }
+
+        if ($request->hasFile('featured_image')) {
+            if ($post->featured_image) Storage::disk('public')->delete($post->featured_image);
+            $post->featured_image = $request->file('featured_image')->store('posts', 'public');
+        }
+
+        $post->title   = $validated['title'];
+        $post->excerpt = $validated['excerpt'];
+        $post->content = $validated['content'];
+        $post->status  = $validated['status'];
+
+        if ($validated['status'] === 'published' && !$post->published_at) {
+            $post->published_at = now();
+        }
+
+        $post->save();
+        $post->categories()->sync($validated['categories'] ?? []);
+        $post->tags()->sync($validated['tags'] ?? []);
+
+        return redirect()->route('admin.posts.index', ['locale' => app()->getLocale()])
+            ->with('success', 'Το άρθρο ενημερώθηκε επιτυχώς!');
     }
 
     // Comments Management

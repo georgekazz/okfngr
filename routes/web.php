@@ -93,6 +93,8 @@ Route::group([
         Route::get('/posts', [AdminController::class, 'posts'])->name('posts.index');
         Route::get('/posts/{post:id}/edit', [AdminController::class, 'editPost'])->name('posts.edit');
         Route::delete('/posts/{post:id}', [AdminController::class, 'destroyPost'])->name('posts.destroy');
+        Route::post('/upload-image', [AdminController::class, 'uploadImage'])->name('upload-image');
+        Route::put('/posts/{post}', [AdminController::class, 'updatePost'])->name('posts.update');
 
         // Comments
         Route::get('/comments', [AdminController::class, 'comments'])->name('comments.index');
