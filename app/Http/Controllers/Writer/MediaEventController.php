@@ -34,16 +34,20 @@ class MediaEventController extends Controller
             'links.*' => 'nullable|url',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
+            'is_important' => 'nullable|boolean',
         ]);
 
+        $validated['is_important'] = $request->boolean('is_important');
         $validated['user_id'] = Auth::id();
 
         // Handle links
         if ($request->has('links')) {
-            $links = array_filter($request->links, function($link) {
+            $links = array_filter($request->links, function ($link) {
                 return !empty($link);
             });
             $validated['links'] = array_values($links);
+        } else {
+            $validated['links'] = [];
         }
 
         // Handle image upload
@@ -71,7 +75,6 @@ class MediaEventController extends Controller
 
     public function update($locale, Request $request, MediaEvent $mediaEvent)
     {
-        // Check if user owns this event
         if ($mediaEvent->user_id !== Auth::id()) {
             abort(403);
         }
@@ -84,11 +87,14 @@ class MediaEventController extends Controller
             'links.*' => 'nullable|url',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
+            'is_important' => 'nullable|boolean',
         ]);
+
+        $validated['is_important'] = $request->boolean('is_important');
 
         // Handle links
         if ($request->has('links')) {
-            $links = array_filter($request->links, function($link) {
+            $links = array_filter($request->links, function ($link) {
                 return !empty($link);
             });
             $validated['links'] = array_values($links);
@@ -98,7 +104,6 @@ class MediaEventController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image
             if ($mediaEvent->image) {
                 Storage::disk('public')->delete($mediaEvent->image);
             }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->json('links')->nullable(); // Store multiple links as JSON
             $table->string('image')->nullable(); // Optional event image
             $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->boolean('is_important')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

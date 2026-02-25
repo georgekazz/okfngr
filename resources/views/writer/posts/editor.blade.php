@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ isset($post) ? 'Επεξεργασία Άρθρου' : 'Δημιουργία Άρθρου' }} - OKFN Greece</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/writer-editor.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- TinyMCE Editor -->
-<script src="https://cdn.tiny.cloud/1/5seorlrf0fc75ossjv7xrxelfgubizejfpbn3bhrasuppiwa/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/5seorlrf0fc75ossjv7xrxelfgubizejfpbn3bhrasuppiwa/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header -->

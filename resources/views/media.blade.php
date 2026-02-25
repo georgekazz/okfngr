@@ -100,7 +100,7 @@
                 <div class="ruler-track" id="rulerTrack">
 
                     @foreach($events as $index => $event)
-                    <div class="ruler-event" data-index="{{ $index }}" onclick="openPopup({{ $index }})">
+                    <div class="ruler-event" id="event-{{ $event->id }}" data-index="{{ $index }}" onclick="openPopup({{ $index }})">
 
                         <div class="ruler-card">
                             @if($event->image)

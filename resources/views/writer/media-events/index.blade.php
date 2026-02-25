@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Εκδηλώσεις Μέσων - Writer Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/media-event.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
@@ -16,7 +15,7 @@
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
-                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link">
+                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                             d="M2.5 7.5L10 2.5L17.5 7.5V16.25C17.5 16.5815 17.3683 16.8995 17.1339 17.1339C16.8995 17.3683 16.5815 17.5 16.25 17.5H3.75C3.41848 17.5 3.10054 17.3683 2.86612 17.1339C2.6317 16.8995 2.5 16.5815 2.5 16.25V7.5Z"
@@ -24,9 +23,8 @@
                         <path d="M7.5 17.5V10H12.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <span>Πίνακας Ελέγχου</span>
+                    Πίνακας Ελέγχου
                 </a>
-
                 <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
@@ -39,9 +37,8 @@
                         <path d="M7.5 14.1667H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <span>Τα Άρθρα μου</span>
+                    Τα Άρθρα μου
                 </a>
-
                 <a href="{{ url('/el/writer/posts/create') }}" class="nav-link create-new">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -49,10 +46,12 @@
                         <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <span>Νέο Άρθρο</span>
+                    Νέο Άρθρο
                 </a>
 
-                <a href="{{ route('writer.media-events.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                <!-- Media Events Section -->
+                <a href="{{ route('writer.media-events.index', ['locale' => app()->getLocale()]) }}"
+                    class="nav-link {{ request()->is('*/writer/media-events*') && !request()->is('*/writer/media-events/create') ? 'active' : '' }}">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                             d="M17.5 5.83333H2.5V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V5.83333Z"
@@ -64,18 +63,18 @@
                         <path d="M2.5 9.16667H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <span>Εκδηλώσεις Μέσων</span>
+                    Εκδηλώσεις Μέσων
                 </a>
 
                 <a href="{{ route('writer.media-events.create', ['locale' => app()->getLocale()]) }}"
-                    class="nav-link create-new active">
+                    class="nav-link create-new {{ request()->is('*/writer/media-events/create') ? 'active' : '' }}">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                         <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <span>Νέα Εκδήλωση</span>
+                    Νέα Εκδήλωση
                 </a>
 
                 <a href="{{ url('/el') }}" class="nav-link">
@@ -87,7 +86,7 @@
                             d="M13.3333 10C13.3333 11.8409 11.8409 13.3333 10 13.3333C8.15905 13.3333 6.66667 11.8409 6.66667 10C6.66667 8.15905 8.15905 6.66667 10 6.66667"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
-                    <span>Προβολή Ιστοτόπου</span>
+                    Προβολή Ιστοτόπου
                 </a>
             </nav>
         </aside>

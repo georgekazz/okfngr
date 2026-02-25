@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Τα Άρθρα μου - OKFN Greece</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/writer-posts.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 
@@ -33,33 +32,76 @@
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
-                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link">
+                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M2.5 7.5L10 2.5L17.5 7.5V16.25C17.5 16.5815 17.3683 16.8995 17.1339 17.1339C16.8995 17.3683 16.5815 17.5 16.25 17.5H3.75C3.41848 17.5 3.10054 17.3683 2.86612 17.1339C2.6317 16.8995 2.5 16.5815 2.5 16.25V7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.5 17.5V10H12.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M2.5 7.5L10 2.5L17.5 7.5V16.25C17.5 16.5815 17.3683 16.8995 17.1339 17.1339C16.8995 17.3683 16.5815 17.5 16.25 17.5H3.75C3.41848 17.5 3.10054 17.3683 2.86612 17.1339C2.6317 16.8995 2.5 16.5815 2.5 16.25V7.5Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M7.5 17.5V10H12.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                     Πίνακας Ελέγχου
                 </a>
-                <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link active">
+                <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M14.1667 2.5H5.83333C4.91667 2.5 4.16667 3.25 4.16667 4.16667V15.8333C4.16667 16.75 4.91667 17.5 5.83333 17.5H14.1667C15.0833 17.5 15.8333 16.75 15.8333 15.8333V4.16667C15.8333 3.25 15.0833 2.5 14.1667 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.5 7.5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.5 10.8333H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.5 14.1667H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M14.1667 2.5H5.83333C4.91667 2.5 4.16667 3.25 4.16667 4.16667V15.8333C4.16667 16.75 4.91667 17.5 5.83333 17.5H14.1667C15.0833 17.5 15.8333 16.75 15.8333 15.8333V4.16667C15.8333 3.25 15.0833 2.5 14.1667 2.5Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M7.5 7.5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M7.5 10.8333H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M7.5 14.1667H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                     Τα Άρθρα μου
                 </a>
                 <a href="{{ url('/el/writer/posts/create') }}" class="nav-link create-new">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                     Νέο Άρθρο
                 </a>
+
+                <!-- Media Events Section -->
+                <a href="{{ route('writer.media-events.index', ['locale' => app()->getLocale()]) }}"
+                    class="nav-link {{ request()->is('*/writer/media-events*') && !request()->is('*/writer/media-events/create') ? 'active' : '' }}">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M17.5 5.83333H2.5V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V5.83333Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.3333 2.5V5.83333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M6.66667 2.5V5.83333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M2.5 9.16667H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Εκδηλώσεις Μέσων
+                </a>
+
+                <a href="{{ route('writer.media-events.create', ['locale' => app()->getLocale()]) }}"
+                    class="nav-link create-new {{ request()->is('*/writer/media-events/create') ? 'active' : '' }}">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Νέα Εκδήλωση
+                </a>
+                
                 <a href="{{ url('/el') }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M18.3333 10C18.3333 14.6024 14.6024 18.3333 10 18.3333C5.39763 18.3333 1.66667 14.6024 1.66667 10C1.66667 5.39763 5.39763 1.66667 10 1.66667C14.6024 1.66667 18.3333 5.39763 18.3333 10Z" stroke="currentColor" stroke-width="1.5" />
-                        <path d="M13.3333 10C13.3333 11.8409 11.8409 13.3333 10 13.3333C8.15905 13.3333 6.66667 11.8409 6.66667 10C6.66667 8.15905 8.15905 6.66667 10 6.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        <path
+                            d="M18.3333 10C18.3333 14.6024 14.6024 18.3333 10 18.3333C5.39763 18.3333 1.66667 14.6024 1.66667 10C1.66667 5.39763 5.39763 1.66667 10 1.66667C14.6024 1.66667 18.3333 5.39763 18.3333 10Z"
+                            stroke="currentColor" stroke-width="1.5" />
+                        <path
+                            d="M13.3333 10C13.3333 11.8409 11.8409 13.3333 10 13.3333C8.15905 13.3333 6.66667 11.8409 6.66667 10C6.66667 8.15905 8.15905 6.66667 10 6.66667"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
                     Προβολή Ιστοτόπου
                 </a>

@@ -136,7 +136,53 @@
     </section>
 
     <section class="open-section">
+
+        @if(isset($importantEvent) && $importantEvent)
+            <div class="important-event-banner" id="importantEventBanner">
+                <div class="important-event-inner">
+                    <div class="important-event-left">
+                        <div class="important-event-badge">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M10 2L12.4 7.5H18L13.5 11.3L15.5 17L10 13.5L4.5 17L6.5 11.3L2 7.5H7.6L10 2Z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            ΣΗΜΑΝΤΙΚΟ
+                        </div>
+                        <div class="important-event-content">
+                            <div class="important-event-date">
+                                {{ $importantEvent->event_date->translatedFormat('d F Y') }}
+                                @if($importantEvent->location)
+                                    · {{ $importantEvent->location }}
+                                @endif
+                            </div>
+                            <div class="important-event-title">{{ $importantEvent->title }}</div>
+                            <div class="important-event-desc">{{ Str::limit($importantEvent->description, 100) }}</div>
+                        </div>
+                    </div>
+                    <div class="important-event-right">
+                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}#event-{{ $importantEvent->id }}"
+                            class="important-event-btn">
+                            Δείτε περισσότερα
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4.16667 10H15.8333M10 4.16667L15.8333 10L10 15.8333" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    <button class="important-event-close"
+                        onclick="document.getElementById('importantEventBanner').style.display='none'">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 5L5 15M5 5L15 15" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        @endif
+
         <h2>{{ __('home.open') }}</h2>
+
     </section>
 
     <section class="info-cards">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\MediaEvent;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,7 +20,12 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        return view('welcome', compact('recentPosts'));
+        $importantEvent = MediaEvent::where('is_important', 1)
+            ->where('status', 'published')
+            ->latest('event_date')
+            ->first();
+
+        return view('welcome', compact('recentPosts','importantEvent'));
     }
 
     public function about($locale)

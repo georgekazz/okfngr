@@ -18,6 +18,7 @@ class MediaEvent extends Model
         'image',
         'status',
         'user_id',
+        'is_important'
     ];
 
     protected $casts = [

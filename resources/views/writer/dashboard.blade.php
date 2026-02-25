@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Πίνακας Ελέγχου - OKFN Greece</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/writerdashboard.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
@@ -206,7 +205,7 @@
                                             </span>
                                         </td>
                                         <td>{{ $post->created_at->format('d/m/Y') }}</td>
-                                        <td>{{ $post->views }}</td>
+                                        <td>{{ $post->views_count }}</td>
                                         <td>
                                             <div class="action-buttons">
                                                 <a href="{{ route('writer.posts.edit', ['locale' => app()->getLocale(), 'post' => $post->id]) }}"
