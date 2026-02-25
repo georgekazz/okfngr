@@ -106,6 +106,36 @@ return [
             ]
         ],
         [
+            'name' => 'Eirini Xanthopoulou',
+            'role' => 'Researcher, Biomedical Engineerer - Physicist',
+            'bio' => 'Eirini Xanthopoulou is a graduate of the Department of Physics at Aristotle University of Thessaloniki (AUTH), specializing in Nuclear Physics, and holds a Master’s Degree in Biomedical Engineering from the same institution. Her research activity focuses on medical imaging and radiation physics, having conducted studies in nuclear medicine on the production of the radioisotope Astatine-211, as well as on the development of motion detection algorithms in fetal cardiovascular magnetic resonance imaging (MRI). Within the framework of her research, she has developed international collaborations, most notably with the Cardiac MR group at Lund University in Sweden. At the same time, with an active presence in international research environments, she serves as a scientific collaborator in programs of CERN, undertaking roles in the organization and communication of science at international workshops and innovation exhibitions, such as the Hadron Therapy Workshop and the International Particle Therapy Masterclasses. Her main interests lie in biomedical technology and medical data analysis, aiming to translate fundamental research into high-precision clinical applications.',
+            'image' => 'people/eiriniXanthopoulou.jpeg',
+            'social' => [
+                'linkedin' => 'https://www.linkedin.com/in/eirini-xanthopoulou-160a73209/',
+                'email' => 'irene.xanthopoulou@okfn.gr',
+            ]
+        ],
+        [
+            'name' => 'Marianna Vouraki',
+            'role' => 'Researcher, Computer Science',
+            'bio' => 'Mariana Vouraki is a final-year student in the Department of Computer, Informatics and Electronic Systems Engineering at the International Hellenic University, specializing in Programming, Data, and Artificial Intelligence. She has experience in web application development, UI/UX design, and process automation using Python, as well as in data management and processing. She has actively contributed to the implementation of open data projects in collaboration with Open Knowledge Foundation Greece, participating in initiatives that promote transparency and the reuse of information. She is a founding member of Soft Minds, where she is involved in the development and support of websites and digital products. In addition, she has teaching experience at a Lifelong Learning Center, training students and professionals in the certified Standard Office User program, while also serving as a technical coordinator responsible for managing and resolving technical issues.',
+            'image' => 'people/mariannaVouraki.jpg',
+            'social' => [
+                'linkedin' => 'https://www.linkedin.com/in/marianna-vouraki-2890831a3/',
+                'email' => 'mvouraki@okfn.gr',
+            ]
+        ],
+        [
+            'name' => 'Konstantinos Tsompanidis',
+            'role' => 'Researcher, Geoinformatics & Web Intelligence',
+            'bio' => 'Konstantinos Tsompanidis is a graduate of the Department of Geoinformatics and Surveying Engineering at the International Hellenic University and holds a Master’s Degree in Intelligent Internet Technologies from the same institution. His professional activity focuses on data analysis using Geographic Information Systems (GIS), on large infrastructure projects, as well as on the management and utilization of spatial data, aiming to transform it into reliable and useful information to support decision-making. At the same time, he is engaged in the study and application of deep learning and computer vision methods on spatial and visual data, with an emphasis on linking research with practical applications. He is a PhD candidate in the Department of Computer, Informatics and Electronic Systems Engineering at the International Hellenic University, with research focused on Computer Vision.',
+            'image' => 'people/konstantinosTsompanidis.jpg',
+            'social' => [
+                'linkedin' => 'https://www.linkedin.com/in/konstantinostsompanidis/',
+                'email' => 'ktsompanidis@okfn.gr',
+            ]
+        ],
+        [
             'name' => 'Maria Nikolaidou',
             'role' => 'Project Management, Proposals, Coordination of Actions',
             'bio' => 'Maria Nikolaidou has been an active member of Open Knowledge Foundation Greece since 2012. She has contributed to event preparation and proposal development, managed communication with partner organizations, and since 2015 has managed the European project OpenBudgets.eu. Maria holds a Master\'s degree in Information Systems from the University of Sheffield and a degree from the Faculty of Philosophy at Aristotle University of Thessaloniki (AUTH). She has worked at research institutes in Greece and at the European Commission, gaining extensive experience in programs related to information management, information systems, and medical education. Since 2006 she has been collaborating with the Medical School of AUTH, with focus on research and administrative/financial management, emphasizing the Medical Education Programs of the Laboratory of Medical Physics.',

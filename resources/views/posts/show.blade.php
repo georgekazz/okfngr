@@ -508,8 +508,10 @@
             @if($post->featured_image)
                 @php
                     $filename = basename($post->featured_image);
+                    $showFeatured = !str_contains($post->content, $filename) 
+                                && !str_contains($post->content, $post->featured_image);
                 @endphp
-                @if(!str_contains($post->content, $filename))
+                @if($showFeatured)
                     <div class="mb-10 rounded-2xl overflow-hidden shadow-xl w-full">
                         <img src="{{ asset('storage/' . $post->featured_image) }}" 
                             alt="{{ $post->title }}"

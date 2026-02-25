@@ -144,7 +144,8 @@
             <div class="info-card-icon">👥</div>
             <h3>{{ __('home.info.team_title') }}</h3>
             <p>{{ __('home.info.team_desc') }}</p>
-            <a href="/new-team" class="info-card-btn">{{ __('home.info.explore') }}</a>
+            <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}"
+                class="info-card-btn">{{ __('home.info.explore') }}</a>
         </div>
         <div class="info-card">
             <div class="info-card-icon">🌍</div>
@@ -156,7 +157,8 @@
             <div class="info-card-icon">🔬</div>
             <h3>{{ __('home.info.projects_title') }}</h3>
             <p>{{ __('home.info.projects_desc') }}</p>
-            <a href="/research-projects" class="info-card-btn">{{ __('home.info.explore') }}</a>
+            <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}"
+                class="info-card-btn">{{ __('home.info.explore') }}</a>
         </div>
     </section>
 
