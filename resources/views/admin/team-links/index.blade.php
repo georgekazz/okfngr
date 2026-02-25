@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Διαχείριση Συνδέσμων - Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin-teamlinks/teamlink.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/team-links.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
