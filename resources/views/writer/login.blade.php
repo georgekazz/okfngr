@@ -16,8 +16,8 @@
         <div class="login-container">
             <div class="login-header">
                 <img src="{{ asset('img/OKGR-landscape-full-rgb.svg') }}" alt="OKFN Greece" class="login-logo">
-                <h1 class="login-title">Σύνδεση Συντάκτη</h1>
-                <p class="login-subtitle">Συνδεθείτε για να διαχειριστείτε τα άρθρα σας</p>
+                <h1 class="login-title">Σύνδεση Χρήστη</h1>
+                <p class="login-subtitle">Καλώς Ορίσατε!</p>
             </div>
 
             @if (session('errors') && session('errors')->any())
