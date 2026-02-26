@@ -8,18 +8,12 @@ services:
     container_name: okfn-app
     restart: always
     ports:
-      - "8000:80"
+      - "${PORT:-8099}:83"
     environment:
       APP_NAME: "OKFN Greece"
       APP_ENV: production
       APP_DEBUG: "false"
-      APP_URL: http://localhost:8000
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: okfngr
-      DB_USERNAME: okfngr_user
-      DB_PASSWORD: okfngr_password
+      APP_URL: ${APP_URL}
     depends_on:
       db:
         condition: service_healthy
@@ -29,12 +23,13 @@ services:
     container_name: okfn-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: okfngr
-      MYSQL_USER: okfngr_user
-      MYSQL_PASSWORD: okfngr_password
+      DB_CONNECTION: mysql
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3307:3306"
+      - "${DB_PORT:-3331}:33"
     volumes:
       - db_data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
