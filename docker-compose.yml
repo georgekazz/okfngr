@@ -8,7 +8,7 @@ services:
     container_name: okfn-app
     restart: always
     ports:
-      - "${PORT:-8099}:83"
+      - "${APP_PORT:-8099}:83"
     environment:
       APP_NAME: "OKFN Greece"
       APP_ENV: production
