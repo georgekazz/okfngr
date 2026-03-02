@@ -227,18 +227,23 @@
             </div>
         </div>
     </footer>
- @php
-        $eventsJson = $events->map(function($e) {
-            return [
-                'title'       => $e->title,
-                'date'        => $e->event_date->translatedFormat('d F Y'),
-                'location'    => $e->location,
-                'description' => $e->description,
-                'image'       => $e->image ? asset('storage/' . $e->image) : null,
-                'links'       => $e->links ?? [],
-            ];
-        });
-    @endphp
+        @php
+            $eventsJson = $events->map(function($e) {
+                return [
+                    'title'       => $e->title,
+                    'date'        => $e->event_date->translatedFormat('d F Y'),
+                    'location'    => $e->location,
+                    'description' => $e->description,
+                    'image'       => $e->image ? asset('storage/' . $e->image) : null,
+                    'links'       => collect($e->links ?? [])->map(function($link) {
+                        // Handle both plain strings and objects
+                        return is_array($link) 
+                            ? $link 
+                            : ['url' => $link, 'label' => $link];
+                    })->values()->toArray(),
+                ];
+            });
+        @endphp
     <script>
    
     const eventsData = {!! json_encode($eventsJson) !!};
@@ -344,7 +349,10 @@
             linksHtml = '<div class="popup-links">';
             for (var i = 0; i < e.links.length; i++) {
                 var l = e.links[i];
-                linksHtml += '<a href="' + l.url + '" target="_blank" rel="noopener" class="popup-link">' + (l.label || l.url) + '</a>';
+                var url = l.url || l;
+                if (url) {
+                    linksHtml += '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="popup-link">🔗 Σύνδεσμος ' + (i + 1) + '</a>';
+                }
             }
             linksHtml += '</div>';
         }

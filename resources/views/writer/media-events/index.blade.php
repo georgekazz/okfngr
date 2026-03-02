@@ -212,7 +212,7 @@
                 </div>
 
                 <div style="margin-top: 30px;">
-                    {{ $events->links() }}
+                    {{ $events->links('vendor.pagination.custom') }}
                 </div>
             @else
                 <div class="empty-state">
