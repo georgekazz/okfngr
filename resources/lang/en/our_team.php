@@ -129,7 +129,7 @@ return [
             'name' => 'Konstantinos Tsompanidis',
             'role' => 'Researcher, Geoinformatics & Web Intelligence',
             'bio' => 'Konstantinos Tsompanidis is a graduate of the Department of Geoinformatics and Surveying Engineering at the International Hellenic University and holds a Master’s Degree in Intelligent Internet Technologies from the same institution. His professional activity focuses on data analysis using Geographic Information Systems (GIS), on large infrastructure projects, as well as on the management and utilization of spatial data, aiming to transform it into reliable and useful information to support decision-making. At the same time, he is engaged in the study and application of deep learning and computer vision methods on spatial and visual data, with an emphasis on linking research with practical applications. He is a PhD candidate in the Department of Computer, Informatics and Electronic Systems Engineering at the International Hellenic University, with research focused on Computer Vision.',
-            'image' => 'people/konstantinosTsompanidis.jpg',
+            'image' => 'people/KonstantinosTsompanidis.jpg',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/konstantinostsompanidis/',
                 'email' => 'ktsompanidis@okfn.gr',
