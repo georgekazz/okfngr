@@ -267,10 +267,27 @@ body {
     font-size: 0.9rem;
     color: #555;
     line-height: 1.65;
-    display: -webkit-box;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.event-description::-webkit-scrollbar {
+    width: 4px;
+}
+
+.event-description::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 2px;
+}
+
+.event-description::-webkit-scrollbar-thumb {
+    background: #00D1FF;
+    border-radius: 2px;
+}
+
+.event-description::-webkit-scrollbar-thumb:hover {
+    background: #00b8e6;
 }
 
 .event-links {
