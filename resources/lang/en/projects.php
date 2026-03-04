@@ -20,6 +20,15 @@ return [
             ]
         ],
         [
+            'title' => 'CYBER-BRIDGE',
+            'description' => 'The CYBER-BRIDGE project (101249702) is a strategic European initiative aimed at strengthening cross-border cooperation on cybersecurity within the EU, fully aligned with the NIS2, CRA, and GDPR directives. A central pillar of the project is the development of an “intelligent” platform powered by artificial intelligence (AI), which serves as a hub for real-time threat information sharing and automated regulatory compliance monitoring. Through specialized digital forensics tools and training programs, the project actively supports Small and Medium-sized Enterprises (SMEs), Security Operations Centers (SOCs), and law enforcement authorities. The goal is to reduce compliance costs and create a resilient digital ecosystem that responds promptly to modern cyber threats. By providing accessible and effective solutions, CYBER-BRIDGE safeguards Europe’s critical infrastructures and promotes trust in the single digital market.',
+            'image' => 'cyberBridge.svg',
+            'badge' => 'EU Project',
+            'social' => [
+                'website' => '',
+            ]
+        ],
+        [
             'title' => 'Cyberguard',
             'description' => 'CYBERGUARD is a three-year European project (Grant Agreement No. 101190251) that develops advanced, deployable tools to help Security Operations Centres (SOCs) detect, prevent, and respond to sophisticated cyber threats across critical sectors such as energy, transport, maritime, government, finance, and health. The project integrates state-of-the-art capabilities in malware analysis, penetration testing, CTI (cyber threat intelligence), and mitigation of attacks targeting AI systems—especially large language models—while ensuring seamless interoperability with existing SOC infrastructures and third-party tools. Its goal is to empower SOC analysts with practical technologies and shared knowledge that measurably improve operational resilience.',
             'image' => 'cyberguard.png',

@@ -1,8 +1,8 @@
 :root {
-    --color-cyan: #00D1FF;
-    --color-mint: #ADFFED;
-    --color-lime: #E4FF36;
-    --color-purple: #E077FF;
+    --color-cyan: #00d1ff;
+    --color-mint: #adffed;
+    --color-lime: #e4ff36;
+    --color-purple: #e077ff;
     --color-dark: #1a1a1a;
     --color-gray: #666;
 }
@@ -58,7 +58,8 @@
 }
 
 @keyframes float-shape {
-    0%, 100% {
+    0%,
+    100% {
         transform: translate(0, 0) rotate(0deg);
     }
     33% {
@@ -156,13 +157,27 @@
     flex-direction: row;
 }
 
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
-.project-card:nth-child(4) { animation-delay: 0.4s; }
-.project-card:nth-child(5) { animation-delay: 0.5s; }
-.project-card:nth-child(6) { animation-delay: 0.6s; }
-.project-card:nth-child(7) { animation-delay: 0.7s; }
+.project-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.project-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.project-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.project-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+.project-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+.project-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+.project-card:nth-child(7) {
+    animation-delay: 0.7s;
+}
 
 /* Alternate Layout - Image on Right */
 .project-card:nth-child(even) {
@@ -189,22 +204,28 @@
 /* Project Image */
 .project-image {
     position: relative;
-    width: 45%;
-    min-height: 350px;
+    width: 35%;
+    min-height: 280px;
+    max-height: 320px;
     overflow: hidden;
     background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
+    padding: 16px;
     transition: transform 0.5s ease;
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.1);
+    transform: scale(1.04);
 }
 
 .project-badge {
@@ -245,6 +266,27 @@
     line-height: 1.9;
     margin-bottom: 30px;
     font-size: 1.05rem;
+    max-height: 160px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.project-description::-webkit-scrollbar {
+    width: 4px;
+}
+
+.project-description::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 2px;
+}
+
+.project-description::-webkit-scrollbar-thumb {
+    background: var(--color-cyan);
+    border-radius: 2px;
+}
+
+.project-description::-webkit-scrollbar-thumb:hover {
+    background: #00b8e6;
 }
 
 /* Project Social */
@@ -288,18 +330,19 @@
 /* Responsive */
 @media (max-width: 1200px) {
     .project-image {
-        width: 40%;
-        min-height: 320px;
+        width: 35%;
+        min-height: 250px;
+        max-height: 280px;
     }
-    
+
     .project-content {
         padding: 35px 40px;
     }
-    
+
     .project-title {
         font-size: 1.7rem;
     }
-    
+
     .project-description {
         font-size: 1rem;
     }
@@ -309,41 +352,42 @@
     .projects-hero h1 {
         font-size: 2.5rem;
     }
-    
+
     .hero-lead {
         font-size: 1.1rem;
     }
-    
+
     .projects-section {
         padding: 60px 20px;
     }
-    
+
     .projects-grid {
         gap: 30px;
     }
-    
+
     .project-card,
     .project-card:nth-child(even) {
         flex-direction: column;
     }
-    
+
     .project-image {
         width: 100%;
-        min-height: 250px;
+        min-height: 200px;
+        max-height: 220px;
     }
-    
+
+    .project-description {
+        max-height: 120px;
+    }
+
     .project-content {
         padding: 30px 25px;
     }
-    
+
     .project-title {
         font-size: 1.5rem;
     }
-    
-    .project-description {
-        font-size: 0.95rem;
-    }
-    
+
     .social-btn {
         width: 44px;
         height: 44px;
@@ -353,19 +397,24 @@
 /* Hover Effect Enhancement */
 @media (hover: hover) {
     .project-card::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, var(--color-cyan), var(--color-mint), var(--color-lime));
+        background: linear-gradient(
+            90deg,
+            var(--color-cyan),
+            var(--color-mint),
+            var(--color-lime)
+        );
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.4s ease;
         z-index: 10;
     }
-    
+
     .project-card:hover::before {
         transform: scaleX(1);
     }
@@ -373,7 +422,7 @@
 
 /* Additional Enhancement - Side Accent Line */
 .project-card::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
