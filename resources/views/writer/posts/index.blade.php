@@ -205,7 +205,7 @@
                 </div>
 
                 <div class="pagination-wrapper">
-                    {{ $posts->links() }}
+                    {{ $posts->links('vendor.pagination.custom') }}
                 </div>
                 @else
                 <div class="empty-state">
