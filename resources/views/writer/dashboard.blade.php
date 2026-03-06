@@ -93,7 +93,7 @@
                     </svg>
                     Νέα Εκδήλωση
                 </a>
-                
+
                 <a href="{{ url('/el') }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
@@ -262,7 +262,7 @@
                     </div>
 
                     <div class="pagination-wrapper">
-                        {{ $posts->links() }}
+                        {{ $posts->links('vendor.pagination.custom') }}
                     </div>
                 @else
                     <div class="empty-state">
