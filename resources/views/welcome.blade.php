@@ -103,11 +103,11 @@
         </div>
         <div class="hero-slider">
             <div class="slider-wrapper">
-                <div class="slide active">
+                <div class="slide">
                     <img src="{{ asset('img/slides/frontpage_img_one.png') }}" alt="Slide 1" class="slide-image">
                     <div class="slide-overlay">
-                        <h3>{{ __('home.slider.schools_title') }}</h3>
-                        <p>{{ __('home.slider.schools_desc') }}</p>
+                        <h3>{{ __('home.slider.budgets_title') }}</h3>
+                        <p>{{ __('home.slider.budgets_desc') }}</p>
                     </div>
                 </div>
                 <div class="slide">
@@ -122,6 +122,13 @@
                     <div class="slide-overlay">
                         <h3>{{ __('home.slider.dbpedia_title') }}</h3>
                         <p>{{ __('home.slider.dbpedia_desc') }}</p>
+                    </div>
+                </div>
+                <div class="slide active">
+                    <img src="{{ asset('img/slides/frontpage_img_four.png') }}" alt="Slide 1" class="slide-image">
+                    <div class="slide-overlay">
+                        <h3>{{ __('home.slider.schools_title') }}</h3>
+                        <p>{{ __('home.slider.schools_desc') }}</p>
                     </div>
                 </div>
 
