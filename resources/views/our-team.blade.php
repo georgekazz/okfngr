@@ -262,7 +262,7 @@
                 </div>
                 <h2>{{ __('our_team.join.title') }}</h2>
                 <p>{{ __('our_team.join.text') }}</p>
-                <a href="#contact" class="btn-join">{{ __('our_team.join.button') }}</a>
+                <a href="mailto:myrtomp08@gmail.com" class="btn-join">{{ __('our_team.join.button') }}</a>
             </div>
         </div>
     </section>
