@@ -156,7 +156,7 @@
 
                         <div class="publication-description">
                             @foreach($publication['description'] as $paragraph)
-                                <p>{{ $paragraph }}</p>
+                                <p>{!! $paragraph !!}</p>
                             @endforeach
                         </div>
 

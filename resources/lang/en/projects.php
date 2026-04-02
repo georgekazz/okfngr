@@ -16,7 +16,7 @@ return [
             'image' => 'arxive.png',
             'badge' => 'EU Project',
             'social' => [
-                'website' => '',
+                'website' => 'https://arxive-eccch.eu/',
             ]
         ],
         [

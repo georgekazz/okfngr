@@ -15,7 +15,7 @@ return [
     'open_data' => [
         'title' => 'Open Data',
         'intro' => 'Open data is data that can be freely used, reused and redistributed by anyone – subject to attribution to the creators and provided, in turn, under the same terms.',
-        'full_definition' => 'The full definition, found in the "Open Definition", offers more information. Summarizing the most important points:',
+        'full_definition' => 'The full definition, found in the <a href="https://opendefinition.org/" target="_blank" rel="noopener" style="color:#00D1FF;font-weight:600;">Open Definition</a>, offers more information. Summarizing the most important points:',
     ],
     
     'principles' => [

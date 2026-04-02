@@ -18,7 +18,7 @@ return [
             'cover' => 'census-2016.png',
             'year' => '2016',
             'description' => [
-                'The census of open data in Greek cities by the Greek chapter of the Open Knowledge Foundation was implemented within the framework of the Foundation\'s actions to highlight the importance of open data, as well as its commitments, within the framework of the 3rd National Action Plan for Open Government 2016-2018. Through the annual census, two objectives are achieved:',
+                'The census of open data in Greek cities by the Greek chapter of the Open Knowledge Foundation was implemented within the framework of the Foundation\'s actions to highlight the importance of open data, as well as its commitments, within the framework of the 3rd National Action Plan for <a href="https://www.opengovpartnership.org/documents/3-2016-2018" target="_blank" rel="noopener" style="color:#00D1FF;font-weight:600;">Open Governance 2016-2018</a>. Through the annual census, two objectives are achieved:',
                 'The progress of each Municipality per year on the issue of openness is presented and the involvement of citizens with open data is promoted. In addition, the census allows the presentation, at a global level, of the way data is managed by the bodies that make up the administration of Greek cities.',
                 'The open platform, which has been created and supported by the global Open Knowledge Foundation, has been structured in such a way that both the data and the results are available openly and in a form that can be evaluated and utilized at a global level.',
             ],
@@ -29,7 +29,7 @@ return [
             'cover' => 'census-2016.png',
             'year' => '2014',
             'description' => [
-                'The census of open data in Greek cities by the Greek chapter of the Open Knowledge Foundation was implemented within the framework of the Foundation\'s actions to highlight the importance of open data. The purpose of the census is to identify and present at a global level the position of Greek cities in relation to how they manage their data.',
+                '<a href="http://gr-city.census.okfn.org/" target="_blank" rel="noopener" style="color:#00D1FF;font-weight:600;">The census of open data</a> in Greek cities by the Greek chapter of the Open Knowledge Foundation was implemented within the framework of the Foundation\'s actions to highlight the importance of open data. The purpose of the census is to identify and present at a global level the position of Greek cities in relation to how they manage their data.',
                 'The utilization of the open platform that has been created and supported by the global Open Knowledge Foundation for recording city data was done so that both the data and the results are available openly and in a form that can be evaluated and utilized at a global level.',
                 'More than 20 volunteers, members and non-members of the Greek chapter of the Open Knowledge Foundation, with a high scientific level in various thematic knowledge areas, worked on the implementation of the census, contributing to the collection and entry of data.',
             ],

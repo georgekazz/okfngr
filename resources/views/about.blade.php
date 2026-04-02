@@ -262,7 +262,7 @@
             <p class="join-text">{{ __('about.join.text') }}</p>
             <div class="join-buttons">
                 <a href="{{ route('posts.index', ['locale' => app()->getLocale()]) }}" class="btn-primary">{{ __('about.join.blog_btn') }}</a>
-                <a href="#contact" class="btn-secondary">{{ __('about.join.contact_btn') }}</a>
+                <a href="mailto:grkazz@okfn.gr" class="btn-secondary">{{ __('about.join.contact_btn') }}</a>
             </div>
         </div>
     </section>

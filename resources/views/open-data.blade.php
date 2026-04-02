@@ -132,7 +132,7 @@
             <div class="content-section">
                 <h2>{{ __('opendata.open_data.title') }}</h2>
                 <p class="intro-text">{{ __('opendata.open_data.intro') }}</p>
-                <p>{{ __('opendata.open_data.full_definition') }}</p>
+                <p>{!! __('opendata.open_data.full_definition') !!}</p>
             </div>
 
             <!-- Key Principles -->
