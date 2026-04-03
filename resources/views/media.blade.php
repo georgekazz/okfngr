@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/media-timeline.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 
 <body>
@@ -123,6 +124,17 @@
                     <div class="zoom-pip" onclick="setZoom(2)"></div>
                 </div>
                 <button class="zoom-btn" id="zoomIn" onclick="changeZoom(1)" title="Μεγέθυνση">+</button>
+                {{-- Export button --}}
+                <button class="export-btn" onclick="exportToExcel()" title="Εξαγωγή σε Excel">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="8" y1="13" x2="16" y2="13" />
+                        <line x1="8" y1="17" x2="16" y2="17" />
+                        <line x1="10" y1="9" x2="14" y2="9" />
+                    </svg>
+                    Εξαγωγή Excel
+                </button>
             </div>
 
             <div class="ruler-track-wrapper">
@@ -449,6 +461,37 @@
 
             applyZoom();
         });
+
+        function exportToExcel() {
+            if (!eventsData || eventsData.length === 0) return;
+
+            const rows = eventsData.map((e, i) => ({
+                'Α/Α': i + 1,
+                'Τίτλος': e.title || '',
+                'Ημερομηνία': e.date || '',
+                'Τοποθεσία': e.location || '',
+                'Περιγραφή': e.description || '',
+                'Σύνδεσμοι': (e.links || []).map(l => l.url || l).filter(Boolean).join(', '),
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(rows);
+
+            // Column widths
+            ws['!cols'] = [
+                { wch: 5 },   // Α/Α
+                { wch: 40 },   // Τίτλος
+                { wch: 18 },   // Ημερομηνία
+                { wch: 25 },   // Τοποθεσία
+                { wch: 60 },   // Περιγραφή
+                { wch: 50 },   // Σύνδεσμοι
+            ];
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Εκδηλώσεις');
+
+            const date = new Date().toISOString().slice(0, 10);
+            XLSX.writeFile(wb, 'okfn-events-' + date + '.xlsx');
+        }
     </script>
 
 </body>

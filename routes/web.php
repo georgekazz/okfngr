@@ -73,6 +73,8 @@ Route::group([
         Route::get('/media-events/{mediaEvent}/edit', [MediaEventController::class, 'edit'])->name('media-events.edit');
         Route::put('/media-events/{mediaEvent}', [MediaEventController::class, 'update'])->name('media-events.update');
         Route::delete('/media-events/{mediaEvent}', [MediaEventController::class, 'destroy'])->name('media-events.destroy');
+        Route::post('/media-events/import', [MediaEventController::class, 'import'])
+            ->name('media-events.import');
     });
 
     // Admin routes

@@ -508,13 +508,12 @@
             @if($post->featured_image)
                 @php
                     $filename = basename($post->featured_image);
-                    $showFeatured = !str_contains($post->content, $filename) 
-                                && !str_contains($post->content, $post->featured_image);
+                    $showFeatured = !str_contains($post->content, $filename)
+                        && !str_contains($post->content, $post->featured_image);
                 @endphp
                 @if($showFeatured)
                     <div class="mb-10 rounded-2xl overflow-hidden shadow-xl w-full">
-                        <img src="{{ asset('storage/' . $post->featured_image) }}" 
-                            alt="{{ $post->title }}"
+                        <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
                             class="w-full h-auto block object-cover max-h-[500px]"
                             onerror="this.parentElement.style.display='none'">
                     </div>
@@ -569,12 +568,11 @@
                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($post->title) }}"
                         target="_blank"
                         class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full text-white font-600 text-sm no-underline transition-all hover:-translate-y-0.5 hover:shadow-lg whitespace-nowrap sm:w-auto w-full justify-center"
-                        style="background:#1da1f2;">
+                        style="background:#000000;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
                             <path
-                                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
-                        Twitter
                     </a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}&title={{ urlencode($post->title) }}"
                         target="_blank"
@@ -591,13 +589,12 @@
         </div>
 
         <!-- Comments Section -->
-        <section class="py-10 lg:py-16 bg-lighter border-t border-gray-100">
+        <!-- <section class="py-10 lg:py-16 bg-lighter border-t border-gray-100">
             <div class="max-w-[900px] mx-auto px-4 sm:px-8 lg:px-12">
                 <h2 class="text-2xl lg:text-3xl font-700 mb-8 text-text-primary">
                     {{ __('post.comments') }} ({{ $post->comments()->where('status', 'approved')->count() }})
                 </h2>
 
-                <!-- Comment Form -->
                 <div class="bg-light rounded-2xl p-6 lg:p-10 mb-10 shadow-sm">
                     <h3 class="text-xl font-700 mb-6 text-text-primary">{{ __('post.leave_comment') }}</h3>
 
@@ -653,7 +650,6 @@
                     </form>
                 </div>
 
-                <!-- Comments List -->
                 @if($post->comments()->where('status', 'approved')->where('parent_id', null)->count() > 0)
                     <div class="space-y-4">
                         @foreach($post->comments()->where('status', 'approved')->where('parent_id', null)->get() as $comment)
@@ -664,7 +660,7 @@
                     <p class="text-center text-text-secondary py-8 text-sm">{{ __('post.no_comments') }}</p>
                 @endif
             </div>
-        </section>
+        </section> -->
     </article>
 
     <!-- Footer -->

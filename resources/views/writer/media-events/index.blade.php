@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/media-event.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 
 <body>
@@ -98,16 +99,27 @@
                     <h1>Εκδηλώσεις Μέσων</h1>
                     <p class="header-subtitle">Διαχειριστείτε τις εκδηλώσεις και τα γεγονότα μέσων</p>
                 </div>
-                <a href="{{ route('writer.media-events.create', ['locale' => app()->getLocale()]) }}"
-                    class="btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    Νέα Εκδήλωση
-                </a>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button class="btn-import" onclick="document.getElementById('importModal').classList.add('active')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        Εισαγωγή Excel
+                    </button>
+                    <a href="{{ route('writer.media-events.create', ['locale' => app()->getLocale()]) }}"
+                        class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Νέα Εκδήλωση
+                    </a>
+                </div>
             </div>
 
             @if(session('success'))
@@ -231,8 +243,227 @@
                     </a>
                 </div>
             @endif
+
+
+            <!-- Import Modal -->
+            <div class="import-modal-overlay" id="importModal">
+                <div class="import-modal">
+                    <div class="import-modal-header">
+                        <h3>Εισαγωγή από Excel</h3>
+                        <button onclick="closeImportModal()" class="import-close">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="import-modal-body">
+                        <div class="import-info">
+                            <p>Το αρχείο Excel πρέπει να έχει τις εξής στήλες:</p>
+                            <div class="import-columns">
+                                <span>title</span>
+                                <span>description</span>
+                                <span>event_date</span>
+                                <span>location</span>
+                                <span>links</span>
+                                <span>status</span>
+                            </div>
+                            <p style="font-size:0.82rem;color:#888;margin-top:8px;">
+                                Η στήλη <strong>links</strong> δέχεται URLs χωρισμένα με κόμμα.<br>
+                                Η στήλη <strong>status</strong> δέχεται: <code>published</code> ή
+                                <code>draft</code>.<br>
+                                Η στήλη <strong>event_date</strong> σε μορφή <code>YYYY-MM-DD</code> ή
+                                <code>DD/MM/YYYY</code>.
+                            </p>
+                        </div>
+
+                        <div class="import-dropzone" id="importDropzone"
+                            onclick="document.getElementById('excelFile').click()">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="8" y1="13" x2="16" y2="13" />
+                                <line x1="8" y1="17" x2="16" y2="17" />
+                            </svg>
+                            <p>Κάντε κλικ για επιλογή αρχείου <strong>.xlsx</strong></p>
+                            <span id="importFileName">Δεν επιλέχθηκε αρχείο</span>
+                            <input type="file" id="excelFile" accept=".xlsx,.xls" style="display:none"
+                                onchange="handleFileSelect(event)">
+                        </div>
+
+                        <div id="importPreview" style="display:none;">
+                            <div class="import-preview-header">
+                                <span id="importPreviewCount"></span>
+                                <button class="btn-preview-clear" onclick="clearImport()">Καθαρισμός</button>
+                            </div>
+                            <div class="import-preview-table-wrap">
+                                <table class="import-preview-table" id="importPreviewTable"></table>
+                            </div>
+                        </div>
+
+                        <div id="importError" class="import-error" style="display:none;"></div>
+                    </div>
+
+                    <div class="import-modal-footer">
+                        <button class="btn-cancel" onclick="closeImportModal()">Ακύρωση</button>
+                        <button class="btn-import-confirm" id="btnImportConfirm" onclick="submitImport()" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Εισαγωγή Εκδηλώσεων
+                        </button>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
+
+
+<script>
+    let parsedRows = [];
+
+    function closeImportModal() {
+        document.getElementById('importModal').classList.remove('active');
+        clearImport();
+    }
+
+    function clearImport() {
+        parsedRows = [];
+        document.getElementById('excelFile').value = '';
+        document.getElementById('importFileName').textContent = 'Δεν επιλέχθηκε αρχείο';
+        document.getElementById('importPreview').style.display = 'none';
+        document.getElementById('importError').style.display = 'none';
+        document.getElementById('btnImportConfirm').disabled = true;
+    }
+
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        document.getElementById('importFileName').textContent = file.name;
+        document.getElementById('importError').style.display = 'none';
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            try {
+                const wb = XLSX.read(e.target.result, { type: 'binary', cellDates: true });
+                const ws = wb.Sheets[wb.SheetNames[0]];
+                const data = XLSX.utils.sheet_to_json(ws, { defval: '' });
+
+                if (data.length === 0) {
+                    showImportError('Το αρχείο είναι κενό.');
+                    return;
+                }
+
+                parsedRows = data.map(row => ({
+                    title: String(row['title'] || '').trim(),
+                    description: String(row['description'] || '').trim(),
+                    event_date: parseDate(row['event_date']),
+                    location: String(row['location'] || '').trim(),
+                    links: String(row['links'] || '').trim(),
+                    status: ['published', 'draft'].includes(String(row['status']).trim())
+                        ? String(row['status']).trim() : 'draft',
+                })).filter(r => r.title && r.event_date);
+
+                if (parsedRows.length === 0) {
+                    showImportError('Δεν βρέθηκαν έγκυρες εγγραφές. Βεβαιωθείτε ότι υπάρχουν στήλες title και event_date.');
+                    return;
+                }
+
+                renderPreview(parsedRows);
+                document.getElementById('btnImportConfirm').disabled = false;
+
+            } catch (err) {
+                showImportError('Σφάλμα ανάγνωσης αρχείου: ' + err.message);
+            }
+        };
+        reader.readAsBinaryString(file);
+    }
+
+    function parseDate(val) {
+        if (!val) return '';
+        if (val instanceof Date) return val.toISOString().slice(0, 10);
+        const s = String(val).trim();
+        // DD/MM/YYYY
+        const dmy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        if (dmy) return `${dmy[3]}-${dmy[2].padStart(2, '0')}-${dmy[1].padStart(2, '0')}`;
+        // YYYY-MM-DD already
+        if (s.match(/^\d{4}-\d{2}-\d{2}$/)) return s;
+        return s;
+    }
+
+    function renderPreview(rows) {
+        const preview = document.getElementById('importPreview');
+        const table = document.getElementById('importPreviewTable');
+        document.getElementById('importPreviewCount').textContent =
+            `${rows.length} εκδηλώσεις έτοιμες για εισαγωγή`;
+
+        table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Τίτλος</th>
+                <th>Ημερομηνία</th>
+                <th>Τοποθεσία</th>
+                <th>Κατάσταση</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${rows.map(r => `
+                <tr>
+                    <td>${r.title}</td>
+                    <td>${r.event_date}</td>
+                    <td>${r.location || '—'}</td>
+                    <td><span class="status-pill ${r.status}">${r.status === 'published' ? 'Δημοσιευμένο' : 'Πρόχειρο'}</span></td>
+                </tr>
+            `).join('')}
+        </tbody>`;
+
+        preview.style.display = 'block';
+    }
+
+    function showImportError(msg) {
+        const el = document.getElementById('importError');
+        el.textContent = msg;
+        el.style.display = 'block';
+    }
+
+    function submitImport() {
+        if (!parsedRows.length) return;
+
+        const btn = document.getElementById('btnImportConfirm');
+        btn.disabled = true;
+        btn.textContent = 'Εισαγωγή...';
+
+        fetch('{{ route("writer.media-events.import", ["locale" => app()->getLocale()]) }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ events: parsedRows })
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    closeImportModal();
+                    window.location.reload();
+                } else {
+                    showImportError(data.message || 'Σφάλμα εισαγωγής.');
+                    btn.disabled = false;
+                    btn.textContent = 'Εισαγωγή Εκδηλώσεων';
+                }
+            })
+            .catch(() => {
+                showImportError('Σφάλμα σύνδεσης με τον server.');
+                btn.disabled = false;
+                btn.textContent = 'Εισαγωγή Εκδηλώσεων';
+            });
+    }
+</script>
 
 </html>

@@ -616,3 +616,45 @@
     .popup-image { height: 220px; }
     .zoom-track  { display: none; }
 }
+
+.export-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 18px;
+    width: auto !important;        /* override any fixed width from zoom-btn */
+    height: auto !important;       /* override any fixed height from zoom-btn */
+    min-width: unset !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1d6f42, #2e9e5e);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 12px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 14px rgba(30, 111, 66, 0.3);
+    white-space: nowrap;           /* keep text on one line */
+}
+
+.export-btn:hover {
+    background: linear-gradient(135deg, #2e9e5e, #1d6f42);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 111, 66, 0.45);
+}
+
+.export-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(30, 111, 66, 0.3);
+}
+
+.export-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.export-btn:hover svg {
+    transform: translateY(2px);
+}

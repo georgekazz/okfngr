@@ -136,4 +136,34 @@ class MediaEventController extends Controller
             ->route('writer.media-events.index', ['locale' => app()->getLocale()])
             ->with('success', 'Η εκδήλωση διαγράφηκε επιτυχώς!');
     }
+
+    public function import(Request $request)
+    {
+        $events = $request->input('events', []);
+
+        if (empty($events)) {
+            return response()->json(['success' => false, 'message' => 'Δεν βρέθηκαν δεδομένα.']);
+        }
+
+        foreach ($events as $row) {
+            try {
+                MediaEvent::create([
+                    'title' => $row['title'],
+                    'description' => $row['description'] ?? null,
+                    'event_date' => $row['event_date'],
+                    'location' => $row['location'] ?? null,
+                    'links' => !empty($row['links'])
+                        ? array_map('trim', explode(',', $row['links']))
+                        : null,
+                    'image' => null,
+                    'status' => $row['status'] ?? 'draft',
+                    'user_id' => auth()->id(),
+                ]);
+            } catch (\Exception $e) {
+                continue;
+            }
+        }
+
+        return response()->json(['success' => true]);
+    }
 }
