@@ -11,6 +11,8 @@ use App\Models\TeamLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -161,16 +163,16 @@ class AdminController extends Controller
     public function updatePost(Request $request, $locale, Post $post)
     {
         $validated = $request->validate([
-            'title'          => 'required|string|max:255',
-            'excerpt'        => 'nullable|string|max:500',
-            'content'        => 'required|string',
-            'status'         => 'required|in:draft,published',
+            'title' => 'required|string|max:255',
+            'excerpt' => 'nullable|string|max:500',
+            'content' => 'required|string',
+            'status' => 'required|in:draft,published',
             'featured_image' => 'nullable|image|max:5120',
-            'remove_image'   => 'nullable|boolean',
-            'categories'     => 'nullable|array',
-            'categories.*'   => 'exists:categories,id',
-            'tags'           => 'nullable|array',
-            'tags.*'         => 'exists:tags,id',
+            'remove_image' => 'nullable|boolean',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         if ($post->title !== $validated['title']) {
@@ -189,14 +191,15 @@ class AdminController extends Controller
         }
 
         if ($request->hasFile('featured_image')) {
-            if ($post->featured_image) Storage::disk('public')->delete($post->featured_image);
+            if ($post->featured_image)
+                Storage::disk('public')->delete($post->featured_image);
             $post->featured_image = $request->file('featured_image')->store('posts', 'public');
         }
 
-        $post->title   = $validated['title'];
+        $post->title = $validated['title'];
         $post->excerpt = $validated['excerpt'];
         $post->content = $validated['content'];
-        $post->status  = $validated['status'];
+        $post->status = $validated['status'];
 
         if ($validated['status'] === 'published' && !$post->published_at) {
             $post->published_at = now();
@@ -330,5 +333,14 @@ class AdminController extends Controller
 
         return redirect()->route('admin.team-links.index', ['locale' => $locale])
             ->with('success', 'Ο σύνδεσμος διαγράφηκε επιτυχώς!');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }
