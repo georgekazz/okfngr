@@ -128,7 +128,7 @@
                 <div class="timeline-item" data-color="#00D1FF">
                     <div class="timeline-marker">
                         <div class="marker-icon">
-                            <img src="{{ asset('img/icons/governance.svg') }}" alt="Transparency">
+                            <!-- <img src="{{ asset('img/icons/governance.svg') }}" alt="Transparency"> -->
                         </div>
                     </div>
                     <div class="timeline-content">
@@ -141,7 +141,7 @@
                 <div class="timeline-item" data-color="#ADFFED">
                     <div class="timeline-marker">
                         <div class="marker-icon">
-                            <img src="{{ asset('img/icons/connect-community.svg') }}" alt="Participation">
+                            <!-- <img src="{{ asset('img/icons/connect-community.svg') }}" alt="Participation"> -->
                         </div>
                     </div>
                     <div class="timeline-content">
@@ -154,7 +154,7 @@
                 <div class="timeline-item" data-color="#E4FF36">
                     <div class="timeline-marker">
                         <div class="marker-icon">
-                            <img src="{{ asset('img/icons/create-open-data.svg') }}" alt="Innovation">
+                            <!-- <img src="{{ asset('img/icons/create-open-data.svg') }}" alt="Innovation"> -->
                         </div>
                     </div>
                     <div class="timeline-content">
@@ -167,7 +167,7 @@
                 <div class="timeline-item" data-color="#E077FF">
                     <div class="timeline-marker">
                         <div class="marker-icon">
-                            <img src="{{ asset('img/icons/collaboration.svg') }}" alt="Collaboration">
+                            <!-- <img src="{{ asset('img/icons/collaboration.svg') }}" alt="Collaboration"> -->
                         </div>
                     </div>
                     <div class="timeline-content">
@@ -180,7 +180,7 @@
                 <div class="timeline-item" data-color="#a110ce">
                     <div class="timeline-marker">
                         <div class="marker-icon">
-                            <img src="{{ asset('img/icons/case-study.svg') }}" alt="Collaboration">
+                            <!-- <img src="{{ asset('img/icons/case-study.svg') }}" alt="Collaboration"> -->
                         </div>
                     </div>
                     <div class="timeline-content">
