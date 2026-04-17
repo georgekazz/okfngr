@@ -435,7 +435,7 @@
 
 /* Achievements Section */
 .achievements-section {
-    padding: 100px 20px;
+    padding: 80px 20px;
     background: white;
 }
 
@@ -460,18 +460,21 @@
 
 .achievement-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 50px;
 }
 
 .achievement-item {
     background: #f8f9fa;
-    padding: 40px 30px;
-    border-radius: 20px;
+    padding: 28px 30px 28px 26px;
+    border-radius: 16px;
     border-left: 5px solid;
     transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 .achievement-item[data-color="#00D1FF"] {
@@ -491,51 +494,81 @@
 }
 
 .achievement-item:hover {
-    transform: translateX(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateX(6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 .achievement-number {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 900;
-    opacity: 0.1;
+    opacity: 0.08;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 16px;
+    right: 16px;
     line-height: 1;
 }
 
+
 .achievement-item h3 {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--color-dark);
+    padding-right: 40px;                     /* room for number */
 }
 
 .achievement-item p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.75;
     color: var(--color-gray);
+    max-height: 110px;
+    overflow-y: auto;
+    padding-right: 6px;
 }
 
+.achievement-item p::-webkit-scrollbar { width: 4px; }
+.achievement-item p::-webkit-scrollbar-track { background: #ebebeb; border-radius: 2px; }
+.achievement-item p::-webkit-scrollbar-thumb { background: var(--color-cyan); border-radius: 2px; }
+.achievement-item p::-webkit-scrollbar-thumb:hover { background: #00b8e6; }
+
+
 .proud-statement {
-    background: linear-gradient(
-        135deg,
-        rgba(224, 119, 255, 0.1),
-        rgba(228, 255, 54, 0.1)
-    );
-    padding: 50px;
-    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(224,119,255,0.1), rgba(228,255,54,0.1));
+    padding: 40px 50px;
+    border-radius: 16px;
     text-align: center;
     border-left: 5px solid var(--color-purple);
 }
 
 .proud-statement p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 1.9;
     color: var(--color-dark);
     font-weight: 500;
+    max-height: 160px;
+    overflow-y: auto;
+    padding-right: 8px;
 }
+
+.proud-statement p::-webkit-scrollbar { width: 4px; }
+.proud-statement p::-webkit-scrollbar-track { background: rgba(224,119,255,0.15); border-radius: 2px; }
+.proud-statement p::-webkit-scrollbar-thumb { background: var(--color-purple); border-radius: 2px; }
+
+@media (max-width: 768px) {
+    .achievement-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .proud-statement {
+        padding: 28px 24px;
+    }
+
+    .proud-statement p {
+        font-size: 1rem;
+    }
+}
+
 
 /* Work Categories Section */
 .work-categories-section {

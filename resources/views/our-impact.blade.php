@@ -102,7 +102,7 @@
                     <div class="stat-label">{{ __('our_impact.hero.founded') }}</div>
                 </div>
 
-                <div class="stat-item">
+                <!-- <div class="stat-item">
                     <div class="stat-icon">
                         <img src="{{ asset('img/icons/collaboration.svg') }}" alt="Projects">
                     </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="stat-number">∞</div>
                     <div class="stat-label">{{ __('our_impact.hero.impact') }}</div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

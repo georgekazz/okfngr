@@ -326,8 +326,18 @@
 }
 
 .step-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .process-step p {

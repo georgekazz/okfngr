@@ -237,17 +237,23 @@
 
                     <div class="decision-process">
                         <div class="process-step">
-                            <div class="step-icon">💬</div>
+                            <div class="step-icon">
+                                <img src="{{ asset('img/governance/sizitisi.png') }}" alt="Discussion">
+                            </div>
                             <p>{{ __('governance.decisions.step1') }}</p>
                         </div>
                         <div class="process-arrow">→</div>
                         <div class="process-step">
-                            <div class="step-icon">🤝</div>
+                            <div class="step-icon">
+                                <img src="{{ asset('img/governance/simmetoxi.png') }}" alt="Consensus">
+                            </div>
                             <p>{{ __('governance.decisions.step2') }}</p>
                         </div>
                         <div class="process-arrow">→</div>
                         <div class="process-step">
-                            <div class="step-icon">✓</div>
+                            <div class="step-icon">
+                                <img src="{{ asset('img/governance/decision.png') }}" alt="Decision">
+                            </div>
                             <p>{{ __('governance.decisions.step3') }}</p>
                         </div>
                     </div>
