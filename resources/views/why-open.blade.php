@@ -202,6 +202,40 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('nav');
+
+            toggle.addEventListener('click', function () {
+                nav.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-item.has-dropdown > .nav-link').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const parent = link.closest('.nav-item');
+
+                        document.querySelectorAll('.nav-item.has-dropdown').forEach(function (item) {
+                            if (item !== parent) item.classList.remove('active');
+                        });
+
+                        parent.classList.toggle('active');
+                    }
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('header')) {
+                    nav.classList.remove('active');
+                    document.querySelectorAll('.nav-item.has-dropdown').forEach(function (item) {
+                        item.classList.remove('active');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

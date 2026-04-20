@@ -420,3 +420,65 @@ blockquote {
 .benefit-card:nth-child(8) {
     animation-delay: 0.45s;
 }
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: white;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        padding: 10px 0;
+    }
+
+    nav.active {
+        display: flex !important;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-link {
+        padding: 14px 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dropdown-menu {
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        background: #f8f9fa;
+        display: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item.has-dropdown.active .dropdown-menu {
+        display: block !important;
+    }
+
+    .dropdown-item {
+        padding: 12px 30px;
+        border-left: 3px solid var(--color-cyan);
+        color: #333;
+    }
+
+    .dropdown-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item.has-dropdown.active .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+}
