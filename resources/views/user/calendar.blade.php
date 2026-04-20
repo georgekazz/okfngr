@@ -110,7 +110,7 @@
 
         <main class="dashboard-main">
             <div class="page-header">
-                <h2>Ημερολόγιο Ομάδας {{ date('Y') }}</h2>
+                <h2>Ημερολόγιο Ομάδας {{ $year }}</h2>
                 <p class="page-subtitle">Δείτε όλες τις άδειες των μελών της ομάδας</p>
             </div>
 
@@ -143,44 +143,23 @@
                 @php
                     use Carbon\Carbon;
 
-                    // Get month/year from URL or default to current
-                    $month = request('month', now()->month);
-                    $year = request('year', now()->year);
-
-                    // Current selected month
+                    // $month and $year are passed from controller
                     $currentDate = Carbon::createFromDate($year, $month, 1);
-
-                    // Previous & Next month for navigation
                     $prevMonth = $currentDate->copy()->subMonth();
                     $nextMonth = $currentDate->copy()->addMonth();
-
-                    // Month boundaries
                     $firstDayOfMonth = $currentDate->copy()->startOfMonth();
                     $lastDayOfMonth = $currentDate->copy()->endOfMonth();
-
-                    // Calendar grid start (Monday) and end (Sunday)
                     $startDate = $firstDayOfMonth->copy()->startOfWeek(Carbon::MONDAY);
                     $endDate = $lastDayOfMonth->copy()->endOfWeek(Carbon::SUNDAY);
-
                     $calendarDate = $startDate->copy();
                 @endphp
 
-
                 <!-- Month Navigation -->
                 <div class="calendar-nav">
-                    <a href="?month={{ $prevMonth->month }}&year={{ $prevMonth->year }}">
-                        &lt;
-                    </a>
-
-                    <span class="calendar-title">
-                        {{ $currentDate->translatedFormat('F Y') }}
-                    </span>
-
-                    <a href="?month={{ $nextMonth->month }}&year={{ $nextMonth->year }}">
-                        &gt;
-                    </a>
+                    <a href="?month={{ $prevMonth->month }}&year={{ $prevMonth->year }}">&lt;</a>
+                    <span class="calendar-title">{{ $currentDate->translatedFormat('F Y') }}</span>
+                    <a href="?month={{ $nextMonth->month }}&year={{ $nextMonth->year }}">&gt;</a>
                 </div>
-
 
                 <div class="calendar-grid">
 
@@ -193,24 +172,18 @@
                     <div class="calendar-day-header">Σάβ</div>
                     <div class="calendar-day-header">Κυρ</div>
 
-
                     @while($calendarDate <= $endDate)
                         @php
                             $isToday = $calendarDate->isToday();
                             $isOtherMonth = $calendarDate->month != $currentDate->month;
 
-                            // Events for this date
                             $dayEvents = $dayOffs->filter(function ($dayOff) use ($calendarDate) {
                                 return $calendarDate->between($dayOff->start_date, $dayOff->end_date);
                             });
                         @endphp
 
                         <div class="calendar-day {{ $isToday ? 'today' : '' }} {{ $isOtherMonth ? 'other-month' : '' }}">
-
-                            <div class="day-number">
-                                {{ $calendarDate->day }}
-                            </div>
-
+                            <div class="day-number">{{ $calendarDate->day }}</div>
                             <div class="day-events">
                                 @foreach($dayEvents as $event)
                                     <div class="event-bar event-{{ $event->type }}"
@@ -219,27 +192,17 @@
                                     </div>
                                 @endforeach
                             </div>
-
                         </div>
 
-                        @php
-                            $calendarDate->addDay();
-                        @endphp
+                        @php $calendarDate->addDay(); @endphp
                     @endwhile
 
                 </div>
             </div>
 
-
             <!-- Upcoming Day Offs -->
             <div class="upcoming-section">
                 <div class="upcoming-title">Επερχόμενες Άδειες</div>
-
-                @php
-                    $upcomingDayOffs = $dayOffs->filter(function ($dayOff) {
-                        return $dayOff->start_date >= \Carbon\Carbon::today();
-                    })->sortBy('start_date')->take(10);
-                @endphp
 
                 @if($upcomingDayOffs->count() > 0)
                     <div class="upcoming-list">
@@ -275,6 +238,11 @@
                             </div>
                         @endforeach
                     </div>
+
+                    <div style="margin-top: 20px;">
+                        {{ $upcomingDayOffs->appends(['month' => $month, 'year' => $year])->links('vendor.pagination.custom') }}
+                    </div>
+
                 @else
                     <div class="empty-state">
                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"

@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         $dayOffs = DayOff::where('user_id', auth()->id())
             ->latest()
-            ->paginate(15);
+            ->paginate(6);
 
         return view('user.day-offs.index', compact('dayOffs'));
     }
@@ -151,11 +151,19 @@ class UserController extends Controller
 
     public function calendar($locale)
     {
+        $month = request('month', now()->month);
+        $year = request('year', now()->year);
+
         $dayOffs = DayOff::with('user')
-            ->whereYear('start_date', Carbon::now()->year)
+            ->whereYear('start_date', $year)
             ->get();
 
-        return view('user.calendar', compact('dayOffs'));
+        $upcomingDayOffs = DayOff::with('user')
+            ->where('start_date', '>=', Carbon::today())
+            ->orderBy('start_date')
+            ->paginate(6);
+
+        return view('user.calendar', compact('dayOffs', 'upcomingDayOffs', 'month', 'year'));
     }
 
     public function teamLinks($locale)
@@ -173,9 +181,11 @@ class UserController extends Controller
     {
         // Get all users with their total days for current year
         $users = User::where('role', 'user')
-            ->withSum(['dayOffs as total_days' => function ($query) {
-                $query->whereYear('start_date', Carbon::now()->year);
-            }], 'total_days')
+            ->withSum([
+                'dayOffs as total_days' => function ($query) {
+                    $query->whereYear('start_date', Carbon::now()->year);
+                }
+            ], 'total_days')
             ->get()
             ->map(function ($user) {
                 $user->total_days = $user->total_days ?? 0;

@@ -213,7 +213,7 @@
                     </table>
 
                     <div class="pagination-wrapper">
-                        {{ $dayOffs->links() }}
+                        {{ $dayOffs->links('vendor.pagination.custom') }}
                     </div>
                 @else
                     <div class="empty-state">

@@ -312,10 +312,10 @@
                 labels: ['Διακοπές', 'Ασθένεια', 'Προσωπική', 'Άλλο'],
                 datasets: [{
                     data: [
-                        typeData.vacation || 0,
-                        typeData.sick || 0,
-                        typeData.personal || 0,
-                        typeData.other || 0
+                        parseInt(typeData.vacation) || 0,
+                        parseInt(typeData.sick) || 0,
+                        parseInt(typeData.personal) || 0,
+                        parseInt(typeData.other) || 0
                     ],
                     backgroundColor: [
                         'rgba(0, 209, 255, 0.8)',
@@ -341,15 +341,18 @@
                             generateLabels: function (chart) {
                                 const data = chart.data;
                                 if (data.labels.length && data.datasets.length) {
+                                    const dataset = data.datasets[0];
+                                    const total = dataset.data.reduce((a, b) => a + b, 0);
+
                                     return data.labels.map((label, i) => {
-                                        const value = data.datasets[0].data[i];
-                                        const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                        const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                        const value = dataset.data[i];
+                                        const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
 
                                         return {
                                             text: `${label}: ${value} (${percentage}%)`,
-                                            fillStyle: data.datasets[0].backgroundColor[i],
-                                            hidden: false,
+                                            fillStyle: dataset.backgroundColor[i],
+                                            strokeStyle: dataset.backgroundColor[i],
+                                            hidden: isNaN(dataset.data[i]) || dataset.data[i] === 0,
                                             index: i
                                         };
                                     });
@@ -361,11 +364,10 @@
                     tooltip: {
                         callbacks: {
                             label: function (context) {
-                                const label = context.label || '';
                                 const value = context.parsed;
                                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
-                                return `${label}: ${value} μέρες (${percentage}%)`;
+                                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+                                return `${context.label}: ${value} μέρες (${percentage}%)`;
                             }
                         }
                     }
