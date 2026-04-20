@@ -2,7 +2,7 @@
 
 return [
     'title' => 'All Articles',
-    'subtitle' => 'Discover our latest articles about open data, technology and innovation',
+    'subtitle' => 'Read our articles and stay updated on all the latest news and developments of our team.',
     'all_posts' => 'All Posts',
     'no_posts' => 'No articles found.',
     'read_more' => 'Read More',
