@@ -32,7 +32,7 @@
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
-                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link active">
+                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                             d="M2.5 7.5L10 2.5L17.5 7.5V16.25C17.5 16.5815 17.3683 16.8995 17.1339 17.1339C16.8995 17.3683 16.5815 17.5 16.25 17.5H3.75C3.41848 17.5 3.10054 17.3683 2.86612 17.1339C2.6317 16.8995 2.5 16.5815 2.5 16.25V7.5Z"
@@ -42,7 +42,7 @@
                     </svg>
                     Πίνακας Ελέγχου
                 </a>
-                <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                <a href="{{ route('writer.posts.index', ['locale' => app()->getLocale()]) }}" class="nav-link active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                             d="M14.1667 2.5H5.83333C4.91667 2.5 4.16667 3.25 4.16667 4.16667V15.8333C4.16667 16.75 4.91667 17.5 5.83333 17.5H14.1667C15.0833 17.5 15.8333 16.75 15.8333 15.8333V4.16667C15.8333 3.25 15.0833 2.5 14.1667 2.5Z"

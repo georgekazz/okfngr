@@ -50,7 +50,7 @@
                     Οι Άδειές μου
                 </a>
 
-                <a href="{{ route('user.salary-calculator', ['locale' => app()->getLocale()]) }}" class="nav-link active">
+                <a href="{{ route('user.salary-calculator', ['locale' => app()->getLocale()]) }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="2" y="5" width="16" height="12" rx="2" />
                         <path d="M2 10h16" />

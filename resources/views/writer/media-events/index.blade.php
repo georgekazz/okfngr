@@ -16,7 +16,7 @@
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <nav class="sidebar-nav">
-                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link active">
+                <a href="{{ url('/el/writer/dashboard') }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                             d="M2.5 7.5L10 2.5L17.5 7.5V16.25C17.5 16.5815 17.3683 16.8995 17.1339 17.1339C16.8995 17.3683 16.5815 17.5 16.25 17.5H3.75C3.41848 17.5 3.10054 17.3683 2.86612 17.1339C2.6317 16.8995 2.5 16.5815 2.5 16.25V7.5Z"
