@@ -96,9 +96,9 @@
             <h1>{{ __('home.hero.title') }}</h1>
             <div class="mission-statements">
                 <p class="mission-item bold">{{ __('home.hero.mission_1') }}</p>
-                <p class="mission-item bold">{{ __('home.hero.mission_2') }}</p>
-                <p class="mission-item">{{ __('home.hero.mission_3') }}</p>
-                <p class="mission-item bold">{{ __('home.hero.mission_4') }}</p>
+                <p class="mission-item">{{ __('home.hero.mission_2') }}</p>
+                <p class="mission-item bold">{{ __('home.hero.mission_3') }}</p>
+                <!-- <p class="mission-item bold">{{ __('home.hero.mission_4') }}</p> -->
             </div>
         </div>
         <div class="hero-slider">

@@ -18,8 +18,8 @@ return [
         [
             'name' => 'Charalampos Bratsas',
             'role' => 'President of the Board of Directors of OKFN Greece',
-            'bio' => 'Dr. Charalampos Bratsas is the founder and president of the board of directors of Open Knowledge Foundation Greece. He is an Assistant Professor in the Department of Informatics and Electronic Engineering at the International Hellenic University and a researcher at the Laboratory of Medical Physics and Digital Innovation at Aristotle University of Thessaloniki (AUTH). His main research interests include Smart Software Systems, Open Data, Semantic Web, Knowledge Graphs, Linked Open Data (coordinator of Greek DBpedia), Data Science, Data Mining, and Big Data Applications with Artificial Intelligence algorithms. He is also a scientific collaborator at the Complex Systems Laboratory of AUTH. He holds a degree in Mathematics (1999), a Master\'s degree in Medical Informatics, and a PhD in Knowledge Graphs in Medical Informatics (2008). He has participated in numerous EU-funded research projects. With over 100 publications in scientific journals and conference proceedings, his work covers topics such as the Semantic Web, Big Data, Artificial Intelligence, and Data Analysis.',
-            'image' => 'people/bratsas1.jpg',
+            'bio' => 'Dr. Charalampos Bratsas is the founder and chairman of the board of the Open Knowledge Foundation Greece. He is an Assistant Professor in the Department of Information and Electronic Engineering at the International Hellenic University. His primary research areas include Intelligent Software Systems, Open Data, the Semantic Web, Knowledge Graphs, Linked Open Data (coordinator of the Greek DBpedia), Data Science, Data Mining, and Big Data Applications with AI algorithms. Dr. Bratsas holds a Bachelor’s degree in Mathematics (1999), a Master’s degree in Medical Informatics, and a Ph.D. in Knowledge Graphs in Medical Informatics (2008). He has been involved as a scientific director in numerous EU-funded research projects. With over 100 publications in scientific journals and conference proceedings, his work spans areas such as the Semantic Web, Big Data, Artificial Intelligence, and Data Analysis.',
+            'image' => 'people-newimg/bratsas.png',
             'social' => [
                 'twitter' => 'https://twitter.com/Bratsas',
                 'linkedin' => 'https://www.linkedin.com/in/charalampos-bratsas-7870529/',
@@ -30,8 +30,8 @@ return [
         [
             'name' => 'Lazaros Ioannidis',
             'role' => 'Developer / Data Analyst',
-            'bio' => 'Lazaros Ioannidis was born and lives in Thessaloniki. He studied Computer Science at Aristotle University of Thessaloniki, where he also completed his postgraduate studies in Internet Science. His work focuses primarily on software solution development and design. He has participated in and coordinated various research projects in areas such as e-commerce and tourism, knowledge management in health sciences, natural resource management, as well as support and interoperability of public sector services. Additionally, he has taught software development to both students and professionals. Lazaros has also participated in research projects in collaboration with Aristotle University of Thessaloniki, the International Hellenic University, and Open Knowledge Foundation Greece.',
-            'image' => 'people/lazaros.jpg',
+            'bio' => 'Lazaros Ioannidis was born in Thessaloniki. He studied Computer Science at Aristotle University of Thessaloniki (AUTH), where he also completed his postgraduate studies in Internet Science. His work primarily focuses on the development and design of software solutions. He has participated in and coordinated various research projects in areas such as, e-commerce and tourism, knowledge management in health sciences, natural resource management, and the support and interoperability of public sector services. Additionally, he has taught software development to both students and professionals. Lazaros has also been involved in research projects in collaboration with the Aristotle University of Thessaloniki, the International Hellenic University, and the Open Knowledge Foundation, Greece.',
+            'image' => 'people-newimg/lazaros.png',
             'social' => [
                 'email' => 'larjohn@gmail.gr',
             ]
@@ -39,8 +39,8 @@ return [
         [
             'name' => 'Panagiotis-Marios Filippidis',
             'role' => 'Developer / Data Analyst',
-            'bio' => 'Notis Filippidis holds a degree in Computer Science from Aristotle University of Thessaloniki (AUTH) and a Master\'s degree in Internet Science from the Faculty of Science of AUTH. He has worked as a researcher in numerous EU-funded research projects in areas such as health, economics, and education, with emphasis on software development, data analysis, ontologies, and knowledge graphs. His research interests include the Semantic Web, knowledge extraction, and sports data analysis. He is an active member of Open Knowledge Foundation Greece, participating in research projects and initiatives, while also working on the development and analysis of semantic data.',
-            'image' => 'people/notis.jpg',
+            'bio' => 'Panagiotis-Marios Filippidis holds a Bachelor’s a degree in Computer Science from Aristotle University of Thessaloniki (AUTH) and a Master’s degree in Internet Science from the School of Mathematics at AUTH. He has worked as a researcher on numerous EU-funded projects in fields such as, health, economy, and education, focusing on software development, data analysis, ontologies, and knowledge graphs. His research interests include the Semantic Web, knowledge extraction, and sports data analysis. He is an active member of the Open Knowledge Foundation Greece, contributing to research projects and activities, while also participates in the development and analysis of semantic data.',
+            'image' => 'people-newimg/notis.png',
             'social' => [
                 'email' => 'filippidis@okfn.gr',
             ]
@@ -48,8 +48,8 @@ return [
         [
             'name' => 'Myrto Papageorgiou',
             'role' => 'Mathematician, Data Analyst, Project Manager',
-            'bio' => 'Myrto Papageorgiou holds a degree in Mathematics and a Master\'s degree in Internet Science from the Department of Mathematics at Aristotle University of Thessaloniki (AUTH). She is a PhD candidate in the same Department of AUTH, with her doctoral dissertation focusing on the field of Statistics and Operations Research. Myrto is a Scientific Collaborator at the International Hellenic University and Aristotle University of Thessaloniki (AUTH), as well as Project Manager at Open Knowledge Foundation Greece. For many years, Myrto was a member of the Board of Directors of the Hellenic Mathematical Society – Central Macedonia Branch, and is a key member of the organizing committee of the Mathematics Week held annually by the Branch. Today she is the executive secretary of the Branch, while dealing with data analysis processes and working as a mathematics teacher.',
-            'image' => 'people/myrto.jpg',
+            'bio' => 'Myrto Papageorgiou holds a B.Sc. in Mathematics and an M.Sc. in Web Science from the School of Mathematics at the Aristotle University of Thessaloniki (AUTh). She is currently a Ph.D candidate in the same Department at AUTh, and her thesis focuses on the field of Statistics and Business Research. Myrto is a Scientific Associate at the International Hellenic University (IHU) and the Aristotle University of Thessaloniki (AUTh), as well as a Project Manager at Open Knowledge Foundation Greece. For many years, Myrto has been a member of the Council of the Hellenic Mathematical Society – Central Macedonia Branch, as well as a key member of the organizing committee for the Mathematics Week held by the Branch every year. Myrto is now the branch s executive secretary, while she is involved in data analysis and project management at both Open Knowledge Foundation Greece and the International Helenic University',
+            'image' => 'people-newimg/myrto.png',
             'social' => [
                 'twitter' => 'https://twitter.com/myrtomp',
                 'linkedin' => 'https://www.linkedin.com/in/myrto-papageorgiou-8a7447a0/',
@@ -59,8 +59,8 @@ return [
         [
             'name' => 'Georgios-Christoforos Kazlaris',
             'role' => 'Developer, Researcher, PhD candidate',
-            'bio' => 'Georgios-Christoforos Kazlaris completed his studies in the Department of Informatics and Electronic Engineering at the International Hellenic University in Thessaloniki. His thesis focused on the development of Android educational applications for elementary school students, utilizing augmented reality technology, and led to significant scientific publications in this field. He works as a researcher and programmer, with experience in various programming languages such as Java, C#, and Kotlin. He actively participates in research projects in collaboration with Open Knowledge Foundation Greece. At the same time, he is working on a doctoral dissertation with a research subject on educational applications for collaborative learning through augmented reality, which reflects his dedication to promoting innovation in this academic field.',
-            'image' => 'people/kazlaris.png',
+            'bio' => 'George-Christophoros Kazlaris completed his studies at the Department of Computer Science and Electronic Engineering of the International Hellenic University in Thessaloniki. His thesis focused on the development of educational Android applications for primary school students, utilizing augmented reality technology, and led to important scientific publications in this field. He works as a researcher and programmer, with experience in various programming language, such as Java, C# and Kotlin. He actively participates in research projects in collaboration with the Open Knowledge Foundation Greece. At the same time, he is working on a doctoral thesis with a research topic on educational applications for collaborative learning through augmented reality, which reflects his dedication to promoting innovation in this academic field.',
+            'image' => 'people-newimg/kazlaris.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/george-christoforos-kazlaris',
                 'github' => 'https://github.com/georgekazz',
@@ -70,8 +70,8 @@ return [
         [
             'name' => 'Alexandros Angelidis',
             'role' => 'Data Scientist, Mathematician',
-            'bio' => 'Alexandros Angelidis received his degree from the Department of Mathematics at Aristotle University of Thessaloniki, where he continued his studies obtaining a Master\'s degree with specialization in "Theoretical Informatics and Systems and Control Theory". His master\'s thesis focused on the analysis of chaotic time series through network theory and specifically through Visibility Graphs. Today he is a PhD candidate at the International Hellenic University, where he studies the analysis and prediction of complex, non-linear systems using neural networks. He is also a research associate in the Department of Informatics and Electronic Engineering at the International Hellenic University. His research interests include Complex Network Theory, Chaos Theory, Time Series Prediction and Analysis, as well as Machine Learning.',
-            'image' => 'people/aggelidis.jpg',
+            'bio' => 'Alexandros Angelidis received his Bachelor s degree from the Department of Mathematics of the Aristotle University of Thessaloniki (AUTH), where he continued his studies by obtaining a Master s degree with a specialization in "Theoretical Informatics and Systems and Control Theory". His Master s thesis focused on the analysis of chaotic time series through network theory and in particular through Visibility Graphs. He is currently a PhD candidate at the International Hellenic University, where he studies the analysis and prediction of complex, nonlinear systems using neural networks. He is also a research associate at the Department of Computer Science and Electronic Engineering of the International Hellenic University. His research interests include Complex Network Theory, Chaos Theory, Time Series Forecasting and Analysis, and Machine Learning.',
+            'image' => 'people-newimg/alexandros.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/alexandros-angelidis-2b9a5224b/',
             ]
@@ -79,8 +79,8 @@ return [
         [
             'name' => 'Efstathios Konstantinos Anastasiadis',
             'role' => 'Data Scientist, Physicist',
-            'bio' => 'Efstathios Konstantinos Anastasiadis graduated from Aristotle University of Thessaloniki with a degree in Physics and holds a Master\'s degree from the interdisciplinary program "Networks and Complexity". In his master\'s thesis he applied Network Theory Techniques to Criminal Networks, exploring their modus operandi and their vulnerability to both targeted and random attacks. Part of his thesis was published in a peer-reviewed scientific journal. His additional scientific interests include Machine Learning, Deep Learning, and Network Inference projects through time series data.',
-            'image' => 'people/stathis.jpg',
+            'bio' => 'Efstathios Konstantinos Anastasiadis graduated from the Aristotle University of Thessaloniki with a Bachelor’s degree in Physics and holds a Master’s from the interdisciplinary program ‘Networks and Complexity’. In his Master’s thesis, he applied Network Theory Techniques to Criminal Networks, investigating their modus operandi and vulnerability to both targeted and random attacks. A portion of his thesis was published in a peer-reviewed journal. His additional scientific interests include Machine Learning, Deep Learning, and Network Inference Tasks, using time series data.',
+            'image' => 'people-newimg/stathis.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/ek-anast',
             ]
@@ -88,8 +88,8 @@ return [
         [
             'name' => 'Elisavet Parisi',
             'role' => 'Architect, Data Analyst',
-            'bio' => 'Elisavet Parisi is a graduate of the Department of Architecture at Aristotle University of Thessaloniki (AUTH) and holds a Master\'s degree in the "Networks and Complexity" program at the same university. Her master\'s thesis focused on the application of the Semantic Web and Network Theory to define and quantify Urban Sustainability. She has worked as an architect in urban planning studies of public spaces and buildings. Since May 2024 she is a PhD candidate at AUTH, with a doctoral dissertation titled: "Ontology of Urban Sustainability: An alternative approach to complexity management and big data". Additionally, she participates in research projects in collaboration with Open Knowledge Foundation Greece. Her research interests include the Semantic Web, Network Theory, and Complex Systems and Big Data Management, with emphasis on Urban Sustainability.',
-            'image' => 'people/elisavet.jpg',
+            'bio' => 'Elisavet Parisi is a graduate of the Department of Architecture at Aristotle University of Thessaloniki (AUTh) and holds a Master’s degree in Networks and Complexity from the same university. Her thesis focused on the application of the Semantic Web and Network Theory to define and quantify Urban Sustainability. She has worked as an architect on urban design studies of public spaces and buildings. Since May 2024, she has been a PhD candidate at AUTh with her dissertation being “Ontology of Urban Sustainability: An alternative approach to managing complexity and big data”. Additionally, she participates in research projects in collaboration with the Open Knowledge Foundation Greece. Her research interests include the Semantic Web, Network Theory, and the Management of Complex Systems and Big Data, with a focus on Urban Sustainability.',
+            'image' => 'people-newimg/parisi.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/elisavet-parisi/',
                 'email' => 'gfage@hotmail.com',
@@ -98,8 +98,8 @@ return [
         [
             'name' => 'Kosmas Panagiotidis',
             'role' => 'Communication Officer',
-            'bio' => 'Kosmas Panagiotidis is a graduate of the Department of Political Sciences of the School of Economic and Political Sciences at Aristotle University of Thessaloniki and a graduate of the two-year postgraduate cycle of studies of the Department of Journalism and Mass Media with direction "Journalism and New Media". His research inquiries regarding the importance and influence of Internet technologies in the news field led him to write his thesis titled "Semantic Web and Journalism" in which he studied one of the most important services of the advanced form of the Internet and its role in the field of journalism. Parallel to his studies he worked as a journalist in television and radio news media of national reach. Today he is a PhD candidate at the Laboratory of Informatics Applications in Mass Media, Department of Journalism and Mass Media at AUTH, with research interests including among others the third era of the Internet, modern journalistic practices, and Open Data.',
-            'image' => 'people/kosmas.jpg',
+            'bio' => 'Kosmas Panagiotidis is a graduate of the Department of Political Science of the School of Economics and Political Science of the Aristotle University of Thessaloniki and a graduate of the two-year postgraduate course of the Department of Journalism and Media with a specialization in "Journalism and New Media". His research on the importance and influence of Internet technologies in the field of Information led him to his thesis entitled "Semantic Web and Journalism" in which he studied one of the most important services of the Internet and its role in the field of journalism. In parallel with his studies, he worked as a journalist in national radio and television news organizations and as a communications manager for civil society organizations. He holds a PhD from the Media Information Technology Applications Laboratory, Department of Journalism and Media, Aristotle University of Thessaloniki, with a focus on the Semantic Web, modern journalistic practices and Open Data.',
+            'image' => 'people-newimg/kosmas.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/kosmas-panagiotidis-phd-27901560/?originalSubdomain=gr',
                 'email' => 'kosmapanagio@okfn.gr',
@@ -108,8 +108,8 @@ return [
         [
             'name' => 'Eirini Xanthopoulou',
             'role' => 'Researcher, Biomedical Engineerer - Physicist',
-            'bio' => 'Eirini Xanthopoulou is a graduate of the Department of Physics at Aristotle University of Thessaloniki (AUTH), specializing in Nuclear Physics, and holds a Master’s Degree in Biomedical Engineering from the same institution. Her research activity focuses on medical imaging and radiation physics, having conducted studies in nuclear medicine on the production of the radioisotope Astatine-211, as well as on the development of motion detection algorithms in fetal cardiovascular magnetic resonance imaging (MRI). Within the framework of her research, she has developed international collaborations, most notably with the Cardiac MR group at Lund University in Sweden. At the same time, with an active presence in international research environments, she serves as a scientific collaborator in programs of CERN, undertaking roles in the organization and communication of science at international workshops and innovation exhibitions, such as the Hadron Therapy Workshop and the International Particle Therapy Masterclasses. Her main interests lie in biomedical technology and medical data analysis, aiming to translate fundamental research into high-precision clinical applications.',
-            'image' => 'people/eiriniXanthopoulou.jpeg',
+            'bio' => 'Eirini Xanthopoulou holds a degree in Physics from the Aristotle University of Thessaloniki (AUTH), with a specialization in Nuclear Physics, and a Master’s degree in Biomedical Engineering from the same institution. Her research focuses on medical representation and radiation physics, and she has conducted studies in nuclear medicine on the production of the radioisotope Astatine-211, as well as on the development of motion detection algorithms in fetal cardiovascular magnetic resonance imaging (MRI). Within the framework of her research, she has established international collaborations, most notably with the Cardiac MR group at Lund University in Sweden. In parallel, with active involvement in international research environments, she serves as a scientific collaborator in CERN programs, undertaking roles in scientific organization and science communication at international workshops and innovation exhibitions, such as the Hadron Therapy Workshop and the International Particle Therapy Masterclasses. Her main interests lie in biomedical technology and medical data analysis, with a strong focus on translating fundamental research into high-precision clinical applications.',
+            'image' => 'people-newimg/eirini.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/eirini-xanthopoulou-160a73209/',
                 'email' => 'irene.xanthopoulou@okfn.gr',
@@ -118,8 +118,8 @@ return [
         [
             'name' => 'Marianna Vouraki',
             'role' => 'Researcher, Computer Science',
-            'bio' => 'Mariana Vouraki is a final-year student in the Department of Computer, Informatics and Electronic Systems Engineering at the International Hellenic University, specializing in Programming, Data, and Artificial Intelligence. She has experience in web application development, UI/UX design, and process automation using Python, as well as in data management and processing. She has actively contributed to the implementation of open data projects in collaboration with Open Knowledge Foundation Greece, participating in initiatives that promote transparency and the reuse of information. She is a founding member of Soft Minds, where she is involved in the development and support of websites and digital products. In addition, she has teaching experience at a Lifelong Learning Center, training students and professionals in the certified Standard Office User program, while also serving as a technical coordinator responsible for managing and resolving technical issues.',
-            'image' => 'people/mariannaVouraki.jpg',
+            'bio' => 'Marianna Vouraki is a graduand student in the Department of Computer Engineering and Electronic Systems at the International Hellenic University, specializing in Programming, Data, and Artificial Intelligence. She has experience in web application development, UI/UX design, and process automation using Python, as well as in data management and processing. She has actively contributed to open data projects in collaboration with Open Knowledge Foundation Greece, participating in initiatives that promote transparency and reuse of information. She is a founding member of the social cooperative enterprise (Koin.S.Ep.) Soft Minds, where she is involved in the development and support of websites and digital products. In addition, she has teaching experience at a lifelong learning center, where she trained students and professionals in the certified Standard Office User program, while also serving as technical coordinator responsible for troubleshooting and resolving technical issues.',
+            'image' => 'people-newimg/marianna.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/marianna-vouraki-2890831a3/',
                 'email' => 'mvouraki@okfn.gr',
@@ -129,20 +129,10 @@ return [
             'name' => 'Konstantinos Tsompanidis',
             'role' => 'Researcher, Geoinformatics & Web Intelligence',
             'bio' => 'Konstantinos Tsompanidis is a graduate of the Department of Geoinformatics and Surveying Engineering at the International Hellenic University and holds a Master’s Degree in Intelligent Internet Technologies from the same institution. His professional activity focuses on data analysis using Geographic Information Systems (GIS), on large infrastructure projects, as well as on the management and utilization of spatial data, aiming to transform it into reliable and useful information to support decision-making. At the same time, he is engaged in the study and application of deep learning and computer vision methods on spatial and visual data, with an emphasis on linking research with practical applications. He is a PhD candidate in the Department of Computer, Informatics and Electronic Systems Engineering at the International Hellenic University, with research focused on Computer Vision.',
-            'image' => 'people/KonstantinosTsompanidis.jpg',
+            'image' => 'people-newimg/konstantinos.png',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/konstantinostsompanidis/',
                 'email' => 'ktsompanidis@okfn.gr',
-            ]
-        ],
-        [
-            'name' => 'Maria Nikolaidou',
-            'role' => 'Project Management, Proposals, Coordination of Actions',
-            'bio' => 'Maria Nikolaidou has been an active member of Open Knowledge Foundation Greece since 2012. She has contributed to event preparation and proposal development, managed communication with partner organizations, and since 2015 has managed the European project OpenBudgets.eu. Maria holds a Master\'s degree in Information Systems from the University of Sheffield and a degree from the Faculty of Philosophy at Aristotle University of Thessaloniki (AUTH). She has worked at research institutes in Greece and at the European Commission, gaining extensive experience in programs related to information management, information systems, and medical education. Since 2006 she has been collaborating with the Medical School of AUTH, with focus on research and administrative/financial management, emphasizing the Medical Education Programs of the Laboratory of Medical Physics.',
-            'image' => 'people/nikolaidou.jpg',
-            'social' => [
-                'twitter' => 'https://twitter.com/maria_mnikol',
-                'email' => 'nikolaidou.okfgr@gmail.com',
             ]
         ],
     ],
@@ -161,6 +151,16 @@ return [
             'image' => 'people/volunteers/karypidou.jpg',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/christina-karypidou-523428145/',
+            ]
+        ],
+        [
+            'name' => 'Maria Nikolaidou',
+            'role' => 'Project Management, Proposals, Coordination of Actions',
+            'bio' => 'Maria Nikolaidou has been an active member of Open Knowledge Foundation Greece since 2012. She has contributed to event preparation and proposal development, managed communication with partner organizations, and since 2015 has managed the European project OpenBudgets.eu. Maria holds a Master\'s degree in Information Systems from the University of Sheffield and a degree from the Faculty of Philosophy at Aristotle University of Thessaloniki (AUTH). She has worked at research institutes in Greece and at the European Commission, gaining extensive experience in programs related to information management, information systems, and medical education. Since 2006 she has been collaborating with the Medical School of AUTH, with focus on research and administrative/financial management, emphasizing the Medical Education Programs of the Laboratory of Medical Physics.',
+            'image' => 'people/nikolaidou.jpg',
+            'social' => [
+                'twitter' => 'https://twitter.com/maria_mnikol',
+                'email' => 'nikolaidou.okfgr@gmail.com',
             ]
         ],
         [

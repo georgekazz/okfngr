@@ -36,10 +36,10 @@ return [
 
     // Hero Section
     'hero' => [
-        'title' => 'SEE HOW DATA CAN CHANGE THE WORLD',
-        'mission_1' => 'A world where knowledge empowers the many, not the few.',
-        'mission_2' => 'A world where data sets us free',
-        'mission_3' => 'To make informed choices about how we want to live, what to buy and who gets our vote.',
+        'title' => 'DATA CAN CHANGE THE WORLD',
+        'mission_1' => 'We envision a world where knowledge is not the privilege of the few, but power in the hands of the many. Where data does not limit us, but sets us free.',
+        'mission_2' => 'We strive for a world that enables us to make informed decisions about how we want to live, what we choose to buy, and whom we trust with our vote.',
+        'mission_3' => 'A world where information is open, accessible, and transparent for everyone.',
         'mission_4' => 'A world where information and data are accessible and transparent to everyone.',
     ],
 
@@ -57,12 +57,12 @@ return [
 
     // Info Cards
     'info' => [
-        'team_title' => 'Our Team',
-        'team_desc' => 'We have a passion for openness. We leverage and support technology and education to unlock information and empower people to create and share knowledge.',
-        'network_title' => 'International Network',
-        'network_desc' => 'Meetings, advocacy campaigns, education, innovative actions, knowledge sharing, creation, support, exploration: some of the fields where you can support us to open knowledge to all.',
-        'projects_title' => 'Projects',
-        'projects_desc' => 'Through projects, we implement high-quality research work and develop partnerships in specialized data areas, while seeking ways to use them to empower people around the world.',
+        'team_title' => 'OUR TEAM',
+        'team_desc' => 'Believes in the importance of openness. Uses technology that unlocks the power of information and transforms data into knowledge. Supports the education of people so they can acquire the necessary skills to share and advance this knowledge.',
+        'network_title' => 'INTERNATIONAL NETWORK',
+        'network_desc' => 'The Open Knowledge Foundation Greece is one of the members of the Open Knowledge Foundation, a global network that promotes open knowledge and open data in more than 40 countries through meetings, advocacy campaigns, innovative initiatives, and educational workshops.',
+        'projects_title' => 'PROJECTS',
+        'projects_desc' => 'We undertake the implementation of projects in specialized fields of work related to the use of Open Data, delivering high-quality results.',
         'explore' => 'Explore',
     ],
 

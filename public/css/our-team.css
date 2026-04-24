@@ -179,6 +179,7 @@
     position: relative;
     overflow: hidden;
     aspect-ratio: 1 / 1;
+    border-bottom: 3px solid var(--color-cyan);
 }
 
 .member-image {
