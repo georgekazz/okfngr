@@ -76,7 +76,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="page-hero">
+    <!-- <section class="page-hero">
         <div class="hero-content">
             <div class="hero-icon">
                 <img src="{{ asset('img/icons/knowledge.svg') }}" alt="Knowledge">
@@ -84,7 +84,7 @@
             <h1>{{ __('who_we_are.hero.title') }}</h1>
             <p class="hero-lead">{{ __('who_we_are.hero.subtitle') }}</p>
         </div>
-    </section>
+    </section> -->
 
     <!-- Vision Section -->
     <section class="vision-section">
