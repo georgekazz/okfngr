@@ -117,12 +117,12 @@
         <div class="content-container">
 
             <!-- Introduction -->
-            <div class="governance-intro">
+            <!-- <div class="governance-intro">
                 <div class="intro-icon">
                     <img src="{{ asset('img/icons/mission.svg') }}" alt="Mission">
                 </div>
                 <p class="intro-text">{{ __('governance.intro') }}</p>
-            </div>
+            </div> -->
 
             <!-- Democracy Section -->
             <div class="governance-section">

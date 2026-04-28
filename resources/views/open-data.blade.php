@@ -181,6 +181,56 @@
                 </div>
             </div>
 
+            <!-- Open Term Section -->
+            <section class="open-term-section">
+                <div class="content-container">
+                    <div class="section-header-large">
+                        <h2>{{ __('who_we_are.open_term.title') }}</h2>
+                    </div>
+
+                    <div class="term-content">
+                        <p class="lead-text">{{ __('who_we_are.open_term.intro') }}</p>
+
+                        <div class="definition-box">
+                            <h3>{{ __('who_we_are.open_term.definition_title') }}</h3>
+                            <p>{{ __('who_we_are.open_term.definition_text') }}</p>
+                        </div>
+
+                        <div class="principles-grid">
+                            <div class="principle-card" data-color="#00D1FF">
+                                <div class="principle-icon">
+                                    <img src="{{ asset('img/icons/governance.svg') }}" alt="Access">
+                                </div>
+                                <p>{{ __('who_we_are.open_term.principle1') }}</p>
+                            </div>
+
+                            <div class="principle-card" data-color="#ADFFED">
+                                <div class="principle-icon">
+                                    <img src="{{ asset('img/icons/reproducible-research.svg') }}" alt="Redistribute">
+                                </div>
+                                <p>{{ __('who_we_are.open_term.principle2') }}</p>
+                            </div>
+
+                            <div class="principle-card" data-color="#E4FF36">
+                                <div class="principle-icon">
+                                    <img src="{{ asset('img/icons/create-open-data.svg') }}" alt="Reuse">
+                                </div>
+                                <p>{{ __('who_we_are.open_term.principle3') }}</p>
+                            </div>
+
+                            <div class="principle-card" data-color="#E077FF">
+                                <div class="principle-icon">
+                                    <img src="{{ asset('img/icons/collaboration.svg') }}" alt="No restrictions">
+                                </div>
+                                <p>{{ __('who_we_are.open_term.principle4') }}</p>
+                            </div>
+                        </div>
+
+                        <p class="term-conclusion">{{ __('who_we_are.open_term.conclusion') }}</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Interoperability Section -->
             <div class="interoperability-section">
                 <div class="section-header-large">

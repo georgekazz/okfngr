@@ -6,7 +6,7 @@ return [
         'about' => 'Σχετικά',
         'who_we_are' => 'Το όραμα και οι αξίες μας',
         'who_we_are2' => 'Ποιοι Είμαστε',
-        'governance' => 'Διοίκηση',
+        'governance' => 'Λειτουργία',
         'what_we_do' => 'Τι Κάνουμε',
         'open_data' => 'Ανοικτά Δεδομένα',
         'blog' => 'Blog',

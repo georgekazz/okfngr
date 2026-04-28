@@ -110,7 +110,7 @@
     </section>
 
     <!-- Open Term Section -->
-    <section class="open-term-section">
+    <!-- <section class="open-term-section">
         <div class="content-container">
             <div class="section-header-large">
                 <h2>{{ __('who_we_are.open_term.title') }}</h2>
@@ -157,7 +157,7 @@
                 <p class="term-conclusion">{{ __('who_we_are.open_term.conclusion') }}</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Values Section -->
     <section class="values-detailed-section">
