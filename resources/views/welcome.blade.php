@@ -41,6 +41,8 @@
                             class="dropdown-item">{{ __('home.nav.governance') }}</a>
                         <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
                             class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
+                        <a href="{{ route('gallery', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.gallery') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">

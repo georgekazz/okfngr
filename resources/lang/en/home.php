@@ -20,6 +20,7 @@ return [
         'why_open' => 'Why open data?',
         'apps' => 'Apps',
         'board' => 'Board of Directors',
+        'gallery' => 'Photo Gallery',
         'our_mission' => 'Our Mission',
         'our_vision' => 'Our Vision',
         'our_team' => 'Our Team',

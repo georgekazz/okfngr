@@ -8,7 +8,7 @@ use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Writer\MediaEventController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\GalleryController;
 
 Route::get('/', function () {
     return redirect('/el');
@@ -41,6 +41,9 @@ Route::group([
     Route::get('/open-data', [HomeController::class, 'openData'])->name('openData');
     Route::get('/how-to', [HomeController::class, 'howTo'])->name('howTo');
     Route::get('/why-open', [HomeController::class, 'whyOpen'])->name('whyOpen');
+
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+
 
     // Public pages - Blog
     Route::get('/', [HomeController::class, 'index'])->name('home');
