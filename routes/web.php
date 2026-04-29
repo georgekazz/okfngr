@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Writer\MediaEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\Writer\WriterGalleryController;
 
 Route::get('/', function () {
     return redirect('/el');
@@ -78,6 +79,15 @@ Route::group([
         Route::delete('/media-events/{mediaEvent}', [MediaEventController::class, 'destroy'])->name('media-events.destroy');
         Route::post('/media-events/import', [MediaEventController::class, 'import'])
             ->name('media-events.import');
+
+        // Gallery
+        Route::get('/gallery', [WriterGalleryController::class, 'index'])->name('gallery.index');
+        Route::get('/gallery/create', [WriterGalleryController::class, 'create'])->name('gallery.create');
+        Route::post('/gallery', [WriterGalleryController::class, 'store'])->name('gallery.store');
+        Route::get('/gallery/{id}/edit', [WriterGalleryController::class, 'edit'])->name('gallery.edit');
+        Route::put('/gallery/{id}', [WriterGalleryController::class, 'update'])->name('gallery.update');
+        Route::delete('/gallery/{id}', [WriterGalleryController::class, 'destroy'])->name('gallery.destroy');
+        Route::delete('/gallery/photo/{photoId}', [WriterGalleryController::class, 'deletePhoto'])->name('gallery.deletePhoto');
     });
 
     // Admin routes

@@ -94,6 +94,30 @@
                     Νέα Εκδήλωση
                 </a>
 
+                <!-- Gallery Section -->
+                <a href="{{ route('writer.gallery.index', ['locale' => app()->getLocale()]) }}"
+                    class="nav-link {{ request()->is('*/writer/gallery*') && !request()->is('*/writer/gallery/create') ? 'active' : '' }}">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="2.5" y="2.5" width="15" height="15" rx="2" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="7.08" cy="7.08" r="1.25" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M17.5 12.5L13.33 8.33L4.17 17.5" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Φωτογραφικό Αρχείο
+                </a>
+
+                <a href="{{ route('writer.gallery.create', ['locale' => app()->getLocale()]) }}"
+                    class="nav-link create-new {{ request()->is('*/writer/gallery/create') ? 'active' : '' }}">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 4.16667V15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.16667 10H15.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Νέα Ομάδα Φωτογραφιών
+                </a>
+
                 <a href="{{ url('/el') }}" class="nav-link">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
