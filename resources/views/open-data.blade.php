@@ -28,8 +28,6 @@
                             class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
                         <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}"
                             class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
-                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
-                            class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
@@ -42,6 +40,8 @@
                             class="dropdown-item">{{ __('home.nav.board') }}</a>
                         <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}"
                             class="dropdown-item">{{ __('home.nav.governance') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
