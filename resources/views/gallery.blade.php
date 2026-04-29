@@ -313,7 +313,7 @@
     </footer>
 
     <script>
-        // ── Lightbox ──────────────────────────────────────────
+        
         function openLightbox(src, caption) {
             document.getElementById('lightboxImg').src = src;
             document.getElementById('lightboxCaption').textContent = caption;
@@ -334,7 +334,6 @@
             }
         });
 
-        // ── Expand / Collapse extra photos ───────────────────
         function togglePhotos(index, btn) {
             const extra = document.getElementById('extra-' + index);
             const icon = btn.querySelector('.expand-icon');
@@ -348,7 +347,6 @@
                 : btn.dataset.less;
         }
 
-        // Store labels on buttons after DOM loads
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.expand-btn').forEach(btn => {
                 btn.dataset.more = btn.querySelector('.expand-label').textContent;
@@ -356,7 +354,6 @@
             });
         });
 
-        // ── Search & Filter ───────────────────────────────────
         const searchInput = document.getElementById('gallerySearch');
         const chips = document.querySelectorAll('.chip');
         const entries = document.querySelectorAll('.timeline-entry');
@@ -400,7 +397,6 @@
             searchInput.addEventListener('input', applyFilters);
         }
 
-        // ── Sticky controls ───────────────────────────────────
         const controls = document.getElementById('galleryControls');
         if (controls) {
             window.addEventListener('scroll', () => {
@@ -408,7 +404,7 @@
             });
         }
 
-        // ── Mobile menu ───────────────────────────────────────
+        // Mobile menu
         document.addEventListener('DOMContentLoaded', () => {
             const toggle = document.querySelector('.mobile-menu-toggle');
             const nav = document.querySelector('nav');
