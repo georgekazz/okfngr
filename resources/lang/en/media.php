@@ -4,7 +4,7 @@ return [
     'title' => 'Media',
     
     'hero' => [
-        'badge' => 'Events',
+        'badge' => 'Important Moments',
         'title' => 'Media Events',
         'subtitle' => 'Discover the events and moments that have marked our journey',
     ],
