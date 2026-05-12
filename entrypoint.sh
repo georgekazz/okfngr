@@ -28,12 +28,7 @@ QUEUE_CONNECTION=sync
 FILESYSTEM_DISK=public
 EOF
 
-# ── Clear only file-based caches (no DB needed) ──────────
-php artisan config:clear
-php artisan view:clear
-php artisan route:clear
-
-# ── Generate key if missing ──────────────────────────────
+# ── Generate key FIRST, before any artisan commands ──────
 CURRENT_KEY=$(grep "^APP_KEY=" /var/www/html/.env | cut -d'=' -f2)
 if [ -z "$CURRENT_KEY" ]; then
     echo "Generating app key..."
@@ -42,6 +37,11 @@ if [ -z "$CURRENT_KEY" ]; then
 else
     echo "App key already set."
 fi
+
+# ── NOW safe to clear caches ─────────────────────────────
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
 
 # ── Wait for database ────────────────────────────────────
 echo "Waiting for database connection..."
