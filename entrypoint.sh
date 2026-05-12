@@ -39,10 +39,13 @@ until php -r "new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:
 done
 echo "Database connected!"
 
-# ── Generate key only if missing ─────────────────────────
-if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:GENERATE_WITH_php_artisan_key_generate" ]; then
+# ── Generate key if missing or empty ─────────────────────
+CURRENT_KEY=$(grep APP_KEY /var/www/html/.env | cut -d'=' -f2)
+
+if [ -z "$CURRENT_KEY" ] || [ "$CURRENT_KEY" = "base64:GENERATE_WITH_php_artisan_key_generate" ]; then
     echo "Generating app key..."
     php artisan key:generate --force
+    echo "App key generated!"
 else
     echo "App key already set."
 fi
