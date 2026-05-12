@@ -3,7 +3,7 @@ set -e
 
 echo "Starting OKFN Greece Laravel App..."
 
-# ── Create .env from environment variables ──────────────
+# ── Create .env ──────────────────────────────────────────
 echo "Creating .env file..."
 cat > /var/www/html/.env << EOF
 APP_NAME="${APP_NAME:-OKFN Greece}"
@@ -25,13 +25,11 @@ DB_PASSWORD=${DB_PASSWORD:-okfnpass}
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_CONNECTION=sync
-
 FILESYSTEM_DISK=public
 EOF
 
-# ── Clear ALL caches before anything else ───────────────
+# ── Clear only file-based caches (no DB needed) ──────────
 php artisan config:clear
-php artisan cache:clear
 php artisan view:clear
 php artisan route:clear
 
@@ -42,7 +40,7 @@ if [ -z "$CURRENT_KEY" ]; then
     php artisan key:generate --force
     echo "App key generated!"
 else
-    echo "App key already set: ${CURRENT_KEY:0:20}..."
+    echo "App key already set."
 fi
 
 # ── Wait for database ────────────────────────────────────
@@ -60,11 +58,13 @@ php artisan migrate --force
 echo "Seeding database..."
 php artisan db:seed --force
 
+# ── Now safe to clear cache (DB exists) ─────────────────
+php artisan cache:clear || true
+
 # ── Storage ──────────────────────────────────────────────
-echo "Creating storage symlink..."
 php artisan storage:link || true
 
-# ── Cache for production AFTER key is set ───────────────
+# ── Cache for production ─────────────────────────────────
 if [ "$APP_ENV" = "production" ]; then
     echo "Caching for production..."
     php artisan config:cache
