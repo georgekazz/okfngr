@@ -3,28 +3,62 @@ set -e
 
 echo "Starting OKFN Greece Laravel App..."
 
+# ── Create .env from environment variables ──────────────
+echo "Creating .env file..."
+cat > /var/www/html/.env << EOF
+APP_NAME="${APP_NAME:-OKFN Greece}"
+APP_ENV=${APP_ENV:-production}
+APP_KEY=${APP_KEY:-}
+APP_DEBUG=${APP_DEBUG:-false}
+APP_URL=${APP_URL:-http://localhost}
+
+LOG_CHANNEL=stderr
+LOG_LEVEL=error
+
+DB_CONNECTION=mysql
+DB_HOST=${DB_HOST:-db}
+DB_PORT=3306
+DB_DATABASE=${DB_DATABASE:-okfngr}
+DB_USERNAME=${DB_USERNAME:-okfnuser}
+DB_PASSWORD=${DB_PASSWORD:-okfnpass}
+
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_CONNECTION=sync
+
+FILESYSTEM_DISK=public
+EOF
+
+echo ".env created!"
+
+# ── Wait for database ────────────────────────────────────
 echo "Waiting for database connection..."
-until php -r "new PDO('mysql:host=${DB_HOST};port=${DB_PORT};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}');" 2>/dev/null; do
+until php -r "new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:-okfngr}', '${DB_USERNAME:-okfnuser}', '${DB_PASSWORD:-okfnpass}');" 2>/dev/null; do
     echo "   Database not ready, retrying in 3s..."
     sleep 3
 done
 echo "Database connected!"
 
+# ── Generate key only if missing ─────────────────────────
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:GENERATE_WITH_php_artisan_key_generate" ]; then
     echo "Generating app key..."
     php artisan key:generate --force
+else
+    echo "App key already set."
 fi
 
+# ── Migrations & seeds ───────────────────────────────────
 echo "Running migrations..."
 php artisan migrate --force
 
 echo "Seeding database..."
 php artisan db:seed --force
-echo "Database seeded!"
 
+# ── Storage ──────────────────────────────────────────────
 echo "Creating storage symlink..."
 php artisan storage:link || true
 
+# ── Cache ────────────────────────────────────────────────
 echo "Clearing caches..."
 php artisan config:clear
 php artisan cache:clear
@@ -38,9 +72,11 @@ if [ "$APP_ENV" = "production" ]; then
     php artisan view:cache
 fi
 
+# ── Permissions ──────────────────────────────────────────
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# ── WordPress import ─────────────────────────────────────
 if [ -f "/var/www/html/AllPosts-wordpress.xml" ]; then
     echo "Found AllPosts-wordpress.xml, running WordPress import..."
     php artisan import:wordpress-xml AllPosts-wordpress.xml
@@ -50,5 +86,4 @@ else
 fi
 
 echo "App is ready!"
-
 exec apache2-foreground
