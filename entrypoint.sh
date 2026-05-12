@@ -29,7 +29,21 @@ QUEUE_CONNECTION=sync
 FILESYSTEM_DISK=public
 EOF
 
-echo ".env created!"
+# ── Clear ALL caches before anything else ───────────────
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+
+# ── Generate key if missing ──────────────────────────────
+CURRENT_KEY=$(grep "^APP_KEY=" /var/www/html/.env | cut -d'=' -f2)
+if [ -z "$CURRENT_KEY" ]; then
+    echo "Generating app key..."
+    php artisan key:generate --force
+    echo "App key generated!"
+else
+    echo "App key already set: ${CURRENT_KEY:0:20}..."
+fi
 
 # ── Wait for database ────────────────────────────────────
 echo "Waiting for database connection..."
@@ -38,17 +52,6 @@ until php -r "new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:
     sleep 3
 done
 echo "Database connected!"
-
-# ── Generate key if missing or empty ─────────────────────
-CURRENT_KEY=$(grep APP_KEY /var/www/html/.env | cut -d'=' -f2)
-
-if [ -z "$CURRENT_KEY" ] || [ "$CURRENT_KEY" = "base64:GENERATE_WITH_php_artisan_key_generate" ]; then
-    echo "Generating app key..."
-    php artisan key:generate --force
-    echo "App key generated!"
-else
-    echo "App key already set."
-fi
 
 # ── Migrations & seeds ───────────────────────────────────
 echo "Running migrations..."
@@ -61,13 +64,7 @@ php artisan db:seed --force
 echo "Creating storage symlink..."
 php artisan storage:link || true
 
-# ── Cache ────────────────────────────────────────────────
-echo "Clearing caches..."
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
-
+# ── Cache for production AFTER key is set ───────────────
 if [ "$APP_ENV" = "production" ]; then
     echo "Caching for production..."
     php artisan config:cache
