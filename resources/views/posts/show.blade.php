@@ -315,7 +315,9 @@
                     id="mobileMenuToggle">☰</button>
 
                 <!-- Navigation -->
+                <!-- Navigation -->
                 <nav class="hidden md:flex items-center gap-1 desktop-nav" id="desktopNav">
+
                     <!-- About -->
                     <div class="nav-item relative group">
                         <a href="#"
@@ -328,8 +330,6 @@
                                 class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.our_mission') }}</a>
                             <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}"
                                 class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.who_we_are') }}</a>
-                            <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
-                                class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.our_impact') }}</a>
                         </div>
                     </div>
 
@@ -340,13 +340,17 @@
                             {{ __('home.nav.who_we_are2') }} <span class="text-xs opacity-60">▼</span>
                         </a>
                         <div
-                            class="dropdown-menu absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+                            class="dropdown-menu absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
                             <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}"
                                 class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.team') }}</a>
                             <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}"
                                 class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.board') }}</a>
                             <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}"
                                 class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.governance') }}</a>
+                            <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.our_impact') }}</a>
+                            <a href="{{ route('gallery', ['locale' => app()->getLocale()]) }}"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.gallery') }}</a>
                         </div>
                     </div>
 
@@ -387,6 +391,7 @@
                                 class="block px-4 py-2 text-sm text-text-secondary hover:text-cyan-brand hover:bg-gray-50 transition-colors">{{ __('home.nav.why_open') }}</a>
                         </div>
                     </div>
+
                 </nav>
 
                 <!-- Right actions -->
