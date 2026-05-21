@@ -183,6 +183,46 @@
                         <div class="stat-label">Σύνολο Άρθρων</div>
                     </div>
                 </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:rgba(224,119,255,0.12);color:#E077FF;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">{{ $totalPhotos }}</div>
+                        <div class="stat-label">Φωτογραφίες</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:rgba(228,255,54,0.15);color:#9aab00;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <path d="M16 2v4M8 2v4M3 10h18" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">{{ $totalMediaEvents }}</div>
+                        <div class="stat-label">Εκδηλώσεις Μέσων</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posts per Month Chart -->
+            <div class="chart-card">
+                <div class="section-header">
+                    <h2>Δημοσιεύσεις ανά Μήνα</h2>
+                    <span class="chart-year-badge">{{ date('Y') }}</span>
+                </div>
+                <div class="chart-body">
+                    <canvas id="postsChart" height="50"></canvas>
+                </div>
             </div>
 
             <!-- Recent Posts -->
@@ -307,6 +347,77 @@
             </div>
         </main>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const monthlyData = @json($postsPerMonth);
+        const months = ['Ιαν', 'Φεβ', 'Μαρ', 'Απρ', 'Μάι', 'Ιούν', 'Ιούλ', 'Αύγ', 'Σεπ', 'Οκτ', 'Νοε', 'Δεκ'];
+        const values = months.map((_, i) => monthlyData[i + 1] || 0);
+        const maxVal = Math.max(...values);
+
+        // Highlight current month
+        const currentMonth = new Date().getMonth();
+        const bgColors = values.map((_, i) =>
+            i === currentMonth ? 'rgba(0,209,255,0.5)' : 'rgba(0,209,255,0.12)'
+        );
+        const borderColors = values.map((_, i) =>
+            i === currentMonth ? '#00D1FF' : 'rgba(0,209,255,0.4)'
+        );
+
+        new Chart(document.getElementById('postsChart'), {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Άρθρα',
+                    data: values,
+                    backgroundColor: bgColors,
+                    borderColor: borderColors,
+                    borderWidth: 2,
+                    borderRadius: 6,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 5,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1a1a1a',
+                        titleColor: '#00D1FF',
+                        bodyColor: '#fff',
+                        padding: 10,
+                        cornerRadius: 8,
+                        callbacks: {
+                            title: ctx => months[ctx[0].dataIndex],
+                            label: ctx => ' ' + ctx.parsed.y + ' άρθρα'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: maxVal > 0 ? maxVal + 1 : 5,
+                        ticks: {
+                            stepSize: 1,
+                            font: { size: 11 },
+                            color: '#aaa',
+                            callback: val => Number.isInteger(val) ? val : ''
+                        },
+                        grid: { color: 'rgba(0,0,0,0.04)' },
+                        border: { display: false }
+                    },
+                    x: {
+                        ticks: { font: { size: 11 }, color: '#888' },
+                        grid: { display: false },
+                        border: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

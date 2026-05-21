@@ -79,6 +79,16 @@ class WriterController extends Controller
         $publishedCount = (clone $postsQuery)->where('status', 'published')->count();
         $draftCount = (clone $postsQuery)->where('status', 'draft')->count();
         $totalPosts = $postsQuery->count();
+        $totalPhotos = \App\Models\GalleryPhoto::count();
+        $totalMediaEvents = \App\Models\MediaEvent::count();
+
+        // Posts per month for current year
+        $postsPerMonth = Post::where('user_id', $user->id)
+            ->whereYear('created_at', date('Y'))
+            ->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->pluck('total', 'month')
+            ->toArray();
 
         $posts = Post::where('user_id', $user->id)
             ->with(['categories', 'tags'])
@@ -89,6 +99,9 @@ class WriterController extends Controller
             'publishedCount',
             'draftCount',
             'totalPosts',
+            'totalPhotos',
+            'totalMediaEvents',
+            'postsPerMonth',
             'posts'
         ));
     }
