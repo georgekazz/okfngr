@@ -360,12 +360,25 @@ nav {
     line-height: 1.1;
     margin-bottom: 3rem;
     letter-spacing: -0.03em;
-    background: linear-gradient(135deg, var(--text-primary) 0%, var(--mint) 50%, var(--cyan) 100%);
+    background: linear-gradient(
+        135deg,
+        #c8f0ff        0%,
+        #5de8c8        30%,
+        #00a8d6        55%,
+        #006694        75%,
+        #002a40        100%
+    );
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
-    animation: textShine 5s ease-in-out infinite;
+    animation: titleFlow 6s ease-in-out infinite;
+}
+
+@keyframes titleFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 @keyframes textShine {
