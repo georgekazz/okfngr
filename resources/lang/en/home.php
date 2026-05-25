@@ -16,7 +16,7 @@ return [
         'our_actions' => 'Our Actions',
         'media' => 'Important Moments',
         'editions' => 'Editions',
-        'how_to' => 'How can you open the data? (more natural: How can you make data open?',
+        'how_to' => 'How can you make data open?',
         'why_open' => 'Why open data?',
         'apps' => 'Apps',
         'board' => 'Board of Directors',

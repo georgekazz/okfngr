@@ -10,6 +10,7 @@ use App\Http\Controllers\Writer\MediaEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\Writer\WriterGalleryController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return redirect('/el');
@@ -44,6 +45,28 @@ Route::group([
     Route::get('/why-open', [HomeController::class, 'whyOpen'])->name('whyOpen');
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+
+    //google translate
+    Route::post('/translate-proxy', function (Request $request) {
+        $text = $request->input('q', '');
+        $source = $request->input('sl', 'el');
+        $target = $request->input('tl', 'en');
+
+        $url = 'https://translate.googleapis.com/translate_a/single?' . http_build_query([
+            'client' => 'gtx',
+            'sl' => $source,
+            'tl' => $target,
+            'dt' => 't',
+            'q' => $text,
+        ]);
+
+        $response = \Illuminate\Support\Facades\Http::withHeaders([
+            'User-Agent' => 'Mozilla/5.0',
+        ])->get($url);
+
+        return response($response->body(), $response->status())
+            ->header('Content-Type', 'application/json');
+    })->name('translate.proxy');
 
 
     // Public pages - Blog

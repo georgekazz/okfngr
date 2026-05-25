@@ -295,6 +295,16 @@
                 display: flex;
             }
         }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -506,6 +516,27 @@
                         </svg>
                         <span>{{ $post->views_count }} {{ __('post.views') }}</span>
                     </div>
+                    {{-- Translate Button --}}
+                    <button id="translateBtn" onclick="toggleTranslate()"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-600 border-2 transition-all hover:-translate-y-0.5 ml-auto"
+                        style="border-color: #4285f4; color: #4285f4; background: white;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 8l6 6M4 14l6-6 2-3M2 5h7M7 2v3M22 22l-5-10-5 10M14 18h6" />
+                        </svg>
+                        <span id="translateBtnText">
+                            {{ app()->getLocale() === 'el' ? 'EN' : 'ΕΛ' }}
+                        </span>
+                        <span id="translateLoader" style="display:none;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" style="animation: spin 1s linear infinite;">
+                                <path d="M21 12a9 9 0 11-6.219-8.56" />
+                            </svg>
+                        </span>
+                    </button>
+                    <span id="translateNote" style="display:none; font-size:0.72rem; color:#aaa; margin-left:-8px;">
+                        via Google
+                    </span>
                 </div>
             </header>
 
@@ -735,6 +766,106 @@
             }).then(r => r.json()).then(d => {
                 if (d.success) window.location.reload();
             }).catch(e => console.error('Error:', e));
+        }
+    </script>
+    <script>
+        const LOCALE = '{{ app()->getLocale() }}';
+        const TARGET_LANG = LOCALE === 'el' ? 'en' : 'el';
+        const SOURCE_LANG = LOCALE;
+        const LABEL_TO = LOCALE === 'el' ? 'EN' : 'ΕΛ';
+        const LABEL_BACK = LOCALE === 'el' ? 'ΕΛ' : 'EN';
+        const PROXY_URL = '{{ route("translate.proxy", ["locale" => app()->getLocale()]) }}';
+
+        let isTranslated = false;
+        let originalContent = null;
+        let originalTitle = null;
+
+        async function toggleTranslate() {
+            const btn = document.getElementById('translateBtn');
+            const btnText = document.getElementById('translateBtnText');
+            const loader = document.getElementById('translateLoader');
+            const note = document.getElementById('translateNote');
+            const content = document.querySelector('.post-content');
+            const title = document.querySelector('header h1');
+
+            if (isTranslated) {
+                content.innerHTML = originalContent;
+                title.textContent = originalTitle;
+                btnText.textContent = LABEL_TO;
+                btn.style.borderColor = '#4285f4';
+                btn.style.color = '#4285f4';
+                btn.style.background = 'white';
+                note.style.display = 'none';
+                isTranslated = false;
+                return;
+            }
+
+            originalContent = content.innerHTML;
+            originalTitle = title.textContent;
+
+            btnText.style.display = 'none';
+            loader.style.display = 'inline-flex';
+            btn.disabled = true;
+
+            try {
+                // Collect all text nodes
+                const textNodes = [];
+                const walker = document.createTreeWalker(
+                    content,
+                    NodeFilter.SHOW_TEXT,
+                    { acceptNode: n => n.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT }
+                );
+                let node;
+                while ((node = walker.nextNode())) textNodes.push(node);
+
+                // Translate title
+                const translatedTitle = await translateOne(title.textContent.trim());
+                title.textContent = translatedTitle;
+
+                // Translate text nodes one by one (safe, no CORS)
+                for (const n of textNodes) {
+                    const tr = await translateOne(n.textContent.trim());
+                    n.textContent = tr;
+                }
+
+                isTranslated = true;
+                btnText.textContent = LABEL_BACK;
+                btn.style.borderColor = '#28a745';
+                btn.style.color = '#28a745';
+                btn.style.background = 'rgba(40,167,69,0.06)';
+                note.style.display = 'inline';
+
+            } catch (err) {
+                console.error('Translation failed:', err);
+                content.innerHTML = originalContent;
+                title.textContent = originalTitle;
+                alert('Η μετάφραση απέτυχε. Δοκιμάστε ξανά.');
+            } finally {
+                btnText.style.display = 'inline';
+                loader.style.display = 'none';
+                btn.disabled = false;
+            }
+        }
+
+        async function translateOne(text) {
+            if (!text.trim()) return text;
+
+            const res = await fetch(PROXY_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    q: text,
+                    sl: SOURCE_LANG,
+                    tl: TARGET_LANG
+                })
+            });
+
+            if (!res.ok) throw new Error('Proxy error ' + res.status);
+            const data = await res.json();
+            return data[0].map(s => s[0]).join('');
         }
     </script>
 </body>
