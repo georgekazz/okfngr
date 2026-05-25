@@ -1,0 +1,388 @@
+/* ================================================
+   admin-dayoffs.css
+   Day-offs statistics & calendar for admin dashboard
+   Extends admin-dashboard.css
+   ================================================ */
+
+/* ── Section divider ── */
+.section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 2.5rem 0 1.5rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #aaa;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: #f0f0f0;
+    border-radius: 2px;
+}
+
+/* ── Summary cards ── */
+.dayoff-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dayoff-summary-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.dayoff-summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.dayoff-summary-card.accent-blue  { border-color: rgba(66,133,244,0.2); }
+.dayoff-summary-card.accent-cyan  { border-color: rgba(0,209,255,0.2); }
+.dayoff-summary-card.accent-green { border-color: rgba(40,167,69,0.2); }
+.dayoff-summary-card.accent-orange{ border-color: rgba(255,152,0,0.2); }
+
+.dayoff-summary-card.accent-blue:hover  { border-color: #4285f4; box-shadow: 0 8px 24px rgba(66,133,244,0.15); }
+.dayoff-summary-card.accent-cyan:hover  { border-color: #00D1FF; box-shadow: 0 8px 24px rgba(0,209,255,0.15); }
+.dayoff-summary-card.accent-green:hover { border-color: #28a745; box-shadow: 0 8px 24px rgba(40,167,69,0.15); }
+.dayoff-summary-card.accent-orange:hover{ border-color: #ff9800; box-shadow: 0 8px 24px rgba(255,152,0,0.15); }
+
+.dsc-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.accent-blue  .dsc-icon { background: rgba(66,133,244,0.1);  color: #4285f4; }
+.accent-cyan  .dsc-icon { background: rgba(0,209,255,0.1);   color: #00D1FF; }
+.accent-green .dsc-icon { background: rgba(40,167,69,0.1);   color: #28a745; }
+.accent-orange.dsc-icon { background: rgba(255,152,0,0.1);   color: #ff9800; }
+.accent-orange .dsc-icon{ background: rgba(255,152,0,0.1);   color: #ff9800; }
+
+.dsc-value {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: 3px;
+}
+
+.dsc-label {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 500;
+}
+
+/* ── Section actions ── */
+.section-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-input {
+    padding: 7px 14px;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: 'Roboto', sans-serif;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color 0.25s;
+    width: 200px;
+}
+
+.search-input:focus {
+    border-color: #00D1FF;
+}
+
+/* ── User cell ── */
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+/* ── Total badge ── */
+.total-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.badge-high { background: rgba(220,53,69,0.1);  color: #dc3545; }
+.badge-mid  { background: rgba(255,152,0,0.12); color: #e65c00; }
+.badge-low  { background: rgba(0,209,255,0.1);  color: #00a8d6; }
+
+/* ── Month bar ── */
+.month-col {
+    min-width: 46px;
+    text-align: center;
+}
+
+.month-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+}
+
+.month-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #00D1FF, #00b8e6);
+    border-radius: 3px;
+    min-width: 4px;
+    max-width: 30px;
+    transition: width 0.3s ease;
+}
+
+.month-count {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #555;
+}
+
+/* ── Next badge ── */
+.next-badge {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #28a745;
+}
+
+.next-reason {
+    font-size: 0.72rem;
+    color: #aaa;
+    font-weight: 400;
+}
+
+/* ── Calendar ── */
+.calendar-wrap {
+    padding: 1.5rem 2rem 2rem;
+}
+
+.cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cal-nav-btn {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.cal-nav-btn:hover {
+    border-color: #00D1FF;
+    color: #00D1FF;
+}
+
+.cal-today-btn {
+    padding: 6px 14px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+
+.cal-today-btn:hover {
+    border-color: #00D1FF;
+    color: #00D1FF;
+}
+
+.cal-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.cal-day-name {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 0;
+}
+
+.cal-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.cal-cell {
+    min-height: 80px;
+    border-radius: 10px;
+    padding: 6px 8px;
+    background: #fafafa;
+    border: 2px solid #f0f0f0;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.cal-cell.empty {
+    background: transparent;
+    border-color: transparent;
+}
+
+.cal-cell.is-weekend {
+    background: #f5f5f5;
+}
+
+.cal-cell.is-today {
+    border-color: #00D1FF !important;
+    background: rgba(0,209,255,0.04);
+}
+
+.cal-cell.has-offs {
+    border-color: #e8f5ff;
+    background: #fafdff;
+}
+
+.cal-cell:not(.empty):hover {
+    border-color: #00D1FF;
+    box-shadow: 0 4px 12px rgba(0,209,255,0.1);
+}
+
+.cal-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #999;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.cal-cell.is-today .cal-num {
+    color: #00D1FF;
+    font-size: 0.82rem;
+}
+
+.cal-offs {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cal-off-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.cal-off-chip:hover {
+    opacity: 0.85;
+}
+
+.cal-off-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cal-off-more {
+    font-size: 0.68rem;
+    color: #aaa;
+    font-weight: 600;
+    padding-left: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1400px) {
+    .dayoff-summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .month-col { display: none; }
+    .month-col:nth-child(-n+5) { display: table-cell; }
+}
+
+@media (max-width: 1024px) {
+    .dayoff-summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .cal-cell { min-height: 60px; }
+}
+
+@media (max-width: 768px) {
+    .dayoff-summary-grid { grid-template-columns: 1fr 1fr; }
+    .calendar-wrap { padding: 1rem; }
+    .cal-cell { min-height: 48px; padding: 4px; }
+    .cal-off-chip span:not(.cal-off-dot) { display: none; }
+}

@@ -34,7 +34,71 @@ class AdminController extends Controller
         $recentPosts = Post::with('user')->latest()->take(5)->get();
         $recentComments = Comment::with(['post', 'post.user'])->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'recentUsers', 'recentPosts', 'recentComments'));
+        [$allUsers, $allDayOffs, $calendarDayOffs, $dayOffsByUser] = $this->getDayOffStats();
+
+        return view('admin.dashboard', compact(
+            'stats',
+            'recentUsers',
+            'recentPosts',
+            'recentComments',
+            'allUsers',
+            'allDayOffs',
+            'calendarDayOffs',
+            'dayOffsByUser'
+        ));
+    }
+
+    private function getDayOffStats(): array
+    {
+        $allUsers = User::where('is_active', true)->orderBy('name')->get();
+        $allDayOffs = \App\Models\DayOff::with('user')->orderBy('start_date')->get();
+
+        $calendarDayOffs = $allDayOffs->flatMap(function ($d) {
+            $days = [];
+            $start = \Carbon\Carbon::parse($d->start_date);
+            $end = \Carbon\Carbon::parse($d->end_date);
+            $current = $start->copy();
+
+            while ($current->lte($end)) {
+                $days[] = [
+                    'date' => $current->format('Y-m-d'),
+                    'user' => $d->user->name,
+                    'color' => '#' . substr(md5($d->user->name), 0, 6),
+                    'reason' => $d->reason ?? '',
+                    'type' => $d->type ?? '',
+                    'total' => $d->total_days,
+                ];
+                $current->addDay();
+            }
+            return $days;
+        })->values();
+
+        $dayOffsByUser = [];
+
+        foreach ($allUsers as $user) {
+            $userDayOffs = $allDayOffs->where('user_id', $user->id);
+
+            $months = [];
+            for ($m = 1; $m <= 12; $m++) {
+                $months[$m] = $userDayOffs->filter(function ($d) use ($m) {
+                    return \Carbon\Carbon::parse($d->start_date)->month === $m
+                        && \Carbon\Carbon::parse($d->start_date)->year === now()->year;
+                })->sum('total_days');
+            }
+
+            $next = $userDayOffs
+                ->filter(fn($d) => \Carbon\Carbon::parse($d->start_date)->isFuture())
+                ->sortBy('start_date')
+                ->first();
+
+            $dayOffsByUser[$user->id] = [
+                'total' => $userDayOffs->sum('total_days'),
+                'months' => $months,
+                'next' => $next,
+            ];
+        }
+
+        return [$allUsers, $allDayOffs, $calendarDayOffs, $dayOffsByUser];
     }
 
     // Users Management
@@ -84,8 +148,10 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'role' => 'required|in:admin,writer,user',
             'bio' => 'nullable|string',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable|boolean',
         ]);
+
+        $validated['is_active'] = $request->boolean('is_active');
 
         $user->update($validated);
 
