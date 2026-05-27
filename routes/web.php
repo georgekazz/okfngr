@@ -13,7 +13,7 @@ use App\Http\Controllers\Writer\WriterGalleryController;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return redirect('/el');
+    return redirect()->to('/el');
 });
 
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])
@@ -172,4 +172,8 @@ Route::group([
         Route::get('/team-links', [UserController::class, 'teamLinks'])->name('team-links');
         Route::get('/statistics', [UserController::class, 'statistics'])->name('statistics');
     });
+});
+
+Route::fallback(function () {
+    return redirect('/el');
 });
