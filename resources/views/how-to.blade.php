@@ -210,7 +210,7 @@
                 </a>
 
                 <!-- Instagram -->
-                <a href="https://instagram.com/okgreece" class="social-link" target="_blank" rel="noopener">
+                <a href="https://instagram.com/okfngreece" class="social-link" target="_blank" rel="noopener">
                     <img src="{{ asset('img/social/instagram.png') }}" alt="Instagram" class="social-icon">
                 </a>
             </div>
