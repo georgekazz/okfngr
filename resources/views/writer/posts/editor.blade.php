@@ -120,6 +120,19 @@
                         </button>
                     </div>
 
+                    <!-- Published At -->
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="published_at" style="font-size:0.85rem; font-weight:600; color:#555; display:block; margin-bottom:6px;">
+                            Ημερομηνία & Ώρα Δημοσίευσης
+                        </label>
+                        <input type="datetime-local"
+                            name="published_at"
+                            id="published_at"
+                            value="{{ old('published_at', isset($post) && $post->published_at ? $post->published_at->format('Y-m-d\TH:i') : now()->format('Y-m-d\TH:i')) }}"
+                            style="width:100%; padding:8px 10px; border:2px solid #e8e8e8; border-radius:8px; font-size:0.88rem; font-family:'Roboto',sans-serif; outline:none; transition:border-color 0.25s;">
+                        <small style="color:#aaa; font-size:0.75rem;">Αφήστε κενό για αυτόματη ημερομηνία</small>
+                    </div>
+
                     @if(isset($post))
                     <div class="post-info">
                         <small>Δημιουργήθηκε: {{ $post->created_at->format('d/m/Y H:i') }}</small>
@@ -181,7 +194,7 @@
                            id="featured_image"
                            accept="image/*"
                            class="file-input">
-                    <small>JPG, PNG, GIF - Max 5MB</small>
+                    <small>JPG, PNG, GIF - Max 10MB</small>
                 </div>
 
             </aside>

@@ -247,7 +247,7 @@
                                 <tr>
                                     <th>Τίτλος</th>
                                     <th>Κατάσταση</th>
-                                    <th>Ημερομηνία</th>
+                                    <th>Δημοσιεύθηκε</th>
                                     <th>Προβολές</th>
                                     <th>Ενέργειες</th>
                                 </tr>
@@ -268,7 +268,22 @@
                                                 {{ $post->status === 'published' ? 'Δημοσιευμένο' : 'Πρόχειρο' }}
                                             </span>
                                         </td>
-                                        <td>{{ $post->created_at->format('d/m/Y') }}</td>
+                                        <td>
+                                            @if($post->status === 'published' && $post->published_at)
+                                                <div style="display:flex; flex-direction:column; gap:2px;">
+                                                    <span
+                                                        style="font-weight:600; font-size:0.88rem;">{{ $post->published_at->format('d/m/Y') }}</span>
+                                                    <span
+                                                        style="font-size:0.75rem; color:#aaa;">{{ $post->published_at->format('H:i') }}</span>
+                                                </div>
+                                            @else
+                                                <div style="display:flex; flex-direction:column; gap:2px;">
+                                                    <span style="font-size:0.88rem; color:#999;">Πρόχειρο</span>
+                                                    <span
+                                                        style="font-size:0.75rem; color:#ccc;">{{ $post->created_at->format('d/m/Y') }}</span>
+                                                </div>
+                                            @endif
+                                        </td>
                                         <td>{{ $post->views_count }}</td>
                                         <td>
                                             <div class="action-buttons">

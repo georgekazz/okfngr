@@ -134,6 +134,7 @@ class WriterController extends Controller
             'content' => 'required|string',
             'status' => 'required|in:draft,published',
             'featured_image' => 'nullable|image|max:10240',
+            'published_at' => 'nullable|date',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'nullable|array',
@@ -167,7 +168,9 @@ class WriterController extends Controller
             'content' => $validated['content'],
             'status' => $validated['status'],
             'featured_image' => $imagePath,
-            'published_at' => $validated['status'] === 'published' ? now() : null,
+            'published_at' => $validated['status'] === 'published'
+                ? ($validated['published_at'] ?? now())
+                : null,
         ]);
 
         if (!empty($validated['categories'])) {
@@ -215,6 +218,7 @@ class WriterController extends Controller
             'status' => 'required|in:draft,published',
             'featured_image' => 'nullable|image|max:10240',
             'remove_image' => 'nullable|boolean',
+            'published_at' => 'nullable|date',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'nullable|array',
@@ -251,8 +255,12 @@ class WriterController extends Controller
         $post->content = $validated['content'];
         $post->status = $validated['status'];
 
-        if ($validated['status'] === 'published' && !$post->published_at) {
-            $post->published_at = now();
+        if ($validated['status'] === 'published') {
+            $post->published_at = !empty($validated['published_at'])
+                ? \Carbon\Carbon::parse($validated['published_at'])
+                : ($post->published_at ?? now());
+        } else {
+            $post->published_at = null;
         }
 
         $post->save();
