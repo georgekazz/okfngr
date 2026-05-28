@@ -44,6 +44,11 @@ RUN mkdir -p /var/www/html/storage/logs && touch /var/www/html/storage/logs/lara
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+RUN echo "upload_max_filesize = 10M" > /usr/local/etc/php/conf.d/uploads.ini \
+ && echo "post_max_size = 12M" >> /usr/local/etc/php/conf.d/uploads.ini \
+ && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/uploads.ini
+
+
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
