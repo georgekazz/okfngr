@@ -133,7 +133,7 @@ class WriterController extends Controller
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
             'status' => 'required|in:draft,published',
-            'featured_image' => 'nullable|image|max:5120',
+            'featured_image' => 'nullable|image|max:10240',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
             'tags' => 'nullable|array',
@@ -184,7 +184,7 @@ class WriterController extends Controller
 
     public function uploadImage(Request $request)
     {
-        $request->validate(['file' => 'required|image|max:5120']);
+        $request->validate(['file' => 'required|image|max:10240']);
         $path = $request->file('file')->store('posts', 'public');
 
         return response()->json(['location' => asset('storage/' . $path)]);
@@ -213,7 +213,7 @@ class WriterController extends Controller
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
             'status' => 'required|in:draft,published',
-            'featured_image' => 'nullable|image|max:5120',
+            'featured_image' => 'nullable|image|max:10240',
             'remove_image' => 'nullable|boolean',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
