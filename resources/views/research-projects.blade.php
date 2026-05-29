@@ -137,6 +137,68 @@
 
                             <p class="project-description">{{ $project['description'] }}</p>
 
+                            {{-- Progress Timeline --}}
+                            @if(isset($project['start_date']) && isset($project['end_date']))
+                                @php
+                                    $start = \Carbon\Carbon::parse($project['start_date']);
+                                    $end = \Carbon\Carbon::parse($project['end_date']);
+                                    $now = \Carbon\Carbon::now();
+                                    $status = $project['status'] ?? 'active';
+
+                                    $total = $start->diffInDays($end);
+                                    $elapsed = min($start->diffInDays($now), $total);
+                                    $percent = $total > 0 ? round(($elapsed / $total) * 100) : 100;
+                                    $percent = max(0, min(100, $percent));
+
+                                    $isCompleted = $status === 'completed' || $now->isAfter($end);
+                                    $isUpcoming = $status === 'upcoming' || $now->isBefore($start);
+                                @endphp
+
+                                <div class="project-timeline">
+                                    <div class="timeline-header">
+                                        <div class="timeline-dates">
+                                            <span>{{ $start->format('M Y') }}</span>
+                                            <span>{{ $end->format('M Y') }}</span>
+                                        </div>
+                                        @if($isCompleted)
+                                            <span class="timeline-tag tag-completed">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                                    <polyline points="20 6 9 17 4 12"/>
+                                                </svg>
+                                                {{ __('projects.timeline.completed') }}
+                                            </span>
+                                        @elseif($isUpcoming)
+                                            <span class="timeline-tag tag-upcoming">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <circle cx="12" cy="12" r="10"/>
+                                                    <polyline points="12 6 12 12 16 14"/>
+                                                </svg>
+                                                {{ __('projects.timeline.upcoming') }}
+                                            </span>
+                                        @else
+                                            <span class="timeline-tag tag-active">
+                                                <span class="tag-dot"></span>
+                                                {{ __('projects.timeline.active', ['percent' => $percent]) }}
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="timeline-bar">
+                                        <div class="timeline-fill {{ $isCompleted ? 'fill-completed' : ($isUpcoming ? 'fill-upcoming' : 'fill-active') }}"
+                                            style="width: {{ $isUpcoming ? 0 : $percent }}%">
+                                        </div>
+                                    </div>
+
+                                    @if(!$isCompleted && !$isUpcoming)
+                                        <div class="timeline-remaining">
+                                            {{ $end->diffInMonths($now) > 0
+                                                ? __('projects.timeline.months_left', ['months' => $now->diffInMonths($end)])
+                                                : __('projects.timeline.ending_soon') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+
                             @if(isset($project['social']) && count($project['social']) > 0)
                                 <div class="project-social">
                                     @foreach($project['social'] as $platform => $url)

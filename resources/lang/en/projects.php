@@ -9,12 +9,23 @@ return [
         'subtitle' => 'Discover our research projects and initiatives to promote open data',
     ],
 
+    'timeline' => [
+        'completed' => 'Completed',
+        'upcoming' => 'Upcoming',
+        'active' => 'In progress · :percent%',
+        'months_left' => ':months months remaining',
+        'ending_soon' => '',
+    ],
+
     'list' => [
         [
             'title' => 'Arxive',
             'description' => 'ARXIVE revolutionizes the documentation, analysis, and dissemination of cultural heritage objects by developing cutting-edge tools and methodologies integrated into the European Collaborative Cloud for Cultural Heritage. Addressing fragmented on-site workflows and the challenges of preserving both tangible and intangible cultural assets, ARXIVE introduces a semantic archival system that provides advanced solutions for annotating evolving digital twins. These tools empower cultural heritage professionals to create semantically rich, context-aware documentation while streamlining processes for research, preservation, and dissemination.',
             'image' => 'arxive.png',
             'badge' => 'EU Project',
+            'start_date' => '2026-01-01',
+            'end_date' => '2029-01-01',
+            'status' => 'active', // 'active', 'completed', 'upcoming'
             'social' => [
                 'website' => 'https://arxive-eccch.eu/',
             ]
@@ -60,6 +71,9 @@ return [
             'description' => 'The UPCAST project provides a set of universal, reliable, transparent and user-friendly data market plugins for automating data sharing and processing agreements between businesses, public administrations and citizens. The project plugins will enable stakeholders in the common European data space to design and develop data exchange and transaction guarantees.',
             'image' => 'upcast.jpg',
             'badge' => 'EU Project',
+            'start_date' => '2023-01-01',
+            'end_date' => '2026-01-01',
+            'status' => 'completed',
             'social' => [
                 'website' => 'https://upcast-project.eu',
                 'twitter' => 'https://twitter.com/upcast_project',
