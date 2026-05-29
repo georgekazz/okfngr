@@ -38,16 +38,23 @@ else
     echo "App key already set."
 fi
 
-# ── NOW safe to clear caches ─────────────────────────────
+# ── Clear caches ─────────────────────────────────────────
 php artisan config:clear
 php artisan view:clear
 php artisan route:clear
 
-# ── Wait for database ────────────────────────────────────
+# ── Wait for database (with retry limit) ─────────────────
 echo "Waiting for database connection..."
+MAX_TRIES=30
+TRIES=0
 until php -r "new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:-okfngr}', '${DB_USERNAME:-okfnuser}', '${DB_PASSWORD:-okfnpass}');" 2>/dev/null; do
-    echo "   Database not ready, retrying in 3s..."
-    sleep 3
+    TRIES=$((TRIES + 1))
+    if [ "$TRIES" -ge "$MAX_TRIES" ]; then
+        echo "Database never became ready after ${MAX_TRIES} attempts. Exiting."
+        exit 1
+    fi
+    echo "   Database not ready, retrying in 5s... (${TRIES}/${MAX_TRIES})"
+    sleep 5
 done
 echo "Database connected!"
 
@@ -58,7 +65,7 @@ php artisan migrate --force
 echo "Seeding database..."
 php artisan db:seed --force
 
-# ── Now safe to clear cache (DB exists) ─────────────────
+# ── Cache clear (DB now exists) ──────────────────────────
 php artisan cache:clear || true
 
 # ── Storage ──────────────────────────────────────────────

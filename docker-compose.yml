@@ -24,7 +24,8 @@ services:
     volumes:
       - storage_data:/var/www/html/storage/app/public
     depends_on:
-      - db
+      db:
+        condition: service_healthy   # ← wait for DB to be truly ready
 
   db:
     image: mysql:8.0
@@ -39,6 +40,12 @@ services:
       - "${DB_PORT:-3339}:3306"
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-okfnroot}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
 volumes:
   db_data:
