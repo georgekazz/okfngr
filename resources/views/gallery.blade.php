@@ -397,13 +397,6 @@
             searchInput.addEventListener('input', applyFilters);
         }
 
-        const controls = document.getElementById('galleryControls');
-        if (controls) {
-            window.addEventListener('scroll', () => {
-                controls.classList.toggle('sticky', window.scrollY > 80);
-            });
-        }
-
         // Mobile menu
         document.addEventListener('DOMContentLoaded', () => {
             const toggle = document.querySelector('.mobile-menu-toggle');
