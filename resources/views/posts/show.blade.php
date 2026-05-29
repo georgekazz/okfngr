@@ -305,6 +305,140 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* ── Post Carousel ── */
+        .post-carousel {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .carousel-main {
+            position: relative;
+            background: #000;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .carousel-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.4s ease;
+        }
+
+        .carousel-main-img.fade {
+            opacity: 0;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+            z-index: 10;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: 14px;
+        }
+
+        .carousel-next {
+            right: 14px;
+        }
+
+        .carousel-counter {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-thumbs {
+            display: flex;
+            gap: 6px;
+            padding: 8px;
+            background: #1a1a1a;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #444 #1a1a1a;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 2px;
+        }
+
+        .carousel-thumb {
+            flex-shrink: 0;
+            width: 72px;
+            height: 52px;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            opacity: 0.6;
+        }
+
+        .carousel-thumb:hover {
+            opacity: 0.85;
+        }
+
+        .carousel-thumb.active {
+            border-color: #00D1FF;
+            opacity: 1;
+        }
+
+        .carousel-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .carousel-thumb {
+                width: 56px;
+                height: 42px;
+            }
+
+            .carousel-arrow {
+                width: 34px;
+                height: 34px;
+            }
+        }
     </style>
 </head>
 
@@ -540,26 +674,82 @@
                 </div>
             </header>
 
-            <!-- Featured Image -->
-            @if($post->featured_image)
-                @php
-                    $filename = basename($post->featured_image);
-                    $showFeatured = !str_contains($post->content, $filename)
-                        && !str_contains($post->content, $post->featured_image);
-                @endphp
-                @if($showFeatured)
-                    <div class="mb-10 rounded-2xl overflow-hidden shadow-xl w-full">
-                        <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
-                            class="w-full h-auto block object-cover max-h-[500px]"
-                            onerror="this.parentElement.style.display='none'">
+            <!-- Image Carousel -->
+            @php
+                // Extract all images from content
+                preg_match_all('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $post->content, $matches);
+                $contentImages = $matches[1] ?? [];
+
+                // Build carousel: featured first, then content images
+                $carouselImages = [];
+                if ($post->featured_image) {
+                    $carouselImages[] = [
+                        'src' => asset('storage/' . $post->featured_image),
+                        'alt' => $post->title,
+                    ];
+                }
+                foreach ($contentImages as $src) {
+                    // Avoid duplicates
+                    $alreadyIn = collect($carouselImages)->pluck('src')->contains($src);
+                    if (!$alreadyIn) {
+                        $carouselImages[] = ['src' => $src, 'alt' => $post->title];
+                    }
+                }
+
+                // Strip all images from content
+                $cleanContent = preg_replace('/<figure[^>]*>.*?<\/figure>/is', '', $post->content);
+                $cleanContent = preg_replace('/<img[^>]+>/i', '', $cleanContent);
+                $cleanContent = preg_replace('/<p>\s*<\/p>/i', '', $cleanContent);
+            @endphp
+
+            @if(count($carouselImages) > 0)
+                <div class="post-carousel mb-10" id="postCarousel">
+
+                    {{-- Main image --}}
+                    <div class="carousel-main">
+                        <img id="carouselMainImg" src="{{ $carouselImages[0]['src'] }}"
+                            alt="{{ $carouselImages[0]['alt'] }}" class="carousel-main-img" onclick="openLightbox()"
+                            style="cursor:zoom-in;" onerror="this.parentElement.style.display='none'">
+
+                        @if(count($carouselImages) > 1)
+                            <button class="carousel-arrow carousel-prev" onclick="carouselMove(-1)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <polyline points="15 18 9 12 15 6" />
+                                </svg>
+                            </button>
+                            <button class="carousel-arrow carousel-next" onclick="carouselMove(1)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </button>
+                            <div class="carousel-counter">
+                                <span id="carouselCurrent">1</span> / {{ count($carouselImages) }}
+                            </div>
+                        @endif
                     </div>
-                @endif
+
+                    {{-- Thumbnails --}}
+                    @if(count($carouselImages) > 1)
+                        <div class="carousel-thumbs" id="carouselThumbs">
+                            @foreach($carouselImages as $i => $img)
+                                <div class="carousel-thumb {{ $i === 0 ? 'active' : '' }}" onclick="carouselGoTo({{ $i }})"
+                                    data-index="{{ $i }}">
+                                    <img src="{{ $img['src'] }}" alt="{{ $img['alt'] }}"
+                                        onerror="this.parentElement.style.display='none'">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                </div>
             @endif
 
-            <!-- Post Content -->
+            <!-- Post Content (text only, no images) -->
             <div
                 class="post-content text-base lg:text-[1.05rem] leading-relaxed text-text-primary mb-10 word-break overflow-hidden">
-                {!! $post->content !!}
+                {!! $cleanContent !!}
             </div>
 
             <!-- Tags -->
@@ -622,6 +812,25 @@
                     </a>
                 </div>
             </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="carouselLightbox" onclick="closeLightbox()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92);
+            z-index:9999; cursor:zoom-out; align-items:center; justify-content:center;">
+            <img id="lightboxImg" src="" alt="" style="max-width:92vw; max-height:92vh; object-fit:contain; border-radius:8px;
+                box-shadow:0 20px 60px rgba(0,0,0,0.5); transition:opacity 0.3s ease;">
+            <button onclick="closeLightbox()" style="position:fixed; top:20px; right:24px; background:rgba(255,255,255,0.15);
+                   border:none; color:white; width:44px; height:44px; border-radius:50%;
+                   font-size:1.4rem; cursor:pointer; display:flex; align-items:center;
+                   justify-content:center; transition:background 0.2s;">✕</button>
+            <button onclick="event.stopPropagation(); carouselMove(-1); updateLightboxImg()" style="position:fixed; left:20px; top:50%; transform:translateY(-50%);
+                   background:rgba(255,255,255,0.15); border:none; color:white;
+                   width:48px; height:48px; border-radius:50%; font-size:1.5rem;
+                   cursor:pointer; display:flex; align-items:center; justify-content:center;">‹</button>
+            <button onclick="event.stopPropagation(); carouselMove(1); updateLightboxImg()" style="position:fixed; right:20px; top:50%; transform:translateY(-50%);
+                   background:rgba(255,255,255,0.15); border:none; color:white;
+                   width:48px; height:48px; border-radius:50%; font-size:1.5rem;
+                   cursor:pointer; display:flex; align-items:center; justify-content:center;">›</button>
         </div>
 
         <!-- Comments Section -->
@@ -718,7 +927,7 @@
                         target="_blank" rel="noopener">
                         <img src="{{ asset('img/social/github.png') }}" alt="GitHub" class="w-6 h-6 object-contain">
                     </a>
-                    <a href="https://instagram.com/okgreece" class="opacity-70 hover:opacity-100 transition-opacity"
+                    <a href="https://instagram.com/okfngreece" class="opacity-70 hover:opacity-100 transition-opacity"
                         target="_blank" rel="noopener">
                         <img src="{{ asset('img/social/instagram.png') }}" alt="Instagram"
                             class="w-6 h-6 object-contain">
@@ -867,6 +1076,74 @@
             const data = await res.json();
             return data[0].map(s => s[0]).join('');
         }
+
+        const CAROUSEL_IMAGES = @json(array_values($carouselImages));
+        let carouselIndex = 0;
+
+        function carouselGoTo(index) {
+            const img = document.getElementById('carouselMainImg');
+            const counter = document.getElementById('carouselCurrent');
+            const thumbs = document.querySelectorAll('.carousel-thumb');
+
+            img.classList.add('fade');
+
+            setTimeout(() => {
+                carouselIndex = index;
+                img.src = CAROUSEL_IMAGES[index].src;
+                img.classList.remove('fade');
+                if (counter) counter.textContent = index + 1;
+
+                thumbs.forEach((t, i) => {
+                    t.classList.toggle('active', i === index);
+                });
+
+                if (thumbs[index]) {
+                    thumbs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }, 200);
+        }
+
+        function carouselMove(dir) {
+            const total = CAROUSEL_IMAGES.length;
+            carouselGoTo((carouselIndex + dir + total) % total);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (document.getElementById('postCarousel')) {
+                if (e.key === 'ArrowLeft') carouselMove(-1);
+                if (e.key === 'ArrowRight') carouselMove(1);
+            }
+        });
+
+        // Lightbox
+        function openLightbox() {
+            const lb = document.getElementById('carouselLightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = CAROUSEL_IMAGES[carouselIndex].src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('carouselLightbox').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxImg() {
+            // Keep lightbox in sync when navigating with arrows inside it
+            const lb = document.getElementById('carouselLightbox');
+            if (lb.style.display === 'flex') {
+                document.getElementById('lightboxImg').src = CAROUSEL_IMAGES[carouselIndex].src;
+            }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+            if (document.getElementById('postCarousel')) {
+                if (e.key === 'ArrowLeft') { carouselMove(-1); updateLightboxImg(); }
+                if (e.key === 'ArrowRight') { carouselMove(1); updateLightboxImg(); }
+            }
+        });
     </script>
 </body>
 
