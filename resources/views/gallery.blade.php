@@ -157,9 +157,9 @@
                     @foreach($groups as $group)
                         @php
                             $photoCount = $group->photos->count();
-                            $hasMany    = $photoCount > 3;
-                            $preview    = $group->photos->take(3);
-                            $rest       = $group->photos->skip(3);
+                            $preview = $group->photos->take(2);
+                            $rest = $group->photos->skip(2);
+                            $hasMany = $rest->count() > 0;
                         @endphp
 
                         <div class="timeline-entry" data-year="{{ $group->date->format('Y') }}"
@@ -193,9 +193,8 @@
                                     </span>
                                 </div>
 
-                                <!-- Photo grid preview (first 3) -->
-                                <div class="photo-grid photo-grid-{{ min($photoCount, 3) }}">
-                                    {{-- Preview photos (first 3) --}}
+                                <!-- Photo grid preview (first 2) -->
+                                <div class="photo-grid photo-grid-{{ min($photoCount, 2) }}">
                                     @foreach($preview as $photo)
                                         <div class="photo-thumb"
                                             onclick="openLightbox('{{ asset('storage/' . $photo->path) }}', '{{ addslashes($group->title) }}')">
@@ -212,39 +211,40 @@
                                             </div>
                                         </div>
                                     @endforeach
-
-                                    @if($hasMany)
-                                        <div class="extra-photos" id="extra-{{ $loop->index }}" style="display:none;">
-                                            <div class="photo-grid photo-grid-3">
-                                                @foreach($rest as $photo)
-                                                    <div class="photo-thumb"
-                                                        onclick="openLightbox('{{ asset('storage/' . $photo->path) }}', '{{ addslashes($group->title) }}')">
-                                                        <img src="{{ asset('storage/' . $photo->path) }}" alt="{{ $group->title }}"
-                                                            loading="lazy" onerror="this.parentElement.style.display='none'">
-                                                        <div class="photo-overlay">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2">
-                                                                <circle cx="11" cy="11" r="8" />
-                                                                <path d="M21 21l-4.35-4.35" />
-                                                                <line x1="11" y1="8" x2="11" y2="14" />
-                                                                <line x1="8" y1="11" x2="14" y2="11" />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-                                        <button class="expand-btn" onclick="togglePhotos({{ $loop->index }}, this)">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2.5" class="expand-icon">
-                                                <polyline points="6 9 12 15 18 9" />
-                                            </svg>
-                                            <span
-                                                class="expand-label">{{ __('gallery.show_more', ['count' => $rest->count()]) }}</span>
-                                        </button>
-                                    @endif
                                 </div>
+
+                                @if($hasMany)
+                                    {{-- Expand button --}}
+                                    <button class="expand-btn" onclick="togglePhotos({{ $loop->index }}, this)">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" class="expand-icon">
+                                            <polyline points="6 9 12 15 18 9" />
+                                        </svg>
+                                        <span class="expand-label">{{ __('gallery.show_more', ['count' => $rest->count()]) }}</span>
+                                    </button>
+
+                                    {{-- Hidden extra photos --}}
+                                    <div class="extra-photos" id="extra-{{ $loop->index }}" style="display:none;">
+                                        <div class="photo-grid photo-grid-3">
+                                            @foreach($rest as $photo)
+                                                <div class="photo-thumb"
+                                                    onclick="openLightbox('{{ asset('storage/' . $photo->path) }}', '{{ addslashes($group->title) }}')">
+                                                    <img src="{{ asset('storage/' . $photo->path) }}" alt="{{ $group->title }}"
+                                                        loading="lazy" onerror="this.parentElement.style.display='none'">
+                                                    <div class="photo-overlay">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2">
+                                                            <circle cx="11" cy="11" r="8" />
+                                                            <path d="M21 21l-4.35-4.35" />
+                                                            <line x1="11" y1="8" x2="11" y2="14" />
+                                                            <line x1="8" y1="11" x2="14" y2="11" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
 
                             </div>
                     @endforeach
@@ -313,7 +313,7 @@
     </footer>
 
     <script>
-        
+
         function openLightbox(src, caption) {
             document.getElementById('lightboxImg').src = src;
             document.getElementById('lightboxCaption').textContent = caption;
