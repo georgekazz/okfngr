@@ -25,7 +25,9 @@ services:
       - storage_data:/var/www/html/storage/app/public
     depends_on:
       db:
-        condition: service_healthy   # ← wait for DB to be truly ready
+        condition: service_healthy
+    networks:
+      - okfn_network        # ← add
 
   db:
     image: mysql:8.0
@@ -46,7 +48,13 @@ services:
       timeout: 5s
       retries: 10
       start_period: 30s
+    networks:
+      - okfn_network        # ← add
 
 volumes:
   db_data:
   storage_data:
+
+networks:
+  okfn_network:             # ← add
+    driver: bridge
