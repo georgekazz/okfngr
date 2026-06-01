@@ -43,10 +43,11 @@ php artisan config:clear
 php artisan view:clear
 php artisan route:clear
 
-# ── Wait for database — no limit, keep trying ────────────
+# ── Wait for database — with timeout ─────────────────────
 echo "Waiting for database connection..."
 TRIES=0
-while true; do
+MAX_TRIES=30
+while [ $TRIES -lt $MAX_TRIES ]; do
     TRIES=$((TRIES + 1))
     if php -r "
         try {
@@ -64,9 +65,14 @@ while true; do
         echo "Database connected after ${TRIES} attempts!"
         break
     fi
-    echo "   Database not ready, retrying in 5s... (attempt ${TRIES})"
+    echo "   Database not ready, retrying in 5s... (attempt ${TRIES}/${MAX_TRIES})"
     sleep 5
 done
+
+if [ $TRIES -eq $MAX_TRIES ]; then
+    echo "ERROR: Could not connect to database after ${MAX_TRIES} attempts!"
+    exit 1
+fi
 
 # ── Migrations & seeds ───────────────────────────────────
 echo "Running migrations..."
