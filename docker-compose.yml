@@ -27,7 +27,7 @@ services:
       db:
         condition: service_healthy
     networks:
-      - okfn_network      
+      - okfn_network
 
   db:
     image: mysql:8.0
@@ -48,18 +48,18 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-okfnroot}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 15
+      start_period: 60s
     networks:
-      - okfn_network      
+      - okfn_network
 
 volumes:
   db_data:
   storage_data:
 
 networks:
-  okfn_network:             
+  okfn_network:
     driver: bridge

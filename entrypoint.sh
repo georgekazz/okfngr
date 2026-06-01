@@ -28,7 +28,7 @@ QUEUE_CONNECTION=sync
 FILESYSTEM_DISK=public
 EOF
 
-# ── Generate key FIRST, before any artisan commands ──────
+# ── Generate key FIRST ───────────────────────────────────
 CURRENT_KEY=$(grep "^APP_KEY=" /var/www/html/.env | cut -d'=' -f2)
 if [ -z "$CURRENT_KEY" ]; then
     echo "Generating app key..."
@@ -43,11 +43,22 @@ php artisan config:clear
 php artisan view:clear
 php artisan route:clear
 
-# ── Wait for database (with retry limit) ─────────────────
+# ── Wait for database ────────────────────────────────────
 echo "Waiting for database connection..."
-MAX_TRIES=30
+
+# Give MySQL extra time to fully initialize after healthcheck passes
+sleep 15
+
+MAX_TRIES=40
 TRIES=0
-until php -r "new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:-okfngr}', '${DB_USERNAME:-okfnuser}', '${DB_PASSWORD:-okfnpass}');" 2>/dev/null; do
+until php -r "
+try {
+    new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:-okfngr}', '${DB_USERNAME:-okfnuser}', '${DB_PASSWORD:-okfnpass}');
+    exit(0);
+} catch (Exception \$e) {
+    exit(1);
+}
+" 2>/dev/null; do
     TRIES=$((TRIES + 1))
     if [ "$TRIES" -ge "$MAX_TRIES" ]; then
         echo "Database never became ready after ${MAX_TRIES} attempts. Exiting."
