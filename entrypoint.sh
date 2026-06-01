@@ -28,7 +28,7 @@ QUEUE_CONNECTION=sync
 FILESYSTEM_DISK=public
 EOF
 
-# ── Generate key FIRST ───────────────────────────────────
+# ── Generate key ─────────────────────────────────────────
 CURRENT_KEY=$(grep "^APP_KEY=" /var/www/html/.env | cut -d'=' -f2)
 if [ -z "$CURRENT_KEY" ]; then
     echo "Generating app key..."
@@ -43,31 +43,30 @@ php artisan config:clear
 php artisan view:clear
 php artisan route:clear
 
-# ── Wait for database ────────────────────────────────────
+# ── Wait for database — no limit, keep trying ────────────
 echo "Waiting for database connection..."
-
-# Give MySQL extra time to fully initialize after healthcheck passes
-sleep 15
-
-MAX_TRIES=40
 TRIES=0
-until php -r "
-try {
-    new PDO('mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:-okfngr}', '${DB_USERNAME:-okfnuser}', '${DB_PASSWORD:-okfnpass}');
-    exit(0);
-} catch (Exception \$e) {
-    exit(1);
-}
-" 2>/dev/null; do
+while true; do
     TRIES=$((TRIES + 1))
-    if [ "$TRIES" -ge "$MAX_TRIES" ]; then
-        echo "Database never became ready after ${MAX_TRIES} attempts. Exiting."
-        exit 1
+    if php -r "
+        try {
+            \$pdo = new PDO(
+                'mysql:host=${DB_HOST:-db};port=3306;dbname=${DB_DATABASE:-okfngr}',
+                '${DB_USERNAME:-okfnuser}',
+                '${DB_PASSWORD:-okfnpass}',
+                [\PDO::ATTR_TIMEOUT => 5]
+            );
+            exit(0);
+        } catch (Exception \$e) {
+            exit(1);
+        }
+    " 2>/dev/null; then
+        echo "Database connected after ${TRIES} attempts!"
+        break
     fi
-    echo "   Database not ready, retrying in 5s... (${TRIES}/${MAX_TRIES})"
+    echo "   Database not ready, retrying in 5s... (attempt ${TRIES})"
     sleep 5
 done
-echo "Database connected!"
 
 # ── Migrations & seeds ───────────────────────────────────
 echo "Running migrations..."
@@ -76,7 +75,7 @@ php artisan migrate --force
 echo "Seeding database..."
 php artisan db:seed --force
 
-# ── Cache clear (DB now exists) ──────────────────────────
+# ── Cache clear ──────────────────────────────────────────
 php artisan cache:clear || true
 
 # ── Storage ──────────────────────────────────────────────
