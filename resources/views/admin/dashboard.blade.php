@@ -442,7 +442,6 @@
     </div>
 
     <script>
-        // Expand each day-off range into individual days for the calendar
         const DAY_OFFS = @json($calendarDayOffs);
 
         const DAY_NAMES = ['Κυρ', 'Δευ', 'Τρι', 'Τετ', 'Πεμ', 'Παρ', 'Σαβ'];
@@ -473,7 +472,7 @@
                 const isToday = dateStr === today;
                 const isWeekend = [0, 6].includes(new Date(dateStr).getDay());
 
-                html += `<div class="cal-cell ${isToday ? 'is-today' : ''} ${isWeekend ? 'is-weekend' : ''} ${offs.length ? 'has-offs' : ''}">`;
+                html += `<div class="cal-cell ${isToday ? 'is-today' : ''} ${isWeekend ? 'is-weekend' : ''} ${offs.length ? 'has-offs' : ''}" onclick="openDayOffModal('${dateStr}')" style="cursor:pointer;">`;
                 html += `<span class="cal-num">${day}</span>`;
 
                 if (offs.length) {
@@ -520,7 +519,159 @@
         }
 
         buildCalendar();
+
+        function openDayOffModal(dateStr) {
+            document.getElementById('modalStartDate').value = dateStr;
+            document.getElementById('modalEndDate').value = dateStr;
+            updateTotalDays();
+            document.getElementById('dayOffModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDayOffModal() {
+            document.getElementById('dayOffModal').style.display = 'none';
+            document.body.style.overflow = '';
+            document.getElementById('dayOffForm').reset();
+            document.getElementById('totalDaysPreview').style.display = 'none';
+        }
+
+        function updateTotalDays() {
+            const start = document.getElementById('modalStartDate').value;
+            const end = document.getElementById('modalEndDate').value;
+            const preview = document.getElementById('totalDaysPreview');
+            const text = document.getElementById('totalDaysText');
+
+            if (start && end && end >= start) {
+                const s = new Date(start);
+                const e = new Date(end);
+                let days = 0;
+                let cursor = new Date(s);
+                while (cursor <= e) {
+                    const dow = cursor.getDay();
+                    if (dow !== 0 && dow !== 6) days++;
+                    cursor.setDate(cursor.getDate() + 1);
+                }
+                text.textContent = days + (days === 1 ? ' εργάσιμη ημέρα' : ' εργάσιμες ημέρες');
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        document.getElementById('modalStartDate')?.addEventListener('change', () => {
+            const s = document.getElementById('modalStartDate').value;
+            const e = document.getElementById('modalEndDate').value;
+            if (!e || e < s) document.getElementById('modalEndDate').value = s;
+            updateTotalDays();
+        });
+
+        document.getElementById('modalEndDate')?.addEventListener('change', updateTotalDays);
+
+        document.getElementById('dayOffModal')?.addEventListener('click', function (e) {
+            if (e.target === this) closeDayOffModal();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeDayOffModal();
+        });
     </script>
+
+    {{-- Day Off Modal --}}
+    <div id="dayOffModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+     z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+        <div style="background:white; border-radius:16px; padding:2rem; width:100%; max-width:480px;
+                margin:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h3 style="font-size:1.1rem; font-weight:700; color:#1a1a1a;">Προσθήκη Άδειας</h3>
+                <button onclick="closeDayOffModal()"
+                    style="background:none; border:none; font-size:1.4rem; cursor:pointer; color:#aaa; line-height:1;">✕</button>
+            </div>
+
+            <form id="dayOffForm" method="POST"
+                action="{{ route('admin.dayoffs.store', ['locale' => app()->getLocale()]) }}">
+                @csrf
+
+                {{-- Date range --}}
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1rem;">
+                    <div>
+                        <label
+                            style="font-size:0.82rem; font-weight:700; color:#555; display:block; margin-bottom:5px;">
+                            Από <span style="color:#dc3545;">*</span>
+                        </label>
+                        <input type="date" name="start_date" id="modalStartDate" required style="width:100%; padding:9px 12px; border:2px solid #e8e8e8; border-radius:8px;
+                                  font-size:0.88rem; font-family:inherit; outline:none;">
+                    </div>
+                    <div>
+                        <label
+                            style="font-size:0.82rem; font-weight:700; color:#555; display:block; margin-bottom:5px;">
+                            Έως <span style="color:#dc3545;">*</span>
+                        </label>
+                        <input type="date" name="end_date" id="modalEndDate" required style="width:100%; padding:9px 12px; border:2px solid #e8e8e8; border-radius:8px;
+                                  font-size:0.88rem; font-family:inherit; outline:none;">
+                    </div>
+                </div>
+
+                {{-- User --}}
+                <div style="margin-bottom:1rem;">
+                    <label style="font-size:0.82rem; font-weight:700; color:#555; display:block; margin-bottom:5px;">
+                        Χρήστης <span style="color:#dc3545;">*</span>
+                    </label>
+                    <select name="user_id" required style="width:100%; padding:9px 12px; border:2px solid #e8e8e8; border-radius:8px;
+                               font-size:0.88rem; font-family:inherit; outline:none; background:white;">
+                        <option value="">-- Επιλέξτε χρήστη --</option>
+                        @foreach($allUsers as $u)
+                            <option value="{{ $u->id }}">{{ $u->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Type --}}
+                <div style="margin-bottom:1rem;">
+                    <label style="font-size:0.82rem; font-weight:700; color:#555; display:block; margin-bottom:5px;">
+                        Τύπος <span style="color:#dc3545;">*</span>
+                    </label>
+                    <select name="type" required style="width:100%; padding:9px 12px; border:2px solid #e8e8e8; border-radius:8px;
+                               font-size:0.88rem; font-family:inherit; outline:none; background:white;">
+                        <option value="">-- Επιλέξτε τύπο --</option>
+                        <option value="vacation">Κανονική Άδεια</option>
+                        <option value="sick">Αναρρωτική Άδεια</option>
+                        <option value="personal">Προσωπική Άδεια</option>
+                        <option value="other">Άλλο</option>
+                    </select>
+                </div>
+
+                {{-- Reason --}}
+                <div style="margin-bottom:1.5rem;">
+                    <label style="font-size:0.82rem; font-weight:700; color:#555; display:block; margin-bottom:5px;">
+                        Λόγος <span style="font-size:0.75rem; color:#aaa; font-weight:400;">(προαιρετικό)</span>
+                    </label>
+                    <textarea name="reason" rows="2" placeholder="Σύντομη περιγραφή..." style="width:100%; padding:9px 12px; border:2px solid #e8e8e8; border-radius:8px;
+                                 font-size:0.88rem; font-family:inherit; outline:none; resize:none;"></textarea>
+                </div>
+
+                {{-- Total days preview --}}
+                <div id="totalDaysPreview" style="display:none; background:rgba(0,209,255,0.08); border:1.5px solid rgba(0,209,255,0.2);
+                        border-radius:8px; padding:10px 14px; margin-bottom:1.25rem;
+                        font-size:0.85rem; font-weight:600; color:#00a8d6;">
+                    📅 <span id="totalDaysText"></span>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button type="button" onclick="closeDayOffModal()" style="flex:1; padding:10px; border:2px solid #e0e0e0; border-radius:8px;
+                               background:white; font-size:0.88rem; font-weight:600; cursor:pointer;
+                               color:#666; font-family:inherit;">
+                        Ακύρωση
+                    </button>
+                    <button type="submit" style="flex:2; padding:10px; border:none; border-radius:8px;
+                               background:linear-gradient(135deg,#00D1FF,#00b8e6); color:white;
+                               font-size:0.88rem; font-weight:700; cursor:pointer; font-family:inherit;">
+                        Αποθήκευση Άδειας
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

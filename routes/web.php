@@ -148,6 +148,8 @@ Route::group([
         Route::put('/team-links/{id}', [AdminController::class, 'updateTeamLink'])->name('team-links.update');
         Route::delete('/team-links/{id}', [AdminController::class, 'destroyTeamLink'])->name('team-links.destroy');
 
+        Route::post('/dayoffs', [AdminController::class, 'storeDayOff'])->name('dayoffs.store');
+
         // Logout
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     });

@@ -409,4 +409,37 @@ class AdminController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function storeDayOff(Request $request, $locale)
+    {
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'type' => 'required|string',
+            'reason' => 'nullable|string|max:500',
+        ]);
+
+        $start = \Carbon\Carbon::parse($validated['start_date']);
+        $end = \Carbon\Carbon::parse($validated['end_date']);
+        $days = 0;
+        $cursor = $start->copy();
+        while ($cursor->lte($end)) {
+            if (!$cursor->isWeekend())
+                $days++;
+            $cursor->addDay();
+        }
+
+        \App\Models\DayOff::create([
+            'user_id' => $validated['user_id'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'total_days' => $days,
+            'type' => $validated['type'],
+            'reason' => $validated['reason'] ?? null,
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Η άδεια καταχωρήθηκε επιτυχώς!');
+    }
 }
