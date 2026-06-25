@@ -13,12 +13,24 @@ return [
 
     'apps' => [
         [
+            'title' => 'CyberKG',
+            'description' => 'CyberKG is a full-stack web platform for cybersecurity threat intelligence analysis. It provides an end-to-end pipeline for converting CAPE sandbox malware analysis reports into STIX 2.1 threat intelligence bundles and UCO/RDF knowledge graphs, stored in a Virtuoso triplestore.',
+            'image' => 'cyberkg.png',
+            'links' => [
+                [
+                    'label' => 'Website',
+                    'url' => 'https://cyberkg.iee.ihu.gr/',
+                ],
+            ],
+            'tags' => ['Cybersecurity', 'STIX', 'UCO'],
+        ],
+        [
             'title' => 'Alignment',
             'description' => 'The Alignment tool is an online platform aimed at collaborative, assisted entity linking. The application can be used for one-to-one creation of link sets between knowledge graphs, or for updating existing links.',
             'image' => 'alignment.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://alignment.okfn.gr/',
                 ],
             ],
@@ -30,7 +42,7 @@ return [
             'image' => 'frictionless.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'https://frictionlessdata.io',
                 ],
                 [
@@ -47,7 +59,7 @@ return [
             'image' => 'red-flag.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'https://redflags.iee.ihu.gr/',
                 ],
             ],
@@ -59,7 +71,7 @@ return [
             'image' => 'OpEnergy.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://openergy.okfn.gr/',
                 ],
             ],
@@ -71,7 +83,7 @@ return [
             'image' => 'kpi-logo.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://kpi.okfn.gr/',
                 ],
                 [
@@ -88,7 +100,7 @@ return [
             'image' => 'participatory-logo.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://participatory-budget.okfn.gr/',
                 ],
                 [
@@ -105,7 +117,7 @@ return [
             'image' => 'placeholder.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://trafficstatusprediction.imet.gr/',
                 ],
                 [
@@ -135,7 +147,7 @@ return [
             'image' => 'indigo.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'https://apps.openbudgets.eu/indigo',
                 ],
             ],
@@ -147,7 +159,7 @@ return [
             'image' => 'dbpedia-logo.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'https://el.dbpedia.org',
                 ],
             ],
@@ -159,7 +171,7 @@ return [
             'image' => 'CKAN.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'https://ckan.org/',
                 ],
             ],
@@ -171,7 +183,7 @@ return [
             'image' => 'OpenSpending.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://next.openspending.org/',
                 ],
                 [
@@ -188,7 +200,7 @@ return [
             'image' => 'Euroleague-Timeline.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://wiki.el.dbpedia.org/apps/Euroleague/',
                 ],
             ],
@@ -200,7 +212,7 @@ return [
             'image' => 'veroia-linked-data-library.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://libver.math.auth.gr/drupal/',
                 ],
             ],
@@ -225,7 +237,7 @@ return [
             'image' => 'cities-census.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://gr-city.census.okfn.org/',
                 ],
             ],
@@ -237,7 +249,7 @@ return [
             'image' => 'OGP_logo.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://ogp.okfn.gr/',
                 ],
             ],
@@ -249,7 +261,7 @@ return [
             'image' => 'placeholder.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://mappings.dbpedia.org/index.php/MappingTool',
                 ],
             ],
@@ -261,7 +273,7 @@ return [
             'image' => 'placeholder.png',
             'links' => [
                 [
-                    'label' => 'Ιστοσελίδα',
+                    'label' => 'Website',
                     'url' => 'http://wordnet.okfn.gr/',
                 ],
             ],

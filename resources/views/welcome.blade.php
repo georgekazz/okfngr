@@ -93,6 +93,25 @@
         </div>
     </header>
 
+    {{-- Global Search Bar --}}
+    <div class="global-search-bar">
+        <div class="global-search" id="globalSearch">
+            <div class="search-input-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                <input type="text" id="globalSearchInput" placeholder="{{ __('home.search.placeholder') }}"
+                    autocomplete="off" spellcheck="false">
+                <button id="searchClear" onclick="clearSearch()" style="display:none;">✕</button>
+            </div>
+            <div class="search-dropdown" id="searchDropdown" style="display:none;">
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 57px;"></div>
+
     <section class="hero">
         <div class="hero-content">
             <h1>{{ __('home.hero.title') }}</h1>
@@ -354,6 +373,100 @@
                 });
             });
         });
+
+        // ── Global Search ─────────────────────────────────────
+        const searchInput = document.getElementById('globalSearchInput');
+        const searchDropdown = document.getElementById('searchDropdown');
+        const searchResults = document.getElementById('searchResults');
+        const searchClear = document.getElementById('searchClear');
+        const SEARCH_URL = '{{ route("search", ["locale" => app()->getLocale()]) }}';
+        const NO_RESULTS = '{{ __("home.search.no_results") }}';
+
+        let searchTimer = null;
+
+        searchInput?.addEventListener('input', function () {
+            const q = this.value.trim();
+            searchClear.style.display = q ? 'block' : 'none';
+            clearTimeout(searchTimer);
+
+            if (q.length < 2) {
+                searchDropdown.style.display = 'none';
+                return;
+            }
+
+            searchTimer = setTimeout(() => doSearch(q), 300);
+        });
+
+        async function doSearch(q) {
+            try {
+                const res = await fetch(`${SEARCH_URL}?q=${encodeURIComponent(q)}`);
+                const data = await res.json();
+                renderResults(data, q);
+            } catch (e) {
+                console.error('Search error:', e);
+            }
+        }
+
+        function renderResults(data, q) {
+            if (!data.length) {
+                searchResults.innerHTML = `<div class="search-no-results">${NO_RESULTS} "<strong>${q}</strong>"</div>`;
+                searchDropdown.style.display = 'block';
+                return;
+            }
+
+            const icons = {
+                post: '📄',
+                event: '📅',
+                page: '🔗',
+            };
+
+            let html = '';
+            data.forEach(item => {
+                const img = item.image
+                    ? `<img src="${item.image}" class="sri-img" alt="" onerror="this.style.display='none'">`
+                    : `<div class="sri-icon ${item.icon}">${icons[item.icon] || '📄'}</div>`;
+
+                html += `
+            <a href="${item.url}" class="search-result-item">
+                ${img}
+                <div class="sri-body">
+                    <div class="sri-label">${item.label}</div>
+                    <div class="sri-title">${highlightMatch(item.title, q)}</div>
+                    ${item.excerpt ? `<div class="sri-excerpt">${item.excerpt}</div>` : ''}
+                </div>
+            </a>`;
+            });
+
+            searchResults.innerHTML = html;
+            searchDropdown.style.display = 'block';
+        }
+
+        function highlightMatch(text, q) {
+            const regex = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<mark style="background:rgba(0,209,255,0.2);border-radius:2px;padding:0 2px;">$1</mark>');
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            searchClear.style.display = 'none';
+            searchDropdown.style.display = 'none';
+        }
+
+        // Close on outside click
+        document.addEventListener('click', e => {
+            if (!document.getElementById('globalSearch')?.contains(e.target)) {
+                searchDropdown.style.display = 'none';
+            }
+        });
+
+        // Navigate with keyboard
+        searchInput?.addEventListener('keydown', e => {
+            if (e.key === 'Escape') clearSearch();
+            if (e.key === 'Enter') {
+                const first = searchResults.querySelector('.search-result-item');
+                if (first) window.location.href = first.href;
+            }
+        }); 
     </script>
 </body>
 

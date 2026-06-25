@@ -46,6 +46,9 @@ Route::group([
 
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
+    Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+
     //google translate
     Route::post('/translate-proxy', function (Request $request) {
         $text = $request->input('q', '');

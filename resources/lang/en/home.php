@@ -44,6 +44,15 @@ return [
         'mission_4' => 'A world where information and data are accessible and transparent to everyone.',
     ],
 
+    'search' => [
+        'placeholder' => 'Search...',
+        'type_post' => 'Article',
+        'type_event' => 'Event',
+        'type_page' => 'Page',
+        'no_results' => 'No results found',
+        'see_all' => 'See all results',
+    ],
+
     // Slider
     'slider' => [
         'schools_title' => 'Schools of Data',

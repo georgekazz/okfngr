@@ -21,7 +21,7 @@ return [
 
         'gallery' => 'Φωτογραφικό Αρχείο',
 
-        
+
         'projects' => 'Ερευνητικά Έργα',
         'old_apps' => 'Παλιά Έργα',
         'our_actions' => 'Οι Δράσεις μας',
@@ -36,6 +36,15 @@ return [
         'datasets' => 'Σύνολα Δεδομένων',
         'tools' => 'Εργαλεία',
         'resources' => 'Πόροι',
+    ],
+
+    'search' => [
+        'placeholder' => 'Αναζήτηση...',
+        'type_post' => 'Άρθρο',
+        'type_event' => 'Εκδήλωση',
+        'type_page' => 'Σελίδα',
+        'no_results' => 'Δεν βρέθηκαν αποτελέσματα',
+        'see_all' => 'Δείτε όλα τα αποτελέσματα',
     ],
 
     // Hero Section
