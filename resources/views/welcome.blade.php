@@ -10,6 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+
+    {{-- Open Graph / Social Share --}}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ __('home.hero_title') }} - Open Knowledge Greece">
+    <meta property="og:description" content="{{ __('home.hero_subtitle') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('og-images/mainpage.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Open Knowledge Greece">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'el' ? 'el_GR' : 'en_US' }}">
+
+    {{-- Twitter/X --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ __('home.hero_title') }} - Open Knowledge Greece">
+    <meta name="twitter:description" content="{{ __('home.hero_subtitle') }}">
+    <meta name="twitter:image" content="{{ asset('img/og-image.jpg') }}">
+
+    {{-- General SEO --}}
+    <meta name="description" content="{{ __('home.hero_subtitle') }}">
 </head>
 
 <body>
