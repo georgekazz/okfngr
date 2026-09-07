@@ -65,6 +65,7 @@ return [
                 'linkedin' => 'https://www.linkedin.com/in/george-christoforos-kazlaris',
                 'github' => 'https://github.com/georgekazz',
                 'email' => 'grkazz@okfn.gr',
+                'website' => 'https://users.iee.ihu.gr/~georkazl/',
             ]
         ],
         [
