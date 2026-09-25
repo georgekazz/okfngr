@@ -957,3 +957,22 @@
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(173, 255, 237, 0.3);
 }
+
+.member-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, var(--color-cyan), #00b8e6);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 14px rgba(0, 209, 255, 0.35);
+    white-space: nowrap;
+}

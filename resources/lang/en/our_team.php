@@ -61,6 +61,7 @@ return [
             'role' => 'Developer, Researcher, PhD candidate',
             'bio' => 'George-Christophoros Kazlaris completed his studies at the Department of Computer Science and Electronic Engineering of the International Hellenic University in Thessaloniki. His thesis focused on the development of educational Android applications for primary school students, utilizing augmented reality technology, and led to important scientific publications in this field. He works as a researcher and programmer, with experience in various programming language, such as Java, C# and Kotlin. He actively participates in research projects in collaboration with the Open Knowledge Foundation Greece. At the same time, he is working on a doctoral thesis with a research topic on educational applications for collaborative learning through augmented reality, which reflects his dedication to promoting innovation in this academic field.',
             'image' => 'people-newimg/kazlaris.png',
+            'badge' => 'Creator of this Website',
             'social' => [
                 'linkedin' => 'https://www.linkedin.com/in/george-christoforos-kazlaris',
                 'github' => 'https://github.com/georgekazz',

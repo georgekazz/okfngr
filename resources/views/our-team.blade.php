@@ -25,37 +25,54 @@
                 <div class="nav-item has-dropdown">
                     <a href="#" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
-                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
+                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
-                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
-                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.governance') }}</a>
-                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
+                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.board') }}</a>
+                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.governance') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                         <a href="{{ route('gallery', ['locale' => app()->getLocale()]) }}"
                             class="dropdown-item">{{ __('home.nav.gallery') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.projects') }}</a>
-                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.apps') }}</a>
-                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
-                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.media') }}</a>
-                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.editions') }}</a>
+                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.apps') }}</a>
+                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
+                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.media') }}</a>
+                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
-                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
-                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
+                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.open_data') }}</a>
+                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.how_to') }}</a>
+                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.why_open') }}</a>
                     </div>
                 </div>
             </nav>
@@ -64,11 +81,13 @@
                     <span>{{ __('home.nav.blog') }}</span>
                 </a>
                 <div class="lang-switcher">
-                    <a href="{{ route('our-team', ['locale' => 'en']) }}" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                    <a href="{{ route('our-team', ['locale' => 'en']) }}"
+                        class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
                         EN
                     </a>
-                    <a href="{{ route('our-team', ['locale' => 'el']) }}" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
+                    <a href="{{ route('our-team', ['locale' => 'el']) }}"
+                        class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
                         <img src="{{ asset('img/gr-flag.png') }}" alt="Ελληνικά" class="flag-icon">
                         EL
                     </a>
@@ -106,66 +125,88 @@
 
             <div class="team-grid">
                 @foreach(__('our_team.members') as $member)
-                <div class="team-member">
-                    <div class="member-image-wrapper">
-                        <div class="member-image">
-                            <img src="{{ asset('img/' . $member['image']) }}" alt="{{ $member['name'] }}" onerror="this.src='{{ asset('img/people/placeholder.png') }}'">
-                        </div>
-                        <div class="member-overlay">
-                            <div class="social-links">
-                                @if(isset($member['social']['twitter']) && $member['social']['twitter'])
-                                <a href="{{ $member['social']['twitter'] }}" target="_blank" rel="noopener" class="social-btn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                    <div class="team-member">
+                        <div class="member-image-wrapper">
+                            @if(isset($member['badge']))
+                                <span class="member-badge">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="16 18 22 12 16 6" />
+                                        <polyline points="8 6 2 12 8 18" />
                                     </svg>
-                                </a>
-                                @endif
+                                    {{ $member['badge'] }}
+                                </span>
+                            @endif
+                            <div class="member-image">
+                                <img src="{{ asset('img/' . $member['image']) }}" alt="{{ $member['name'] }}"
+                                    onerror="this.src='{{ asset('img/people/placeholder.png') }}'">
+                            </div>
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    @if(isset($member['social']['twitter']) && $member['social']['twitter'])
+                                        <a href="{{ $member['social']['twitter'] }}" target="_blank" rel="noopener"
+                                            class="social-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                                            </svg>
+                                        </a>
+                                    @endif
 
-                                @if(isset($member['social']['linkedin']) && $member['social']['linkedin'])
-                                <a href="{{ $member['social']['linkedin'] }}" target="_blank" rel="noopener" class="social-btn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                                        <circle cx="4" cy="4" r="2" />
-                                    </svg>
-                                </a>
-                                @endif
+                                    @if(isset($member['social']['linkedin']) && $member['social']['linkedin'])
+                                        <a href="{{ $member['social']['linkedin'] }}" target="_blank" rel="noopener"
+                                            class="social-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                                <circle cx="4" cy="4" r="2" />
+                                            </svg>
+                                        </a>
+                                    @endif
 
-                                @if(isset($member['social']['github']) && $member['social']['github'])
-                                <a href="{{ $member['social']['github'] }}" target="_blank" rel="noopener" class="social-btn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                                    </svg>
-                                </a>
-                                @endif
+                                    @if(isset($member['social']['github']) && $member['social']['github'])
+                                        <a href="{{ $member['social']['github'] }}" target="_blank" rel="noopener"
+                                            class="social-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                                            </svg>
+                                        </a>
+                                    @endif
 
-                                @if(isset($member['social']['email']) && $member['social']['email'])
-                                <a href="mailto:{{ $member['social']['email'] }}" class="social-btn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                        <polyline points="22,6 12,13 2,6" />
-                                    </svg>
-                                </a>
-                                @endif
+                                    @if(isset($member['social']['email']) && $member['social']['email'])
+                                        <a href="mailto:{{ $member['social']['email'] }}" class="social-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2">
+                                                <path
+                                                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                                <polyline points="22,6 12,13 2,6" />
+                                            </svg>
+                                        </a>
+                                    @endif
 
-                                @if(isset($member['social']['website']) && $member['social']['website'])
-                                <a href="{{ $member['social']['website'] }}" target="_blank" rel="noopener" class="social-btn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <line x1="2" y1="12" x2="22" y2="12" />
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                                    </svg>
-                                </a>
-                                @endif
+                                    @if(isset($member['social']['website']) && $member['social']['website'])
+                                        <a href="{{ $member['social']['website'] }}" target="_blank" rel="noopener"
+                                            class="social-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <line x1="2" y1="12" x2="22" y2="12" />
+                                                <path
+                                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                            </svg>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="member-info">
-                        <h3 class="member-name">{{ $member['name'] }}</h3>
-                        <p class="member-role">{{ $member['role'] }}</p>
-                        <p class="member-bio">{{ $member['bio'] }}</p>
+                        <div class="member-info">
+                            <h3 class="member-name">{{ $member['name'] }}</h3>
+                            <p class="member-role">{{ $member['role'] }}</p>
+                            <p class="member-bio">{{ $member['bio'] }}</p>
+                        </div>
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -181,29 +222,29 @@
 
             <div class="volunteers-grid">
                 @php
-                $volunteers = __('our_team.volunteer_members');
-                // Convert to array if it's not already
-                if (!is_array($volunteers)) {
-                $volunteers = [];
-                }
+                    $volunteers = __('our_team.volunteer_members');
+                    // Convert to array if it's not already
+                    if (!is_array($volunteers)) {
+                        $volunteers = [];
+                    }
                 @endphp
 
                 @if(empty($volunteers))
-                <p>No volunteers found.</p>
+                    <p>No volunteers found.</p>
                 @else
-                @foreach($volunteers as $index => $volunteer)
-                <div class="volunteer-card" data-volunteer="{{ $index }}">
-                    <div class="volunteer-image">
-                        <img src="{{ asset('img/' . ($volunteer['image'] ?? 'people/placeholder.png')) }}"
-                            alt="{{ $volunteer['name'] ?? 'Volunteer' }}"
-                            onerror="this.onerror=null; this.src='{{ asset('img/people/placeholder.png') }}';">
-                        <div class="volunteer-overlay">
-                            <span class="view-bio-text">{{ __('our_team.volunteers.view_bio') }}</span>
+                    @foreach($volunteers as $index => $volunteer)
+                        <div class="volunteer-card" data-volunteer="{{ $index }}">
+                            <div class="volunteer-image">
+                                <img src="{{ asset('img/' . ($volunteer['image'] ?? 'people/placeholder.png')) }}"
+                                    alt="{{ $volunteer['name'] ?? 'Volunteer' }}"
+                                    onerror="this.onerror=null; this.src='{{ asset('img/people/placeholder.png') }}';">
+                                <div class="volunteer-overlay">
+                                    <span class="view-bio-text">{{ __('our_team.volunteers.view_bio') }}</span>
+                                </div>
+                            </div>
+                            <h3 class="volunteer-name">{{ $volunteer['name'] ?? 'Volunteer' }}</h3>
                         </div>
-                    </div>
-                    <h3 class="volunteer-name">{{ $volunteer['name'] ?? 'Volunteer' }}</h3>
-                </div>
-                @endforeach
+                    @endforeach
                 @endif
             </div>
         </div>
@@ -241,9 +282,10 @@
         <div class="content-container">
             <div class="memory-teaser-content">
                 <div class="memory-teaser-icon">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
                     </svg>
                 </div>
                 <h3>{{ __('our_team.in_memory_teaser.title') }}</h3>
@@ -298,19 +340,20 @@
             </div>
 
             <div class="footer-text">
-                <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}</p>
+                <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}
+                </p>
                 <p style="margin-top: 1rem;">{{ __('home.footer.copyright', ['year' => date('Y')]) }}</p>
             </div>
         </div>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Mobile menu toggle
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const nav = document.querySelector('nav');
 
             if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener('click', function() {
+                mobileMenuToggle.addEventListener('click', function () {
                     nav.classList.toggle('active');
                 });
             }
@@ -318,7 +361,7 @@
             const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
 
             navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
+                item.addEventListener('click', function (e) {
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         const parent = this.parentElement;
@@ -341,7 +384,7 @@
             const volunteerCards = document.querySelectorAll('.volunteer-card');
 
             volunteerCards.forEach(card => {
-                card.addEventListener('click', function() {
+                card.addEventListener('click', function () {
                     const index = this.dataset.volunteer;
                     const volunteer = volunteers[index];
 
@@ -406,13 +449,13 @@
             });
 
             // Close modal
-            closeModal.addEventListener('click', function() {
+            closeModal.addEventListener('click', function () {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
             });
 
             // Close on overlay click
-            modal.addEventListener('click', function(e) {
+            modal.addEventListener('click', function (e) {
                 if (e.target === modal) {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
@@ -420,7 +463,7 @@
             });
 
             // Close on ESC key
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
