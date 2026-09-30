@@ -10,11 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:image:alt" content="Open Knowledge Greece">
 
     {{-- Open Graph / Social Share --}}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ __('home.hero_title') }} - Open Knowledge Greece">
-    <meta property="og:description" content="{{ __('home.hero_subtitle') }}">
+    <meta property="og:title" content="Open Knowledge Greece">
+    <!-- <meta property="og:description" content="{{ __('home.hero_subtitle') }}"> -->
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ asset('img/og-images/mainpage.png') }}">
     <meta property="og:image:width" content="1200">
@@ -24,11 +26,10 @@
 
     {{-- Twitter/X --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ __('home.hero_title') }} - Open Knowledge Greece">
-    <meta name="twitter:description" content="{{ __('home.hero_subtitle') }}">
+    <meta name="twitter:title" content="Open Knowledge Greece">
     <meta name="twitter:image" content="{{ asset('img/og-images/mainpage.png') }}">
     {{-- General SEO --}}
-    <meta name="description" content="{{ __('home.hero_subtitle') }}">
+    <meta name="description" content="{{ __('home.hero.mission_1') }}">
 </head>
 
 <body>
