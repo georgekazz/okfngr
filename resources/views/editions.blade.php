@@ -11,6 +11,29 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/editions.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Open Graph / Social Share --}}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Open Knowledge Greece - {{ __('home.nav.editions') }}">
+    <meta property="og:description"
+        content="{{ Str::limit(__('editions.intro.text') ?? __('home.hero.mission_1'), 155) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('img/og-images/ogeditions.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Open Knowledge Greece - {{ __('home.nav.editions') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Open Knowledge Greece">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'el' ? 'el_GR' : 'en_US' }}">
+
+    {{-- Twitter/X --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@okfngr">
+    <meta name="twitter:title" content="Open Knowledge Greece - {{ __('home.nav.editions') }}">
+    <meta name="twitter:description"
+        content="{{ Str::limit(__('editions.intro.text') ?? __('home.hero.mission_1'), 155) }}">
+    <meta name="twitter:image" content="{{ asset('img/og-images/ogeditions.png') }}">
 </head>
 
 <body>

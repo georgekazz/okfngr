@@ -11,6 +11,29 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/research-projects.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Open Graph / Social Share --}}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Open Knowledge Greece - {{ __('home.nav.projects') }}">
+    <meta property="og:description"
+        content="{{ Str::limit(__('projects.intro.text') ?? __('home.hero.mission_1'), 155) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('img/og-images/ogresearchproject.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Open Knowledge Greece - {{ __('home.nav.projects') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Open Knowledge Greece">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'el' ? 'el_GR' : 'en_US' }}">
+
+    {{-- Twitter/X --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@okfngr">
+    <meta name="twitter:title" content="Open Knowledge Greece - {{ __('home.nav.projects') }}">
+    <meta name="twitter:description"
+        content="{{ Str::limit(__('projects.intro.text') ?? __('home.hero.mission_1'), 155) }}">
+    <meta name="twitter:image" content="{{ asset('img/og-images/ogresearchproject.png') }}">
 </head>
 
 <body>
@@ -162,16 +185,18 @@
                                         </div>
                                         @if($isCompleted)
                                             <span class="timeline-tag tag-completed">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                                    <polyline points="20 6 9 17 4 12"/>
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="3">
+                                                    <polyline points="20 6 9 17 4 12" />
                                                 </svg>
                                                 {{ __('projects.timeline.completed') }}
                                             </span>
                                         @elseif($isUpcoming)
                                             <span class="timeline-tag tag-upcoming">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <circle cx="12" cy="12" r="10"/>
-                                                    <polyline points="12 6 12 12 16 14"/>
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <circle cx="12" cy="12" r="10" />
+                                                    <polyline points="12 6 12 12 16 14" />
                                                 </svg>
                                                 {{ __('projects.timeline.upcoming') }}
                                             </span>
@@ -190,11 +215,11 @@
                                     </div>
 
                                     @if(!$isCompleted && !$isUpcoming)
-                                        <div class="timeline-remaining">
-                                            {{ $end->diffInMonths($now) > 0
-                                                ? __('projects.timeline.months_left', ['months' => $now->diffInMonths($end)])
-                                                : __('projects.timeline.ending_soon') }}
-                                        </div>
+                                                    <div class="timeline-remaining">
+                                                        {{ $end->diffInMonths($now) > 0
+                                        ? __('projects.timeline.months_left', ['months' => $now->diffInMonths($end)])
+                                        : __('projects.timeline.ending_soon') }}
+                                                    </div>
                                     @endif
                                 </div>
                             @endif

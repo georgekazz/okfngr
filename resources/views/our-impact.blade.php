@@ -11,6 +11,30 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/our-impact.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Open Graph / Social Share --}}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Open Knowledge Greece - {{ __('home.nav.our_impact') }}">
+    <meta property="og:description"
+        content="{{ Str::limit(__('our_impact.intro.text') ?? __('home.hero.mission_1'), 155) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('img/og-images/ogimpact.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Open Knowledge Greece - {{ __('home.nav.our_impact') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Open Knowledge Greece">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'el' ? 'el_GR' : 'en_US' }}">
+
+    {{-- Twitter/X --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@okfngr">
+    <meta name="twitter:title" content="Open Knowledge Greece - {{ __('home.nav.our_impact') }}">
+    <meta name="twitter:description"
+        content="{{ Str::limit(__('our_impact.intro.text') ?? __('home.hero.mission_1'), 155) }}">
+    <meta name="twitter:image" content="{{ asset('img/og-images/ogimpact.png') }}">
+
 </head>
 
 <body>
@@ -25,37 +49,54 @@
                 <div class="nav-item has-dropdown">
                     <a href="#" class="nav-link">{{ __('home.nav.about') }} <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
-                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
+                        <a href="{{ route('about', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_mission') }}</a>
+                        <a href="{{ route('vision-and-values', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.who_we_are') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.who_we_are2') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.team') }}</a>
-                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.board') }}</a>
-                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.governance') }}</a>
-                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
+                        <a href="{{ route('our-team', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.team') }}</a>
+                        <a href="{{ route('board-of-directors', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.board') }}</a>
+                        <a href="{{ route('governance', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.governance') }}</a>
+                        <a href="{{ route('our-impact', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.our_impact') }}</a>
                         <a href="{{ route('gallery', ['locale' => app()->getLocale()]) }}"
                             class="dropdown-item">{{ __('home.nav.gallery') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.what_we_do') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.projects') }}</a>
-                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.apps') }}</a>
-                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
-                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.media') }}</a>
-                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.editions') }}</a>
+                        <a href="{{ route('researchProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.projects') }}</a>
+                        <a href="{{ route('applications', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.apps') }}</a>
+                        <a href="{{ route('oldProjects', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.old_apps') }}</a>
+                        <a href="{{ route('media', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.media') }}</a>
+                        <a href="{{ route('editions', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.editions') }}</a>
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span class="dropdown-arrow">▼</span></a>
+                    <a href="#" class="nav-link">{{ __('home.nav.open_data') }} <span
+                            class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.open_data') }}</a>
-                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.how_to') }}</a>
-                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}" class="dropdown-item">{{ __('home.nav.why_open') }}</a>
+                        <a href="{{ route('openData', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.open_data') }}</a>
+                        <a href="{{ route('howTo', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.how_to') }}</a>
+                        <a href="{{ route('whyOpen', ['locale' => app()->getLocale()]) }}"
+                            class="dropdown-item">{{ __('home.nav.why_open') }}</a>
                     </div>
                 </div>
             </nav>
@@ -64,11 +105,13 @@
                     <span>{{ __('home.nav.blog') }}</span>
                 </a>
                 <div class="lang-switcher">
-                    <a href="{{ route('our-impact', ['locale' => 'en']) }}" class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                    <a href="{{ route('our-impact', ['locale' => 'en']) }}"
+                        class="lang-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                         <img src="{{ asset('img/uk-flag.png') }}" alt="English" class="flag-icon">
                         EN
                     </a>
-                    <a href="{{ route('our-impact', ['locale' => 'el']) }}" class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
+                    <a href="{{ route('our-impact', ['locale' => 'el']) }}"
+                        class="lang-link {{ app()->getLocale() == 'el' ? 'active' : '' }}">
                         <img src="{{ asset('img/gr-flag.png') }}" alt="Ελληνικά" class="flag-icon">
                         EL
                     </a>
@@ -136,8 +179,11 @@
                     <div class="choice-box closed">
                         <div class="choice-icon">
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                                <path d="M30 5C16.215 5 5 16.215 5 30C5 43.785 16.215 55 30 55C43.785 55 55 43.785 55 30C55 16.215 43.785 5 30 5Z" stroke="currentColor" stroke-width="3" />
-                                <path d="M30 20V30L37.5 37.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <path
+                                    d="M30 5C16.215 5 5 16.215 5 30C5 43.785 16.215 55 30 55C43.785 55 55 43.785 55 30C55 16.215 43.785 5 30 5Z"
+                                    stroke="currentColor" stroke-width="3" />
+                                <path d="M30 20V30L37.5 37.5" stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" />
                                 <rect x="25" y="15" width="10" height="3" fill="currentColor" />
                             </svg>
                         </div>
@@ -148,8 +194,11 @@
                     <div class="choice-box open">
                         <div class="choice-icon">
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                                <path d="M30 5C16.215 5 5 16.215 5 30C5 43.785 16.215 55 30 55C43.785 55 55 43.785 55 30C55 16.215 43.785 5 30 5Z" stroke="currentColor" stroke-width="3" />
-                                <path d="M20 30L27 37L40 23" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M30 5C16.215 5 5 16.215 5 30C5 43.785 16.215 55 30 55C43.785 55 55 43.785 55 30C55 16.215 43.785 5 30 5Z"
+                                    stroke="currentColor" stroke-width="3" />
+                                <path d="M20 30L27 37L40 23" stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <h3>{{ __('our_impact.intro.open_title') }}</h3>
@@ -260,19 +309,20 @@
             </div>
 
             <div class="footer-text">
-                <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}</p>
+                <p>{!! __('home.footer.content', ['okfn_greece' => '<a href="https://okfn.gr/">' . __('home.footer.okfn_greece') . '</a>', 'okfn_international' => '<a href="https://okfn.org/">' . __('home.footer.okfn_international') . '</a>', 'license' => '<a href="https://creativecommons.org/licenses/by/4.0/">' . __('home.footer.license') . '</a>']) !!}
+                </p>
                 <p style="margin-top: 1rem;">{{ __('home.footer.copyright', ['year' => date('Y')]) }}</p>
             </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const nav = document.querySelector('nav');
 
             if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener('click', function() {
+                mobileMenuToggle.addEventListener('click', function () {
                     nav.classList.toggle('active');
                 });
             }
@@ -280,7 +330,7 @@
             const navItems = document.querySelectorAll('.nav-item.has-dropdown > .nav-link');
 
             navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
+                item.addEventListener('click', function (e) {
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         const parent = this.parentElement;
