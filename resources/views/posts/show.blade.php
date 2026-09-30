@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $post->title }} - Open Knowledge Greece</title>
-    <meta name="description" content="{{ Str::limit($post->excerpt, 160) }}">
+    <meta name="description" content="{{ Str::limit($post->excerpt, 155) }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -14,8 +14,8 @@
 
     {{-- Open Graph / Social Share --}}
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Open Knowledge Greece - {{ $post->title }}">
-    <meta property="og:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160) }}">
+    <meta property="og:title" content="{{ Str::limit($post->title, 70) }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 155) }}">
     <meta property="og:url" content="{{ url()->current() }}">
     @if($post->featured_image)
         <meta property="og:image" content="{{ asset('storage/' . $post->featured_image) }}">
@@ -42,9 +42,10 @@
     {{-- Twitter/X --}}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@okfngr">
-    <meta name="twitter:title" content="Open Knowledge Greece - {{ $post->title }}">
-    <meta name="twitter:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160) }}">
-    <meta name="twitter:image" content="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('img/og-images/mainpage.png') }}">
+    <meta name="twitter:title" content="{{ Str::limit($post->title, 70) }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 155) }}">
+    <meta name="twitter:image"
+        content="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('img/og-images/mainpage.png') }}">
     <script>
         tailwind.config = {
             theme: {
