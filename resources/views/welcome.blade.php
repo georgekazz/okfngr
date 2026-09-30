@@ -16,7 +16,7 @@
     <meta property="og:title" content="{{ __('home.hero_title') }} - Open Knowledge Greece">
     <meta property="og:description" content="{{ __('home.hero_subtitle') }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('og-images/mainpage.png') }}">
+    <meta property="og:image" content="{{ asset('img/og-images/mainpage.png') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Open Knowledge Greece">
@@ -26,8 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ __('home.hero_title') }} - Open Knowledge Greece">
     <meta name="twitter:description" content="{{ __('home.hero_subtitle') }}">
-    <meta name="twitter:image" content="{{ asset('img/og-image.jpg') }}">
-
+    <meta name="twitter:image" content="{{ asset('img/og-images/mainpage.png') }}">
     {{-- General SEO --}}
     <meta name="description" content="{{ __('home.hero_subtitle') }}">
 </head>
