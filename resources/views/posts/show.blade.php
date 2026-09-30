@@ -9,7 +9,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="canonical" href="{{ url()->current() }}">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    {{-- Open Graph / Social Share --}}
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Open Knowledge Greece - {{ $post->title }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if($post->featured_image)
+        <meta property="og:image" content="{{ asset('storage/' . $post->featured_image) }}">
+        <meta property="og:image:type" content="image/jpeg">
+    @else
+        <meta property="og:image" content="{{ asset('img/og-images/mainpage.png') }}">
+        <meta property="og:image:type" content="image/png">
+    @endif
+    <meta property="og:image:alt" content="{{ $post->title }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Open Knowledge Greece">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'el' ? 'el_GR' : 'en_US' }}">
+    <meta property="article:published_time"
+        content="{{ ($post->published_at ?? $post->created_at)->toIso8601String() }}">
+    <meta property="article:author" content="{{ $post->user->name }}">
+    @if($post->categories->count() > 0)
+        <meta property="article:section" content="{{ $post->categories->first()->name }}">
+    @endif
+    @foreach($post->tags as $tag)
+        <meta property="article:tag" content="{{ $tag->name }}">
+    @endforeach
+
+    {{-- Twitter/X --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@okfngr">
+    <meta name="twitter:title" content="Open Knowledge Greece - {{ $post->title }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160) }}">
+    <meta name="twitter:image" content="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('img/og-images/mainpage.png') }}">
     <script>
         tailwind.config = {
             theme: {
@@ -458,7 +493,6 @@
                 <button class="md:hidden text-2xl text-gray-600 hover:text-cyan-brand transition-colors"
                     id="mobileMenuToggle">☰</button>
 
-                <!-- Navigation -->
                 <!-- Navigation -->
                 <nav class="hidden md:flex items-center gap-1 desktop-nav" id="desktopNav">
 
